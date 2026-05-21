@@ -1,0 +1,169 @@
+/*
+ * cooler_left_app.c
+ *
+ *  Created on: 8 kwi 2026
+ *      Author: Karol
+ */
+# include "main.h"
+# include "can_driver.h"
+# include "MY_driver_can.h"
+# include "MY_driver_serwo.h"
+# include "MY_driver_fan.h"
+# include "MY_driver_i2c.h"
+
+/* ================= EXTERNAL ================= */
+
+extern CAN_HandleTypeDef hcan;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim7;
+extern I2C_HandleTypeDef hi2c1;
+
+/* ================= PRIVATE VARIABLE ================= */
+static uint8_t pwmDuty;
+static uint8_t pwmTable[2];
+static struct CAN_bufferFrame msg = {0};
+
+extern volatile struct CAN_fifoBuffer canBufferRx;
+extern struct CAN_scheduledMsgList canBufferTx;
+
+/* ================= CALLBACK ================= */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == TIM7)
+	{
+		CAN_HandleScheduled(&hcan, &canBufferTx);  // CHANGE IT; USE FLAG INSTEAD CALL
+	}
+	else if(htim->Instance == TIM6)
+	{
+		AM2320_StartMeasure();
+		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	}
+}
+
+/* ================= HELPER FUNCTION ================= */
+
+void Init_Cooler()
+{
+	  // 			INIT CAN
+	  CAN_Init(&hcan);
+	  canBufferRx.readIndex = 0;
+	  canBufferRx.writeIndex = 0;
+	  canBufferRx.ReadData = CAN_ReadData;
+	  canBufferRx.WriteData = CAN_WriteData;
+	  canBufferRx.IsEmpty = IsEmpty;
+	  HAL_TIM_Base_Start_IT(&htim7);
+	  HAL_TIM_Base_Start_IT(&htim6);
+
+
+	  // 			INIT AM2320 - I2C
+	  AM2320_Init();
+
+	  // 			INIT SERWO
+	  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
+	  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
+
+	  // 			INIT FAN
+	  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+	  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+
+}
+
+/* ================= DEBUG VAR ================ */
+
+
+
+/* ================= MAIN APP ================= */
+
+
+void COOLER_LEFT_app()
+{
+  Init_Cooler();
+  // SERWO_SetPulse(SERWO_Open)
+
+  while (1)
+  {
+
+////  =================  =================  TEST ZONE  =================  =================
+
+////	  ================= TEST SERWA =================
+//
+//	  SERWO_set_pulse(&htim3, &CAN_Buffer_TX, counter, counter);
+//	  if(counter >= 28){ // ADJUST IT WHEN COOLING FILTER IS PRINTED
+//		  counter = 0;
+//	  }
+//	  HAL_Delay(500);
+
+////	  ================= TEST FAN =================
+//	  if (counter == 0)
+//	  {
+//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
+//	  }
+//	  else if (counter == 50)
+//	  {
+//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
+//	  }
+//
+//	  ++counter;
+//	  if (counter > 100)
+//	  {
+//		  counter = 0;
+//	  }
+//	  HAL_Delay(100);
+
+////  ================= TEST AM2320 =================
+//	  AM2320_StateMachine();
+
+////  =================  =================   		=================  =================
+
+
+
+// STATE: DRIVING / CHARGING
+	  AM2320_StateMachine();
+	  if(!canBufferRx.IsEmpty(canBufferRx))
+	  {
+		  canBufferRx.ReadData(&canBufferRx, &msg);
+
+		  if(CAN_FRAME_BMS_TEMP_1 <= msg.name <= CAN_FRAME_BMS_TEMP_9)
+		  {
+			  FAN_BatteryController();
+			  FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+		  }
+		  else
+		  {
+			  switch(msg.name)
+			  {
+			  case(CAN_FRAME_CABIN_SET_FAN):
+					FAN_CabinController(msg.data);
+			  	  	FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+
+			  case(CAN_FRAME_CABIN_SET_SERVO):
+					SERWO_CabinController(msg.data);
+					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+
+			  case(CAN_FRAME_SAFE_STATE):
+				    FAN_CabinController([100]);
+					SERWO_CabinController([100]);
+					FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+//			  case(CAN_FRAME_BATTERY_SET_FAN):
+//
+//			  case(CAN_FRAME_BATTERY_SET_SERVO):
+
+
+			  }
+		  }
+
+	  }
+
+
+
+// STATE: SAFE STATE
+	  // SERWO_Open()
+	  // FAN_MAX_BLOW()  <--- ???
+
+
+  }
+}

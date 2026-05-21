@@ -20,6 +20,11 @@ extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
 extern I2C_HandleTypeDef hi2c1;
 
+/* ================= PRIVATE VARIABLE ================= */
+static uint8_t pwmDuty;
+static uint8_t pwmTable[2];
+static struct CAN_bufferFrame msg = {0};
+
 extern volatile struct CAN_fifoBuffer canBufferRx;
 extern struct CAN_scheduledMsgList canBufferTx;
 
@@ -38,7 +43,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 
-
 /* ================= HELPER FUNCTION ================= */
 
 void Init_Cooler()
@@ -49,6 +53,7 @@ void Init_Cooler()
 	  canBufferRx.writeIndex = 0;
 	  canBufferRx.ReadData = CAN_ReadData;
 	  canBufferRx.WriteData = CAN_WriteData;
+	  canBufferRx.IsEmpty = IsEmpty;
 	  HAL_TIM_Base_Start_IT(&htim7);
 	  HAL_TIM_Base_Start_IT(&htim6);
 
@@ -77,7 +82,6 @@ void COOLER_LEFT_app()
 {
   Init_Cooler();
   // SERWO_SetPulse(SERWO_Open)
-
 
   while (1)
   {
@@ -114,17 +118,49 @@ void COOLER_LEFT_app()
 
 ////  =================  =================   		=================  =================
 
+
 // STATE: DRIVING / CHARGING
 	  AM2320_StateMachine();
+	  if(!canBufferRx.IsEmpty(canBufferRx))
+	  {
+		  canBufferRx.ReadData(&canBufferRx, &msg);
 
-	  // READ canBufferRx AND DO STH:
+		  if(CAN_FRAME_BMS_TEMP_1 <= msg.name <= CAN_FRAME_BMS_TEMP_9)
+		  {
+			  FAN_BatteryController();
+			  FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+		  }
+		  else
+		  {
+			  switch(msg.name)
+			  {
+			  case(CAN_FRAME_CABIN_SET_FAN):
+					FAN_CabinController(msg.data);
+			  	  	FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
 
-	  	  // READ THERMISTOR
-		  // FAN_Controller()
-		  // FORCE SET SERWO (BATTERY OR CABIN)
-		  // FORCE SET FAN (BATTERY OR CABIN)
+			  case(CAN_FRAME_CABIN_SET_SERVO):
+					SERWO_CabinController(msg.data);
+					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
 
-	  	  // IF SENSOR TIMEOUT OCCURS X TIMES ADD FRAME TO CAN WITH ERROR
+			  case(CAN_FRAME_BATTERY_SET_SERVO):
+					SERWO_BatteryController(msg.data);
+					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+
+			  case(CAN_FRAME_SAFE_STATE):
+
+//				    FAN_CabinController();
+//					SERWO_CabinController();
+//					FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+//					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+//			  case(CAN_FRAME_BATTERY_SET_FAN):
+//
+//			  case(CAN_FRAME_BATTERY_SET_SERVO):
+
+			  }
+		  }
+	  }
+
+
 
 // STATE: SAFE STATE
 	  // SERWO_Open()

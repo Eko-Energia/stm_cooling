@@ -12,6 +12,12 @@
 static uint8_t fan1Pulse = 0;
 static uint8_t fan2Pulse = 0;
 
+static float  batteryMaxTemp = 0;
+
+/* ================= PRIVATE FUNCTION DECLARATIONS ================= */
+
+static void FAN_SetMaxTempPacket(uint8_t* data);
+
 
 /* ================= API ================= */
 
@@ -38,17 +44,20 @@ void FAN_FetcherPulse(uint8_t *data)
  * @param pulse_ch1     Desired pulse value for fan 1 (TIM_CHANNEL_1), range 0–100.
  * @param pulse_ch2     Desired pulse value for fan 2 (TIM_CHANNEL_2), range 0–100.
  */
-void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch1, uint8_t pulse_ch2)
+void FAN_SetPulseExtern(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t* pulseTable)
 {
-	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
+	if(pulse_ch1 != fan1Pulse || pulse_ch2 != fan2Pulse)
+	{
+		CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
 
-	fan1Pulse = pulse_ch1;
-	fan2Pulse = pulse_ch2;
+		fan1Pulse = pulseTable[0];
+		fan2Pulse = pulseTable[0];
 
-	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, pulse_ch1 * SCALER_PULSE_FAN);
-	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, pulse_ch2 * SCALER_PULSE_FAN);
+		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse * SCALER_PULSE_FAN);
+		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse * SCALER_PULSE_FAN);
 
-	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
+		CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
+	}
 }
 
 /**
@@ -87,3 +96,86 @@ void FAN_SetOnOff(fan_state_e setter)
 		break;
 	}
 }
+
+void FAN_SetMaxTemp(CAN_bufferFrame* frame)
+{
+	static float  tempPacket[NUMBER_OF_PACKET] = 0;
+	float maxTemp = 0;
+
+	tempPacket[frame->name] = FAN_SetMaxTempPacket(frame->data);
+	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
+	{
+		if(maxTemp < tempPacket[i])
+		{
+			maxTemp = tempPacket[i];
+		}
+	}
+	batteryMaxTemp = maxTemp;
+
+}
+
+void FAN_BatteryController()
+{
+	static float integral = 0;
+	static uint8_t pwmDuty = 0;
+	static uint32_t lastTick = 0;
+
+	float error = 0;
+
+
+	if(HAL_GetTick() - lastTick >= DT)
+	{
+		lastTick = HAL_GetTick();
+
+		error = batteryMaxTemp - TEMP_REF;
+		integral = integral + error*DT;
+		pwmDuty = (uint8_t)((DUTY_STABLE + integral * I + error * K) * 100);
+
+		if(pwmDuty > 100)
+		{
+			pwmDuty = 100;
+		}
+		else if(pwmDuty < 0 )
+		{
+			pwmDuty = 0;
+		}
+	}
+	fan1Pulse = pwmDuty;
+}
+
+void FAN_CabinController(uint8_t* pulseTable)
+{
+	fan2Pulse = pulseTable[0];
+}
+
+
+void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
+}
+
+
+/* ================= PRIVATE ================= */
+static void FAN_SetMaxTempPacket(uint8_t* data)
+{
+	uint8_t sizeData = sizeof(data)/sizeof(data[0]);
+	float maxTemp = 0;
+
+	for(uint8_t i = 0; i < sizeData; ++i)
+	{
+		if(maxTemp < data[i])
+		{
+			maxTemp = data[i];
+		}
+	}
+
+	return maxTemp * TEMP_FACTOR + TEMP_OFFSET;
+}
+
+
+

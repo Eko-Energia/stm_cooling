@@ -49,4 +49,10 @@ void SERWO_FetcherPulse(uint8_t *data);
  */
 void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch3, uint8_t pulse_ch4);
 
+
+void SERWO_CabinController(uint8_t* pulseTable);
+
+
+void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
+
 #endif /* INC_MY_LIB_MY_DRIVER_SERWO_H_ */

@@ -45,8 +45,31 @@ void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Bu
 	serwo1Pulse = pulse_ch3;
 	serwo2Pulse = pulse_ch4;
 
-	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, pulse_ch3 * SCALER_PULSE_SERWO);
-	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, pulse_ch4 * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
 
 	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
 }
+
+void SERWO_CabinController(uint8_t* pulseTable)
+{
+	fan2Pulse = pulseTable[0];
+}
+
+void SERWO_BatteryController(uint8_t* pulseTable)
+{
+	fan1Pulse = pulseTable[0];
+}
+
+
+
+void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
+}
+

@@ -1,0 +1,68 @@
+/**
+ * @file driver_serwo.c
+ * @brief Driver for controlling servo motors via PWM timer channels and CAN bus reporting.
+ * @author AGH EKO-ENERGIA
+ * @author Karol
+ */
+
+#include "MY_driver_serwo.h"
+
+
+/* ================= PRIVATE VARIABLE ================= */
+static uint8_t serwo1Pulse = 0;
+static uint8_t serwo2Pulse = 0;
+
+
+/* ================= API ================= */
+
+/**
+ * @brief Populates the CAN data buffer with the current pulse values of both servos.
+ *
+ * @param data  Pointer to a byte array of at least 2 bytes; filled with servo 1 and servo 2 pulse values.
+ */
+void SERWO_FetcherPulse(uint8_t *data)
+{
+	data[0] = serwo1Pulse;
+	data[1] = serwo2Pulse;
+}
+
+/**
+ * @brief Sets PWM pulse widths for both servo channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling servo, updates the
+ * internal pulse state, applies the new compare values to TIM_CHANNEL_3 and TIM_CHANNEL_4,
+ * then re-registers a periodic CAN frame.
+ *
+ * @param htim          Pointer to the timer handle controlling the servo PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ * @param pulse_ch3     Desired pulse value for servo 1 (TIM_CHANNEL_3), range 0–100.
+ * @param pulse_ch4     Desired pulse value for servo 2 (TIM_CHANNEL_4), range 0–100.
+ */
+void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch3, uint8_t pulse_ch4)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
+
+	serwo1Pulse = pulse_ch3;
+	serwo2Pulse = pulse_ch4;
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
+}
+
+void SERWO_CabinController(uint8_t* pulseTable)
+{
+	fan2Pulse = pulseTable[0];
+}
+
+void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
+}
+

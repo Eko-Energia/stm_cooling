@@ -11,9 +11,7 @@
 #include "MY_driver_can.h"
 #include "can_driver.h"
 #include "main.h"
-
-/* Multiplier converting 0-100 pulse value to timer compare register units */
-#define SCALER_PULSE_FAN        (2)
+#include "stdbool.h"
 
 /* CAN transmission period for fan pulse feedback [ms] */
 #define PERIOD_PULSE_SEND       (1000)
@@ -23,6 +21,24 @@
 
 /* CAN ID for the left cooling fan (0x502) */
 #define ID_COOLING_LEFT_FAN     (1282)
+
+#define NUMBER_OF_PACKET (9)
+
+#define TEMP_FACTOR 	(0.39216)
+
+#define TEMP_OFFSET 	(49.8039)
+
+
+#define TEMP_REF        (50)
+
+#define DT				(500) // ms
+
+#define DUTY_STABLE		(0.8133)
+
+#define K				(0.2589)
+
+#define I				(0.0086)
+
 
 typedef enum
 {
@@ -55,7 +71,7 @@ void FAN_FetcherPulse(uint8_t *data);
  * @param pulse_ch1     Desired pulse value for fan 1 (TIM_CHANNEL_1), range 0–100.
  * @param pulse_ch2     Desired pulse value for fan 2 (TIM_CHANNEL_2), range 0–100.
  */
-void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch1, uint8_t pulse_ch2);
+void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t* pulseTable);
 
 /**
  * @brief Switches individual fans or both fans on or off via GPIO.
@@ -63,5 +79,17 @@ void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buff
  * @param setter    Desired fan state from fan_state_e.
  */
 void FAN_SetOnOff(fan_state_e setter);
+
+
+void FAN_SetMaxTemp(CAN_bufferFrame *frame);		// wybiera z ramki temperatury największą wartość i zapisuje
+
+
+void FAN_BatteryController();	// steruje wentylatorem do baterii jako pomiar temperatura uzyskana przez FAN_Set_MaxTemp()
+
+
+void FAN_CabinController();     // Będzie podawał wypełenie z ramki która przyjdzie
+
+void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
+
 
 #endif /* INC_MY_LIB_MY_DRIVER_FAN_H_ */

@@ -32,6 +32,15 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 
 
 /* ================= API ================= */
+bool IsEmpty(volatile struct CAN_fifoBuffer *self)
+{
+	if (self->readIndex == self->writeIndex)
+	{
+		return true; 	/* Buffer empty */
+	}
+	return false;
+}
+
 
 /**
  * @brief Writes a frame to the FIFO buffer.
@@ -64,7 +73,7 @@ HAL_StatusTypeDef CAN_WriteData(volatile struct CAN_fifoBuffer *self, struct CAN
  */
 HAL_StatusTypeDef CAN_ReadData(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame)
 {
-	if (self->readIndex == self->writeIndex)
+	if (IsEmpty(self))
 	{
 		return HAL_ERROR; /* Buffer empty */
 	}
@@ -149,17 +158,25 @@ void CAN_ExampleFetchingFrame(uint8_t *data, void *context)
  * @brief Maps a CAN standard ID to a known frame type enum.
  *
  * @param id    standard CAN ID to map
- * @retval corresponding CAN_frameType_e value, or CAN_FRAME_UNKNOWN if not recognized
+ * @retval corresponding CAN_frameType_e value
  */
 static CAN_frameType_e MapIdToFrameEnum(uint16_t id)
 {
 	switch (id)
 	{
-	case 0x01: return CAN_FRAME_BMS_TEMP;
-	case 0x02: return CAN_FRAME_CABIN_SET_FAN;
-	case 0x03: return CAN_FRAME_CABIN_SET_SERVO;
-	case 0x04: return CAN_FRAME_SAFE_STATE;
-	case 0x05: return CAN_FRAME_BATTERY_SET_FAN;
-	case 0x06: return CAN_FRAME_BATTERY_SET_SERVO;
+	case 0x83: return CAN_FRAME_BMS_TEMP_1;
+	case 0x84: return CAN_FRAME_BMS_TEMP_2;
+	case 0x85: return CAN_FRAME_BMS_TEMP_3;
+	case 0x86: return CAN_FRAME_BMS_TEMP_4;
+	case 0x87: return CAN_FRAME_BMS_TEMP_5;
+	case 0x88: return CAN_FRAME_BMS_TEMP_6;
+	case 0x89: return CAN_FRAME_BMS_TEMP_7;
+	case 0x8A: return CAN_FRAME_BMS_TEMP_8;
+	case 0x8B: return CAN_FRAME_BMS_TEMP_9;
+	case 0xFF: return CAN_FRAME_CABIN_SET_FAN;
+	case 0xFFF: return CAN_FRAME_CABIN_SET_SERVO;
+	case 0xFFFF: return CAN_FRAME_SAFE_STATE;
+	case 0xFFFFF: return CAN_FRAME_BATTERY_SET_FAN;
+	case 0xFFFFF: return CAN_FRAME_BATTERY_SET_SERVO;
 	}
 }

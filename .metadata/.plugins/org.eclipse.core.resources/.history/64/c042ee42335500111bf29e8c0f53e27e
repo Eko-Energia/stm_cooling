@@ -1,0 +1,207 @@
+/**
+ * @file MY_driver_fan.c
+ * @brief Driver for controlling cooling fans via PWM timer channels and CAN bus reporting.
+ * @author AGH EKO-ENERGIA
+ * @author Karol
+ */
+
+#include "MY_driver_fan.h"
+
+/* ================= PRIVATE VARIABLE ================= */
+
+static uint8_t fan1Pulse = 0;
+static uint8_t fan2Pulse = 0;
+
+static float  batteryMaxTemp = 0;
+
+/* ================= PRIVATE FUNCTION DECLARATIONS ================= */
+
+static void FAN_SetMaxTempPacket(uint8_t* data);
+
+
+/* ================= API ================= */
+
+/**
+ * @brief Populates the CAN data buffer with the current pulse values of both fans.
+ *
+ * @param data  Pointer to a byte array of at least 2 bytes; filled with fan 1 and fan 2 pulse values.
+ */
+void FAN_FetcherPulse(uint8_t *data)
+{
+	data[0] = fan1Pulse;
+	data[1] = fan2Pulse;
+}
+
+/**
+ * @brief Sets PWM pulse widths for both fan channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling fan, updates the
+ * internal pulse state, applies the new compare values to TIM_CHANNEL_1 and TIM_CHANNEL_2,
+ * then re-registers a periodic CAN frame.
+ *
+ * @param htim          Pointer to the timer handle controlling the fan PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ * @param pulse_ch1     Desired pulse value for fan 1 (TIM_CHANNEL_1), range 0–100.
+ * @param pulse_ch2     Desired pulse value for fan 2 (TIM_CHANNEL_2), range 0–100.
+ */
+void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch1, uint8_t pulse_ch2)
+{
+	if(pulse_ch1 != fan1Pulse || pulse_ch2 != fan2Pulse)
+	{
+		CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
+
+		fan1Pulse = pulse_ch1;
+		fan2Pulse = pulse_ch2;
+
+		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse * SCALER_PULSE_FAN);
+		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse * SCALER_PULSE_FAN);
+
+		CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
+	}
+}
+
+/**
+ * @brief Switches individual fans or both fans on or off via GPIO.
+ *
+ * @param setter    Desired fan state from fan_state_e.
+ */
+void FAN_SetOnOff(fan_state_e setter)
+{
+	switch (setter)
+	{
+	case FAN_ON_1:
+		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_SET);
+		break;
+
+	case FAN_OFF_1:
+		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_RESET);
+		break;
+
+	case FAN_ON_2:
+		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_SET);
+		break;
+
+	case FAN_OFF_2:
+		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_RESET);
+		break;
+
+	case FAN_ON_BOTH:
+		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_SET);
+		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_SET);
+		break;
+
+	case FAN_OFF_BOTH:
+		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_RESET);
+		break;
+	}
+}
+
+
+void FAN_SetMaxTemp(CAN_bufferFrame* frame)
+{
+	static float  tempPacket[NUMBER_OF_PACKET] = 0;
+	float maxTemp = 0;
+
+	switch(frame->name){
+		case(CAN_FRAME_BMS_TEMP_1):
+			tempPacket[0]= FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_2):
+			tempPacket[1] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_3):
+			tempPacket[2] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_4):
+			tempPacket[3] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_5):
+			tempPacket[4] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_6):
+			tempPacket[5] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_7):
+			tempPacket[6] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_8):
+			tempPacket[7] = FAN_SetMaxTempPacket(frame->data);
+
+		case(CAN_FRAME_BMS_TEMP_9):
+			tempPacket[8] = FAN_SetMaxTempPacket(frame->data);
+	}
+
+	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
+	{
+		if(maxTemp < tempPacket[i])
+		{
+			maxTemp = tempPacket[i];
+		}
+	}
+	batteryMaxTemp = maxTemp;
+}
+
+void FAN_BatteryController()
+{
+	static float integral = 0;
+	static uint8_t pwmDuty = 0;
+	static uint32_t lastTick = 0;
+
+	float error = 0;
+
+
+	if(HAL_GetTick() - lastTick >= DT)
+	{
+		lastTick = HAL_GetTick();
+
+		error = batteryMaxTemp - TEMP_REF;
+		integral = integral + error*DT;
+		pwmDuty = (uint8_t)((DUTY_STABLE + integral * I + error * K) * 100);
+
+		if(pwmDuty > 100)
+		{
+			pwmDuty = 100;
+		}
+		else if(pwmDuty < 0 )
+		{
+			pwmDuty = 0;
+		}
+	}
+	fan1Pulse = pwmDuty;
+}
+
+void FAN_CabinController(uint8_t* data)
+{
+	fan2Pulse = data[0];
+}
+
+
+void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse * SCALER_PULSE_FAN);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse * SCALER_PULSE_FAN);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
+}
+/* ================= PRIVATE ================= */
+static void FAN_SetMaxTempPacket(uint8_t* data)
+{
+	uint8_t sizeData = sizeof(data)/sizeof(data[0]);
+	float maxTemp = 0;
+
+	for(uint8_t i = 0; i < sizeData; ++i)
+	{
+		if(maxTemp < data[i])
+		{
+			maxTemp = data[i];
+		}
+	}
+
+	return maxTemp * TEMP_FACTOR + TEMP_OFFSET;
+}
+
+
+

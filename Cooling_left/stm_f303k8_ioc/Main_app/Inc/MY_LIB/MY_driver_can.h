@@ -11,7 +11,7 @@
 #include "MY_driver_can.h"
 #include "can_driver.h"
 #include "main.h"
-
+#include "stdbool.h"
 
 /* ================= CONFIG ================= */
 #define CAN_DATA_SIZE	(8)
@@ -21,7 +21,15 @@
 /* ================= FRAMES NAMES ================= */
 typedef enum
 {
-	CAN_FRAME_BMS_TEMP,
+	CAN_FRAME_BMS_TEMP_1,
+	CAN_FRAME_BMS_TEMP_2,
+	CAN_FRAME_BMS_TEMP_3,
+	CAN_FRAME_BMS_TEMP_4,
+	CAN_FRAME_BMS_TEMP_5,
+	CAN_FRAME_BMS_TEMP_6,
+	CAN_FRAME_BMS_TEMP_7,
+	CAN_FRAME_BMS_TEMP_8,
+	CAN_FRAME_BMS_TEMP_9,
 	CAN_FRAME_CABIN_SET_FAN,
 	CAN_FRAME_CABIN_SET_SERVO,
 	CAN_FRAME_SAFE_STATE,
@@ -48,10 +56,14 @@ struct CAN_fifoBuffer
 	uint8_t writeIndex;
 	HAL_StatusTypeDef (*WriteData)(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame);
 	HAL_StatusTypeDef (*ReadData)(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame);
+	bool (*IsEmpty)(volatile struct CAN_fifoBuffer *self);
 };
 
 
 /* ================= API ================= */
+
+bool IsEmpty(volatile struct CAN_fifoBuffer *self);
+
 
 /**
  * @brief Writes a frame to the FIFO buffer.
