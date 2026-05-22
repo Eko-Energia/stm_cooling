@@ -175,8 +175,9 @@ static CAN_frameType_e MapIdToFrameEnum(uint16_t id)
 	case 0x8B: return CAN_FRAME_BMS_TEMP_9;
 	case 0xFF: return CAN_FRAME_CABIN_SET_FAN;
 	case 0xFFF: return CAN_FRAME_CABIN_SET_SERVO;
-	case 0xFFFF: return CAN_FRAME_SAFE_STATE;
-	case 0xFFFFF: return CAN_FRAME_BATTERY_SET_FAN;
-	case 0xFFFFF: return CAN_FRAME_BATTERY_SET_SERVO;
+	case 0xAAAA: return CAN_FRAME_SAFE_STATE;
+	case 0xBBBB: return CAN_FRAME_BATTERY_SET_FAN;
+	case 0xCCCC: return CAN_FRAME_BATTERY_SET_SERVO;
+	default: return CAN_FRAME_UNKNOWN;
 	}
 }

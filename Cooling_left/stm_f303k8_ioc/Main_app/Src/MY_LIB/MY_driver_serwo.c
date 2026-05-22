@@ -53,17 +53,17 @@ void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Bu
 
 void SERWO_CabinController(uint8_t* pulseTable)
 {
-	fan2Pulse = pulseTable[0];
+	serwo2Pulse = pulseTable[0];
 }
 
 void SERWO_BatteryController(uint8_t* pulseTable)
 {
-	fan1Pulse = pulseTable[0];
+	serwo1Pulse = pulseTable[0];
 }
 
 
 
-void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
 {
 	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
 

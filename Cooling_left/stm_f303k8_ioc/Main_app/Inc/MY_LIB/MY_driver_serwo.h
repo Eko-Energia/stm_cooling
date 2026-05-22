@@ -52,7 +52,8 @@ void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Bu
 
 void SERWO_CabinController(uint8_t* pulseTable);
 
+void SERWO_BatteryController(uint8_t* pulseTable);
 
-void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
+void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
 
 #endif /* INC_MY_LIB_MY_DRIVER_SERWO_H_ */

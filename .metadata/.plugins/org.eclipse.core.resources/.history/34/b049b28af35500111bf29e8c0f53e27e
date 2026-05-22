@@ -1,0 +1,56 @@
+/*
+ * cooler_test.c
+ *
+ *  Created on: 22 maj 2026
+ *      Author: Karol
+ */
+
+# include "main.h"
+# include "can_driver.h"
+# include "MY_driver_can.h"
+# include "MY_driver_serwo.h"
+# include "MY_driver_fan.h"
+# include "MY_driver_i2c.h"
+
+
+
+void TEST_Function()
+{
+	while(1)
+	{
+
+	}
+
+}
+
+////  =================  =================  TEST ZONE  =================  =================
+
+////	  ================= TEST SERWA =================
+//
+//	  SERWO_set_pulse(&htim3, &CAN_Buffer_TX, counter, counter);
+//	  if(counter >= 28){ // ADJUST IT WHEN COOLING FILTER IS PRINTED
+//		  counter = 0;
+//	  }
+//	  HAL_Delay(500);
+
+////	  ================= TEST FAN =================
+//	  if (counter == 0)
+//	  {
+//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
+//	  }
+//	  else if (counter == 50)
+//	  {
+//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
+//	  }
+//
+//	  ++counter;
+//	  if (counter > 100)
+//	  {
+//		  counter = 0;
+//	  }
+//	  HAL_Delay(100);
+
+////  ================= TEST AM2320 =================
+//	  AM2320_StateMachine();
+
+////  =================  =================   		=================  =================

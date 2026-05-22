@@ -12,6 +12,7 @@
 #include "can_driver.h"
 #include "main.h"
 #include "stdbool.h"
+#include "MY_driver_can.h"
 
 /* CAN transmission period for fan pulse feedback [ms] */
 #define PERIOD_PULSE_SEND       (1000)
@@ -71,7 +72,7 @@ void FAN_FetcherPulse(uint8_t *data);
  * @param pulse_ch1     Desired pulse value for fan 1 (TIM_CHANNEL_1), range 0–100.
  * @param pulse_ch2     Desired pulse value for fan 2 (TIM_CHANNEL_2), range 0–100.
  */
-void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t* pulseTable);
+void FAN_SetPulseExtern(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t* pulseTable);
 
 /**
  * @brief Switches individual fans or both fans on or off via GPIO.
@@ -81,7 +82,7 @@ void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buff
 void FAN_SetOnOff(fan_state_e setter);
 
 
-void FAN_SetMaxTemp(CAN_bufferFrame *frame);		// wybiera z ramki temperatury największą wartość i zapisuje
+void FAN_SetMaxTemp(struct CAN_bufferFrame *frame);		// wybiera z ramki temperatury największą wartość i zapisuje
 
 
 void FAN_BatteryController();	// steruje wentylatorem do baterii jako pomiar temperatura uzyskana przez FAN_Set_MaxTemp()
@@ -89,7 +90,7 @@ void FAN_BatteryController();	// steruje wentylatorem do baterii jako pomiar tem
 
 void FAN_CabinController();     // Będzie podawał wypełenie z ramki która przyjdzie
 
-void FAN_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
+void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
 
 
 #endif /* INC_MY_LIB_MY_DRIVER_FAN_H_ */

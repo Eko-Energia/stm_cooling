@@ -21,8 +21,6 @@ extern TIM_HandleTypeDef htim7;
 extern I2C_HandleTypeDef hi2c1;
 
 /* ================= PRIVATE VARIABLE ================= */
-static uint8_t pwmDuty;
-static uint8_t pwmTable[2];
 static struct CAN_bufferFrame msg = {0};
 
 extern volatile struct CAN_fifoBuffer canBufferRx;
@@ -70,9 +68,7 @@ void Init_Cooler()
 	  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
 
 }
-
 /* ================= DEBUG VAR ================ */
-
 
 
 /* ================= MAIN APP ================= */
@@ -86,49 +82,17 @@ void COOLER_LEFT_app()
   while (1)
   {
 
-////  =================  =================  TEST ZONE  =================  =================
-
-////	  ================= TEST SERWA =================
-//
-//	  SERWO_set_pulse(&htim3, &CAN_Buffer_TX, counter, counter);
-//	  if(counter >= 28){ // ADJUST IT WHEN COOLING FILTER IS PRINTED
-//		  counter = 0;
-//	  }
-//	  HAL_Delay(500);
-
-////	  ================= TEST FAN =================
-//	  if (counter == 0)
-//	  {
-//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
-//	  }
-//	  else if (counter == 50)
-//	  {
-//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
-//	  }
-//
-//	  ++counter;
-//	  if (counter > 100)
-//	  {
-//		  counter = 0;
-//	  }
-//	  HAL_Delay(100);
-
-////  ================= TEST AM2320 =================
-//	  AM2320_StateMachine();
-
-////  =================  =================   		=================  =================
-
-
 // STATE: DRIVING / CHARGING
 	  AM2320_StateMachine();
-	  if(!canBufferRx.IsEmpty(canBufferRx))
+
+	  if(!canBufferRx.IsEmpty(&canBufferRx))
 	  {
 		  canBufferRx.ReadData(&canBufferRx, &msg);
 
-		  if(CAN_FRAME_BMS_TEMP_1 <= msg.name <= CAN_FRAME_BMS_TEMP_9)
+		  if((CAN_FRAME_BMS_TEMP_1 <= msg.name) && (msg.name <= CAN_FRAME_BMS_TEMP_9))
 		  {
 			  FAN_BatteryController();
-			  FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+			  FAN_SetPulseInternal(&htim2, &canBufferTx);
 		  }
 		  else
 		  {
@@ -136,22 +100,18 @@ void COOLER_LEFT_app()
 			  {
 			  case(CAN_FRAME_CABIN_SET_FAN):
 					FAN_CabinController(msg.data);
-			  	  	FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
+			  	  	FAN_SetPulseInternal(&htim2, &canBufferTx);
 
 			  case(CAN_FRAME_CABIN_SET_SERVO):
 					SERWO_CabinController(msg.data);
-					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+					SERWO_SetPulseInternal(&htim3, &canBufferTx);
 
 			  case(CAN_FRAME_BATTERY_SET_SERVO):
 					SERWO_BatteryController(msg.data);
-					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+					SERWO_SetPulseInternal(&htim3, &canBufferTx);
 
-			  case(CAN_FRAME_SAFE_STATE):
-
-//				    FAN_CabinController();
-//					SERWO_CabinController();
-//					FAN_SetPulseInternal(&htim2, &CAN_Buffer_TX);
-//					SERWO_SetPulseInternal(&htim3, &CAN_Buffer_TX);
+//			  case(CAN_FRAME_SAFE_STATE):
+//
 //			  case(CAN_FRAME_BATTERY_SET_FAN):
 //
 //			  case(CAN_FRAME_BATTERY_SET_SERVO):
@@ -159,13 +119,5 @@ void COOLER_LEFT_app()
 			  }
 		  }
 	  }
-
-
-
-// STATE: SAFE STATE
-	  // SERWO_Open()
-	  // FAN_MAX_BLOW()  <--- ???
-
-
   }
 }

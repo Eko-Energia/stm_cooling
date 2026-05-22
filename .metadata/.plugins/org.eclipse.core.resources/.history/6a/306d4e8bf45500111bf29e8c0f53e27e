@@ -1,0 +1,91 @@
+/*
+ * cooler_test.c
+ *
+ *  Created on: 22 maj 2026
+ *      Author: Karol
+ */
+
+# include "main.h"
+# include "can_driver.h"
+# include "MY_driver_can.h"
+# include "MY_driver_serwo.h"
+# include "MY_driver_fan.h"
+# include "MY_driver_i2c.h"
+
+
+extern struct CAN_bufferFrame msg;
+
+extern volatile struct CAN_fifoBuffer canBufferRx;
+extern struct CAN_scheduledMsgList canBufferTx;
+
+extern CAN_HandleTypeDef hcan;
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
+extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef htim7;
+extern I2C_HandleTypeDef hi2c1;
+
+
+void TEST_Serwo(uint8_t counter)
+{
+		  SERWO_SetPulseExtern(&htim3, &canBufferTx, counter,counter);
+		  HAL_Delay(500);
+}
+
+void TEST_FAN(uint8_t* counter)
+{
+	if (*counter == 0)
+	{
+		FAN_SetPulseExtern(&htim2, &canBufferTx, *counter, *counter);
+	}
+	else if (*counter == 50)
+	{
+		FAN_SetPulseExtern(&htim2, &canBufferTx, *counter, *counter);
+	}
+
+	++(*counter);
+	if ((*counter) > 100)
+	{
+		  *counter = 0;
+	}
+	HAL_Delay(100);
+}
+
+void TEST_AM2320()
+{
+	AM2320_StateMachine();
+}
+
+
+void TEST_Function()
+{
+	while(1)
+	{
+
+	}
+
+}
+
+////  =================  =================  TEST ZONE  =================  =================
+
+////	  ================= TEST FAN =================
+//	  if (counter == 0)
+//	  {
+//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
+//	  }
+//	  else if (counter == 50)
+//	  {
+//		  FAN_set_pulse(&htim2, &CAN_Buffer_TX, counter, counter);
+//	  }
+//
+//	  ++counter;
+//	  if (counter > 100)
+//	  {
+//		  counter = 0;
+//	  }
+//	  HAL_Delay(100);
+
+////  ================= TEST AM2320 =================
+//	  AM2320_StateMachine();
+
+////  =================  =================   		=================  =================

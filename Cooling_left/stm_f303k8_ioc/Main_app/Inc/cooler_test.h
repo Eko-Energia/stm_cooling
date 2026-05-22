@@ -1,0 +1,27 @@
+/*
+ * cooler_test.h
+ *
+ *  Created on: 22 maj 2026
+ *      Author: Karol
+ */
+
+#ifndef INC_COOLER_TEST_H_
+#define INC_COOLER_TEST_H_
+
+# include "main.h"
+# include "can_driver.h"
+# include "MY_driver_can.h"
+# include "MY_driver_serwo.h"
+# include "MY_driver_fan.h"
+# include "MY_driver_i2c.h"
+
+void TEST_Function();
+
+void TEST_Serwo();
+
+void TEST_FAN();
+
+void TEST_AM2320();
+
+
+#endif /* INC_COOLER_TEST_H_ */

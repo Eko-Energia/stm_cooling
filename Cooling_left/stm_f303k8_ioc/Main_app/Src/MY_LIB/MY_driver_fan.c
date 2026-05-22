@@ -6,6 +6,7 @@
  */
 
 #include "MY_driver_fan.h"
+#include "MY_driver_can.h"
 
 /* ================= PRIVATE VARIABLE ================= */
 
@@ -16,7 +17,7 @@ static float  batteryMaxTemp = 0;
 
 /* ================= PRIVATE FUNCTION DECLARATIONS ================= */
 
-static void FAN_SetMaxTempPacket(uint8_t* data);
+static float FAN_SetMaxTempPacket(uint8_t* data);
 
 
 /* ================= API ================= */
@@ -46,15 +47,15 @@ void FAN_FetcherPulse(uint8_t *data)
  */
 void FAN_SetPulseExtern(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t* pulseTable)
 {
-	if(pulse_ch1 != fan1Pulse || pulse_ch2 != fan2Pulse)
+	if(pulseTable[0] != fan1Pulse || pulseTable[1] != fan2Pulse)
 	{
 		CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
 
 		fan1Pulse = pulseTable[0];
 		fan2Pulse = pulseTable[0];
 
-		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse * SCALER_PULSE_FAN);
-		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse * SCALER_PULSE_FAN);
+		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse);
+		__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse);
 
 		CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
 	}
@@ -97,9 +98,9 @@ void FAN_SetOnOff(fan_state_e setter)
 	}
 }
 
-void FAN_SetMaxTemp(CAN_bufferFrame* frame)
+void FAN_SetMaxTemp(struct CAN_bufferFrame* frame)
 {
-	static float  tempPacket[NUMBER_OF_PACKET] = 0;
+	static float  tempPacket[NUMBER_OF_PACKET] = {0};
 	float maxTemp = 0;
 
 	tempPacket[frame->name] = FAN_SetMaxTempPacket(frame->data);
@@ -161,12 +162,11 @@ void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *
 
 
 /* ================= PRIVATE ================= */
-static void FAN_SetMaxTempPacket(uint8_t* data)
+static float FAN_SetMaxTempPacket(uint8_t* data)
 {
-	uint8_t sizeData = sizeof(data)/sizeof(data[0]);
 	float maxTemp = 0;
 
-	for(uint8_t i = 0; i < sizeData; ++i)
+	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
 	{
 		if(maxTemp < data[i])
 		{
@@ -174,7 +174,7 @@ static void FAN_SetMaxTempPacket(uint8_t* data)
 		}
 	}
 
-	return maxTemp * TEMP_FACTOR + TEMP_OFFSET;
+	return (float)maxTemp * TEMP_FACTOR + TEMP_OFFSET;
 }
 
 
