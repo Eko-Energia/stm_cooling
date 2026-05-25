@@ -16,7 +16,7 @@
 #define SCALER_PULSE_SERWO      (5)
 
 /* CAN transmission period for servo pulse feedback [ms] */
-#define PERIOD_PULSE_SEND       (1000)
+#define PERIOD_PULSE_SEND       (500)
 
 /* Number of bytes in the servo pulse CAN frame payload */
 #define BYTE_SIZE_PULSE         (2)

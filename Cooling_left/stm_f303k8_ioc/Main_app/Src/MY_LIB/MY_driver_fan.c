@@ -146,7 +146,7 @@ void FAN_BatteryController()
 
 void FAN_CabinController(uint8_t* pulseTable)
 {
-	fan2Pulse = pulseTable[0];
+	fan2Pulse = pulseTable[0]; // TEST: ZMIENIĆ NA fan2Pulse
 }
 
 

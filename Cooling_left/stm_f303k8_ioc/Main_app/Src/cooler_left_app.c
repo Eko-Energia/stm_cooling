@@ -77,6 +77,7 @@ void Init_Cooler()
 void COOLER_LEFT_app()
 {
   Init_Cooler();
+  FAN_SetOnOff(FAN_ON_BOTH);
   // SERWO_SetPulse(SERWO_Open)
 
   while (1)
@@ -88,6 +89,8 @@ void COOLER_LEFT_app()
 	  if(!canBufferRx.IsEmpty(&canBufferRx))
 	  {
 		  canBufferRx.ReadData(&canBufferRx, &msg);
+
+		  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 
 		  if((CAN_FRAME_BMS_TEMP_1 <= msg.name) && (msg.name <= CAN_FRAME_BMS_TEMP_9))
 		  {
@@ -101,15 +104,17 @@ void COOLER_LEFT_app()
 			  case(CAN_FRAME_CABIN_SET_FAN):
 					FAN_CabinController(msg.data);
 			  	  	FAN_SetPulseInternal(&htim2, &canBufferTx);
-
+			  	  	break;
 			  case(CAN_FRAME_CABIN_SET_SERVO):
 					SERWO_CabinController(msg.data);
+					SERWO_BatteryController(msg.data);
 					SERWO_SetPulseInternal(&htim3, &canBufferTx);
+			  	  	break;
 
 			  case(CAN_FRAME_BATTERY_SET_SERVO):
 					SERWO_BatteryController(msg.data);
 					SERWO_SetPulseInternal(&htim3, &canBufferTx);
-
+			  	  	break;
 //			  case(CAN_FRAME_SAFE_STATE):
 //
 //			  case(CAN_FRAME_BATTERY_SET_FAN):

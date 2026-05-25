@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 # include "cooler_left_app.h"
+# include "cooler_test.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -107,8 +108,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	//COOLER_LEFT_app();
+//	Init_Cooler();
+//	TEST_Function();
 	COOLER_LEFT_app();
-
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

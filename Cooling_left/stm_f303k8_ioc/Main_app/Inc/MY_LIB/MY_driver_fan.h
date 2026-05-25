@@ -15,7 +15,7 @@
 #include "MY_driver_can.h"
 
 /* CAN transmission period for fan pulse feedback [ms] */
-#define PERIOD_PULSE_SEND       (1000)
+#define PERIOD_PULSE_SEND       (500)
 
 /* Number of bytes in the fan pulse CAN frame payload */
 #define BYTE_SIZE_PULSE         (2)
