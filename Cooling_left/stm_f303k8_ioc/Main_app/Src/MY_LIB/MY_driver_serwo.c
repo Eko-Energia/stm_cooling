@@ -6,7 +6,7 @@
  */
 
 #include "MY_driver_serwo.h"
-
+#include "MY_driver_i2c.h"
 
 /* ================= PRIVATE VARIABLE ================= */
 static uint8_t serwo1Pulse = 0;
@@ -15,6 +15,8 @@ static uint8_t serwo2Pulse = 0;
 
 /* ================= API ================= */
 
+/* ================= EXTERNAL ================= */
+extern float  batteryMaxTemp;
 /**
  * @brief Populates the CAN data buffer with the current pulse values of both servos.
  *
@@ -38,31 +40,101 @@ void SERWO_FetcherPulse(uint8_t *data)
  * @param pulse_ch3     Desired pulse value for servo 1 (TIM_CHANNEL_3), range 0–100.
  * @param pulse_ch4     Desired pulse value for servo 2 (TIM_CHANNEL_4), range 0–100.
  */
-void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch3, uint8_t pulse_ch4)
-{
-	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
-
-	serwo1Pulse = pulse_ch3;
-	serwo2Pulse = pulse_ch4;
-
-	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
-	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
-
-	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
-}
-
-void SERWO_CabinController(uint8_t* pulseTable)
+void SERWO_SetPulseExternCabin(uint8_t* pulseTable)
 {
 	serwo2Pulse = pulseTable[0];
 }
 
-void SERWO_BatteryController(uint8_t* pulseTable)
+/**
+ * @brief Sets the servo 1 (battery canal) pulse value from an externally received pulse table.
+ *
+ * @param pulseTable  Pointer to a byte array whose first element holds the desired servo 1 pulse value.
+ */
+void SERWO_SetPulseExternBattery(uint8_t* pulseTable)
 {
 	serwo1Pulse = pulseTable[0];
 }
 
+/**
+ * @brief Forces both servo channels to the fully open canal position.
+ */
+void SERWO_OpenCanal()
+{
+	serwo1Pulse = SERWO_OPEN_CANAL;
+	serwo2Pulse = SERWO_OPEN_CANAL;
+}
+
+/**
+ * @brief Regulates servo 1 (battery canal) position based on battery humidity and temperature.
+ *
+ * Runs periodically (every @ref DT ms). Reads temperature and humidity from the AM2320
+ * sensor. The canal is closed when humidity exceeds 90.0% (humX10 > 900) and the battery
+ * temperature is below 40°C; otherwise it stays open.
+ */
+void SERWO_BatteryController()
+{
+	static uint16_t lastTick = 0;
+	static uint8_t pwmDuty = 0;
+	static int16_t tempX10 = 0;
+	static uint16_t humX10 = 0 ;
+
+	if(HAL_GetTick() - lastTick >= DT)
+	{
+		lastTick = HAL_GetTick();
+
+		AM2320_GetTempHum(&tempX10, &humX10);
+
+		pwmDuty = SERWO_OPEN_CANAL;
+		if((humX10 > 900) && (batteryMaxTemp < 40))
+		{
+			pwmDuty = SERWO_CLOSE_CANAL;
+		}
+
+		serwo1Pulse = pwmDuty;
+	}
+}
+
+/**
+ * @brief Regulates servo 2 (cabin canal) position based on the cabin temperature.
+ *
+ * Runs periodically (every @ref DT ms). Reads temperature and humidity from the AM2320
+ * sensor. The canal is closed when the cabin temperature drops below 17.0°C (tempX10 < 170);
+ * otherwise it stays open.
+ */
+void SERWO_CabinController()
+{
+	static uint16_t lastTick = 0;
+	static uint8_t pwmDuty = 0;
+	static int16_t tempX10 = 0;
+	static uint16_t humX10 = 0;
+
+	if(HAL_GetTick() - lastTick >= DT)
+	{
+		lastTick = HAL_GetTick();
+
+		AM2320_GetTempHum(&tempX10, &humX10);
+
+		pwmDuty = SERWO_OPEN_CANAL;
+		if(tempX10 < 170)
+		{
+			pwmDuty = SERWO_CLOSE_CANAL;
+		}
+		serwo2Pulse = pwmDuty;
+	}
+}
 
 
+/**
+ * @brief Applies current servo pulse values to the PWM timer channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling servo, applies the
+ * stored @ref serwo1Pulse and @ref serwo2Pulse values (scaled by @ref SCALER_PULSE_SERWO)
+ * to TIM_CHANNEL_3 and TIM_CHANNEL_4, then re-registers a periodic CAN frame reporting
+ * both pulse values.
+ *
+ * @param htim          Pointer to the timer handle controlling the servo PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ */
 void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
 {
 	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
@@ -72,4 +144,3 @@ void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList
 
 	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
 }
-

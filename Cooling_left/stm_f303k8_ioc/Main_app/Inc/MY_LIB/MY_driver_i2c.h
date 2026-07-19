@@ -17,7 +17,7 @@
 #define MAX_FRAME_LENGTH (32)
 #define AM2320_CAN_ID_SENSOR (1281)
 #define AM2320_TEMP_RH_BYTES (4)
-#define AM2320_MEASURE_PERIOD_MS (1000)
+#define AM2320_MEASURE_PERIOD_MS (500)
 
 /* ================= STATE MACHINE ================= */
 
@@ -76,6 +76,6 @@ void AM2320_StartMeasure(void);
  * @param tempX10   pointer to store temperature * 10 (signed, degrees Celsius)
  * @param humX10    pointer to store relative humidity * 10 (unsigned, percent)
  */
-void AM2320_GetTempHum(int16_t* const tempX10, uint16_t* const humX10);
+void AM2320_GetTempHum(int16_t* tempX10, uint16_t* humX10);
 
 #endif /* INC_MY_LIB_MY_DRIVER_I2C_H_ */

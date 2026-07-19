@@ -11,7 +11,8 @@
 
 void Init_Cooler();
 
-void COOLER_LEFT_app();
+void COOLER_app();
 
+void COOLER_refresh_pulse();
 
 #endif /* INC_COOLER_LEFT_APP_H_ */

@@ -111,7 +111,7 @@ int main(void)
 	//COOLER_LEFT_app();
 //	Init_Cooler();
 //	TEST_Function();
-	COOLER_LEFT_app();
+	COOLER_app();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

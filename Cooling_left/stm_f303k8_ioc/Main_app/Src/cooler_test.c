@@ -54,7 +54,7 @@ void TEST_FAN()
 
 	if(dutyTable[0] < 100)
 	{
-		FAN_SetPulseExtern(&htim2, &canBufferTx, dutyTable);
+		//FAN_SetPulseExtern(&htim2, &canBufferTx, dutyTable);
 		dutyTable[0] += 1;
 	}
 	else

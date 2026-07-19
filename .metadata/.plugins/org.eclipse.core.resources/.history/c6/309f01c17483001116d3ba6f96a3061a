@@ -1,0 +1,69 @@
+/**
+ * @file driver_serwo.h
+ * @brief Driver for controlling servo motors via PWM timer channels and CAN bus reporting.
+ * @author AGH EKO-ENERGIA
+ * @author Karol
+ */
+
+#ifndef INC_MY_LIB_MY_DRIVER_SERWO_H_
+#define INC_MY_LIB_MY_DRIVER_SERWO_H_
+
+#include "MY_driver_can.h"
+#include "can_driver.h"
+#include "MY_diriver_i2c.h"
+#include "main.h"
+
+/* Multiplier converting 0-100 pulse value to timer compare register units */
+#define SCALER_PULSE_SERWO      (5)
+
+/* CAN transmission period for servo pulse feedback [ms] */
+#define PERIOD_PULSE_SEND       (1000)
+
+/* Number of bytes in the servo pulse CAN frame payload */
+#define BYTE_SIZE_PULSE         (2)
+
+/* CAN ID for the left cooling servo (0x503) */
+#define ID_COOLING_LEFT_SERWO   (1283)
+/* PWM duty that open cooling canal */
+#define SERWO_OPEN_CANAL		(100)
+/* PWM duty that close cooling canal */
+#define SERWO_CLOSE_CANAL 		(0)
+
+
+#define DT				(500) // ms
+
+/* ================= API ================= */
+
+/**
+ * @brief Populates the CAN data buffer with the current pulse values of both servos.
+ *
+ * @param data  Pointer to a byte array of at least 2 bytes; filled with servo 1 and servo 2 pulse values.
+ */
+void SERWO_FetcherPulse(uint8_t *data);
+
+/**
+ * @brief Sets PWM pulse widths for both servo channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling servo, updates the
+ * internal pulse state, applies the new compare values to TIM_CHANNEL_3 and TIM_CHANNEL_4,
+ * then re-registers a periodic CAN frame.
+ *
+ * @param htim          Pointer to the timer handle controlling the servo PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ * @param pulse_ch3     Desired pulse value for servo 1 (TIM_CHANNEL_3), range 0–100.
+ * @param pulse_ch4     Desired pulse value for servo 2 (TIM_CHANNEL_4), range 0–100.
+ */
+void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch3, uint8_t pulse_ch4);
+
+void SERWO_OpenCanal();
+
+void SERWO_CabinController();
+
+void SERWO_BatteryController();
+
+void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
+
+
+void SERWO_SetPulseExternCabin();
+void SERWO_SetPulseExternBattery();
+#endif /* INC_MY_LIB_MY_DRIVER_SERWO_H_ */

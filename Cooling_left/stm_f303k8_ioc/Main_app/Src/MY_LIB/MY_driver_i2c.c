@@ -137,7 +137,7 @@ void AM2320_StartMeasure(void)
  * @param tempX10   pointer to store temperature * 10 (signed, degrees Celsius)
  * @param humX10    pointer to store relative humidity * 10 (unsigned, percent)
  */
-void AM2320_GetTempHum(int16_t* const tempX10, uint16_t* const humX10)
+void AM2320_GetTempHum(int16_t* tempX10, uint16_t* humX10)
 {
     *tempX10 = am2320TempX10;
     *humX10 = am2320RhX10;

@@ -1,0 +1,104 @@
+/**
+ * @file driver_serwo.c
+ * @brief Driver for controlling servo motors via PWM timer channels and CAN bus reporting.
+ * @author AGH EKO-ENERGIA
+ * @author Karol
+ */
+
+#include "MY_driver_serwo.h"
+
+
+/* ================= PRIVATE VARIABLE ================= */
+static uint8_t serwo1Pulse = 0;
+static uint8_t serwo2Pulse = 0;
+
+
+/* ================= API ================= */
+
+/* ================= EXTERNAL ================= */
+extern static float  batteryMaxTemp;
+/**
+ * @brief Populates the CAN data buffer with the current pulse values of both servos.
+ *
+ * @param data  Pointer to a byte array of at least 2 bytes; filled with servo 1 and servo 2 pulse values.
+ */
+void SERWO_FetcherPulse(uint8_t *data)
+{
+	data[0] = serwo1Pulse;
+	data[1] = serwo2Pulse;
+}
+
+/**
+ * @brief Sets PWM pulse widths for both servo channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling servo, updates the
+ * internal pulse state, applies the new compare values to TIM_CHANNEL_3 and TIM_CHANNEL_4,
+ * then re-registers a periodic CAN frame.
+ *
+ * @param htim          Pointer to the timer handle controlling the servo PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ * @param pulse_ch3     Desired pulse value for servo 1 (TIM_CHANNEL_3), range 0–100.
+ * @param pulse_ch4     Desired pulse value for servo 2 (TIM_CHANNEL_4), range 0–100.
+ */
+void FAN_SetPulseExternCabin(uint8_t* pulseTable)
+{
+	serwo2Pulse = pulseTable[0];
+}
+void FAN_SetPulseExternBattery(uint8_t* pulseTable)
+{
+	serwo1Pulse = pulseTable[0];
+}
+
+void SERWO_BatteryController(uint8_t* pulseTable)
+{
+	static uint8_t pwmDuty = 0;
+	static int16_t tempX10 = 0;
+	static uint16_t humX10 = 0;
+
+	if(HAL_GetTick() - lastTick >= DT)
+	{
+		lastTick = HAL_GetTick();
+
+		AM2320_GetTempHum(*tempX10, *humX10);
+
+		pwmDuty = SERWO_OPEN_CANAL;
+		if(humX10 > 900 && batteryMaxTemp < 40)
+		{
+			pwmDuty = SERWO_CLOSE_CANAL;
+		}
+
+		serwo1Pulse = pwmDuty;
+	}
+}
+
+void SERWO_CabinController(uint8_t* pulseTable)
+{
+	static uint8_t pwmDuty = 0;
+	static int16_t tempX10 = 0;
+
+	if(HAL_GetTick() - lastTick >= DT)
+	{
+		lastTick = HAL_GetTick();
+
+		AM2320_GetTempHum(*tempX10, *humX10);
+
+		pwmDuty = SERWO_OPEN_CANAL;
+		if(tempX10 < 170)
+		{
+			pwmDuty = SERWO_CLOSE_CANAL;
+		}
+		serwo2Pulse = pwmDuty;
+	}
+}
+
+
+void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
+}
+
