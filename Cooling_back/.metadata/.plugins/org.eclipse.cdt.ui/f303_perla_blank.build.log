@@ -1,0 +1,17 @@
+18:13:21 **** Incremental Build of configuration Debug for project f303_perla_blank ****
+make -j16 all 
+arm-none-eabi-gcc "../Main_app/Src/cooler_left_app.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F303x8 -c -I"E:/Pulpit/PCB/Plytki_chlodzenia_SOFTWARE/Cooling_back/f303_perla_blank/Main_app/Inc/EKO_LIB" -I"E:/Pulpit/PCB/Plytki_chlodzenia_SOFTWARE/Cooling_back/f303_perla_blank/Main_app/Src" -I"E:/Pulpit/PCB/Plytki_chlodzenia_SOFTWARE/Cooling_back/f303_perla_blank/Main_app/Inc" -I"E:/Pulpit/PCB/Plytki_chlodzenia_SOFTWARE/Cooling_back/f303_perla_blank/Main_app/Inc/MY_LIB" -I"E:/Pulpit/PCB/Plytki_chlodzenia_SOFTWARE/Cooling_back/f303_perla_blank/Main_app/Src/EKO_LIB" -I"E:/Pulpit/PCB/Plytki_chlodzenia_SOFTWARE/Cooling_back/f303_perla_blank/Main_app/Src/MY_LIB" -I../Core/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc -I../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F3xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Main_app/Src/cooler_left_app.d" -MT"Main_app/Src/cooler_left_app.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Main_app/Src/cooler_left_app.o"
+arm-none-eabi-gcc -o "f303_perla_blank.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\Pulpit\PCB\Plytki_chlodzenia_SOFTWARE\Cooling_back\f303_perla_blank\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f303_perla_blank.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: f303_perla_blank.elf
+ 
+arm-none-eabi-size  f303_perla_blank.elf 
+arm-none-eabi-objdump -h -S f303_perla_blank.elf  > "f303_perla_blank.list"
+   text	   data	    bss	    dec	    hex	filename
+  22460	     12	   3644	  26116	   6604	f303_perla_blank.elf
+Finished building: default.size.stdout
+ 
+Finished building: f303_perla_blank.list
+ 
+
+18:13:22 Build Finished. 0 errors, 0 warnings. (took 971ms)
+
