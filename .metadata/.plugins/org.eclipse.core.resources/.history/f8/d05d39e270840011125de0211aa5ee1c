@@ -20,6 +20,7 @@ extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim6;
 extern TIM_HandleTypeDef htim7;
 extern I2C_HandleTypeDef hi2c1;
+extern volatile struct CAN_fifoBuffer canBufferRx;
 extern struct CAN_scheduledMsgList canBufferTx;
 
 /* ================= PRIVATE VARIABLE ================= */
@@ -27,6 +28,15 @@ static struct CAN_bufferFrame msg = {0};
 volatile uint8_t interuptCanFlag = CAN_WAIT_TO_SEND_MSG;
 /* ================= CALLBACK ================= */
 
+/**
+ * @brief HAL timer period-elapsed callback, dispatched for TIM6 and TIM7.
+ *
+ * On TIM7: toggles the red status LED and triggers handling of any scheduled
+ * CAN messages that are due for transmission.
+ * On TIM6: starts a new AM2320 temperature/humidity measurement cycle.
+ *
+ * @param htim  Pointer to the timer handle that triggered the callback.
+ */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM7)
@@ -43,9 +53,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 /* ================= HELPER FUNCTION ================= */
 
+/**
+ * @brief Periodically applies the current fan and servo pulse values to their PWM timers.
+ *
+ * Runs at most once every 500 ms; when due, pushes the internally stored fan
+ * pulses to TIM2 and servo pulses to TIM3 (also scheduling their CAN status frames).
+ */
 void COOLER_refresh_pulse()
 {
-	static uint32_t lastTick = 0;
+	static uint16_t lastTick = 0;
 	if(HAL_GetTick() - lastTick  > 500)
 	{
 		lastTick = HAL_GetTick();
@@ -65,10 +81,23 @@ void COOLER_IsTimeSendMsg(uint8_t* interuptCanFlag)
 }
 
 
+
+/**
+ * @brief Initializes all peripherals used by the cooler application.
+ *
+ * Sets up the CAN driver and its RX ring buffer, starts the periodic TIM6/TIM7
+ * interrupt timers, initializes the AM2320 sensor over I2C, and starts the PWM
+ * channels used for the servos (TIM3) and fans (TIM2).
+ */
 void Init_Cooler()
 {
 	  // 			INIT CAN
 	  CAN_Init(&hcan);
+	  canBufferRx.readIndex = 0;
+	  canBufferRx.writeIndex = 0;
+	  canBufferRx.ReadData = CAN_ReadData;
+	  canBufferRx.WriteData = CAN_WriteData;
+	  canBufferRx.IsEmpty = IsEmpty;
 	  HAL_TIM_Base_Start_IT(&htim7);
 	  HAL_TIM_Base_Start_IT(&htim6);
 
@@ -90,6 +119,16 @@ void Init_Cooler()
 
 /* ================= MAIN APP ================= */
 
+/**
+ * @brief Main application entry point / superloop for the left cooler controller.
+ *
+ * Initializes the cooler hardware, turns both fans on and opens both servo canals,
+ * then continuously: runs the AM2320 sensor state machine, regulates the cabin fan
+ * and both servo canals (cabin and battery), processes any incoming CAN frames
+ * (battery temperature packets update the max-temperature and battery fan control;
+ * other frames update externally-commanded fan/servo pulses), and periodically
+ * refreshes the PWM outputs and CAN status frames.
+ */
 void COOLER_app()
 {
   Init_Cooler();
@@ -107,8 +146,11 @@ void COOLER_app()
 	  SERWO_CabinController();
 	  SERWO_BatteryController();
 
-	  if(CAN_GetFrame(&msg) == HAL_OK)
+	  if(!canBufferRx.IsEmpty(&canBufferRx))
 	  {
+		  canBufferRx.ReadData(&canBufferRx, &msg);
+
+
 		  if((CAN_FRAME_BMS_TEMP_1 <= msg.name) && (msg.name <= CAN_FRAME_BMS_TEMP_9))
 		  {
 			  FAN_SetMaxTemp(&msg);

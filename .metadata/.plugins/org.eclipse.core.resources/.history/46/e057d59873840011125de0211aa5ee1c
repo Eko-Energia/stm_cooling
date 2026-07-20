@@ -73,7 +73,7 @@ void SERWO_OpenCanal()
  */
 void SERWO_BatteryController()
 {
-	static uint32_t lastTick = 0;
+	static uint64_t lastTick = 0;
 	static uint8_t pwmDuty = 0;
 	static int16_t tempX10 = 0;
 	static uint16_t humX10 = 0 ;
@@ -103,7 +103,7 @@ void SERWO_BatteryController()
  */
 void SERWO_CabinController()
 {
-	static uint32_t lastTick = 0;
+	static uint64_t lastTick = 0;
 	static uint8_t pwmDuty = 0;
 	static int16_t tempX10 = 0;
 	static uint16_t humX10 = 0;

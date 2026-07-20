@@ -45,7 +45,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void COOLER_refresh_pulse()
 {
-	static uint32_t lastTick = 0;
+	static uint16_t lastTick = 0;
 	if(HAL_GetTick() - lastTick  > 500)
 	{
 		lastTick = HAL_GetTick();

@@ -132,7 +132,7 @@ void FAN_SetMaxTemp(struct CAN_bufferFrame* frame)
 void FAN_BatteryController() // Fix it during tests
 {
 	static uint8_t pwmDuty = 0;
-	static uint32_t lastTick = 0;
+	static uint64_t lastTick = 0;
 
 	if(HAL_GetTick() - lastTick >= DT)
 	{
@@ -161,7 +161,7 @@ void FAN_BatteryController() // Fix it during tests
  */
 void FAN_CabinController() // Fix it during tests
 {
-	static uint32_t lastTick = 0;
+	static uint64_t lastTick = 0;
 	static uint8_t pwmDuty = 0;
 	static int16_t tempX10 = 0;
 	static uint16_t humX10 = 0;
