@@ -25,7 +25,7 @@ extern struct CAN_scheduledMsgList canBufferTx;
 
 /* ================= PRIVATE VARIABLE ================= */
 static struct CAN_bufferFrame msg = {0};
-volatile uint8_t interuptCanFlag = CAN_WAIT_TO_SEND_MSG;
+static uint8_t interuptCanFlag = CAN_WAIT_TO_SEND_MSG;
 /* ================= CALLBACK ================= */
 
 /**
@@ -69,17 +69,6 @@ void COOLER_refresh_pulse()
 		SERWO_SetPulseInternal(&htim3, &canBufferTx);
 	}
 }
-
-
-void COOLER_IsTimeSendMsg(uint8_t* interuptCanFlag)
-{
-	if(*interuptCanFlag == CAN_TIME_TO_SEND_MSG)
-	{
-		*interuptCanFlag = CAN_WAIT_TO_SEND_MSG;
-		CAN_HandleScheduled(&hcan, &canBufferTx);
-	}
-}
-
 
 
 /**
@@ -140,7 +129,7 @@ void COOLER_app()
   {
 	  // STATE: DRIVING / CHARGING
 	  AM2320_StateMachine();
-	  COOLER_IsTimeSendMsg(&interuptCanFlag);
+	  CAN_IsTimeSend();
 	  FAN_CabinController();
 
 	  SERWO_CabinController();

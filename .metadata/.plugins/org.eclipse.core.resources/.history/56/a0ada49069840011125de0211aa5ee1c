@@ -64,7 +64,7 @@ struct CAN_fifoBuffer
 
 bool IsEmpty(volatile struct CAN_fifoBuffer *self);
 
-
+void IsTime(uint8_t interuptCanFlag);
 
 /**
  * @brief Writes a frame to the FIFO buffer.

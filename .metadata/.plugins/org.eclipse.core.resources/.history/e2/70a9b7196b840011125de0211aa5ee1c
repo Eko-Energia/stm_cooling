@@ -41,6 +41,15 @@ bool IsEmpty(volatile struct CAN_fifoBuffer *self)
 	return false;
 }
 
+void CAN_IsTimeSendMsg(uint8_t* interuptCanFlag)
+{
+	if(*interuptCanFlag == CAN_TIME_TO_SEND_MSG)
+	{
+		*interuptCanFlag = 0;
+		CAN_HandleScheduled(&hcan, &canBufferTx);
+	}
+}
+
 /**
  * @brief Writes a frame to the FIFO buffer.
  *

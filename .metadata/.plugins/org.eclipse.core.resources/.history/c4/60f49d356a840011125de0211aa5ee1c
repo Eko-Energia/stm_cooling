@@ -5,6 +5,7 @@
  * @author Karol
  */
 
+#include "cooler_left_app.h"
 #include "MY_driver_can.h"
 #include "can_driver.h"
 #include "main.h"
@@ -39,6 +40,15 @@ bool IsEmpty(volatile struct CAN_fifoBuffer *self)
 		return true; 	/* Buffer empty */
 	}
 	return false;
+}
+
+void CAN_IsTimeSendMsg(uint8_t* interuptCanFlag)
+{
+	if(*interuptCanFlag == CAN_TIME_TO_SEND_MSG)
+	{
+		*interuptCanFlag = 0;
+		CAN_HandleScheduled(&hcan, &canBufferTx);
+	}
 }
 
 /**

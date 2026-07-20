@@ -41,6 +41,7 @@ bool IsEmpty(volatile struct CAN_fifoBuffer *self)
 	return false;
 }
 
+
 /**
  * @brief Writes a frame to the FIFO buffer.
  *
