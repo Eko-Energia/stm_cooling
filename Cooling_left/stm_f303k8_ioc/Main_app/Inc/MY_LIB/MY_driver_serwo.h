@@ -24,9 +24,9 @@
 /* CAN ID for the left cooling servo (0x503) */
 #define ID_COOLING_LEFT_SERWO   (1283)
 /* PWM duty that open cooling canal */
-#define SERWO_OPEN_CANAL		(100)
+#define SERWO_OPEN_CANAL		(0x07)
 /* PWM duty that close cooling canal */
-#define SERWO_CLOSE_CANAL 		(0)
+#define SERWO_CLOSE_CANAL 		(0x13)
 
 
 #define DT				(500) // ms

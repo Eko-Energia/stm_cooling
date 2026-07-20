@@ -143,7 +143,6 @@ void COOLER_app()
 		  canBufferRx.ReadData(&canBufferRx, &msg);
 
 
-
 		  if((CAN_FRAME_BMS_TEMP_1 <= msg.name) && (msg.name <= CAN_FRAME_BMS_TEMP_9))
 		  {
 			  FAN_SetMaxTemp(&msg);

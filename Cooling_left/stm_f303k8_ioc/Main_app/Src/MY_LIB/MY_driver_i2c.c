@@ -90,19 +90,19 @@ void AM2320_Init(void)
     am2320WakeUp.hi2c = &hi2c1;
     am2320WakeUp.address = 0xB8;
     am2320WakeUp.sizeData = 0;
-    am2320WakeUp.delayMs = 2;
+    am2320WakeUp.delayMs = 3;
     memcpy(am2320WakeUp.data, empty, 1);
 
     am2320Measure.hi2c = &hi2c1;
     am2320Measure.address = 0xB8;
     am2320Measure.sizeData = 3;
-    am2320Measure.delayMs = 2;
+    am2320Measure.delayMs = 3;
     memcpy(am2320Measure.data, measureCmd, 3);
 
     am2320Read.hi2c = &hi2c1;
     am2320Read.address = 0xB8;
     am2320Read.sizeData = 8;
-    am2320Read.delayMs = 0;
+    am2320Read.delayMs = 2;
 }
 
 /**
@@ -216,9 +216,9 @@ static void AM2320_PrepareData(void)
 {
     uint8_t* data = am2320Read.data;
 
-    am2320RhX10 = (uint16_t)(data[4] << 8 | data[5]);
+    am2320RhX10 = (uint16_t)(data[2] << 8 | data[3]);
 
-    uint16_t rawTemp = (uint16_t)(data[2] << 8 | data[3]);
+    uint16_t rawTemp = (uint16_t)(data[4] << 8 | data[5]);
 
     if (rawTemp & 0x8000)
     {

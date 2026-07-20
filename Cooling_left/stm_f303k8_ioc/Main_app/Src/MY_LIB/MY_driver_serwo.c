@@ -85,7 +85,7 @@ void SERWO_BatteryController()
 		AM2320_GetTempHum(&tempX10, &humX10);
 
 		pwmDuty = SERWO_OPEN_CANAL;
-		if((humX10 > 900) && (batteryMaxTemp < 40))
+		if((humX10 > 90) && (batteryMaxTemp < 40))
 		{
 			pwmDuty = SERWO_CLOSE_CANAL;
 		}
