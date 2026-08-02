@@ -93,7 +93,7 @@ void Init_Cooler()
 void COOLER_app()
 {
   Init_Cooler();
-  FAN_SetOnOff(FAN_ON_BOTH);
+  FAN_SetOnOff(FAN_OFF_BOTH);
 
   SERWO_OpenCanal();
 
@@ -101,11 +101,10 @@ void COOLER_app()
   {
 	  // STATE: DRIVING / CHARGING
 	  AM2320_StateMachine();
-	  COOLER_IsTimeSendMsg(&interuptCanFlag);
-	  FAN_CabinController();
 
-	  SERWO_CabinController();
-	  SERWO_BatteryController();
+	  COOLER_IsTimeSendMsg(&interuptCanFlag);
+
+	  FAN_CabinController();
 
 	  if(CAN_GetFrame(&msg) == HAL_OK)
 	  {
@@ -118,14 +117,12 @@ void COOLER_app()
 		  {
 			  switch(msg.name)
 			  {
+			  case(CAN_FRAME_SET_SERVOS_FRONT):
+					SERWO_SetPulseExtern(msg.data);
+			  	  	break;
+
 			  case(CAN_FRAME_CABIN_SET_FAN):
 					FAN_SetPulseExternCabin(msg.data);
-			  	  	break;
-			  case(CAN_FRAME_CABIN_SET_SERVO):
-					SERWO_SetPulseExternCabin(msg.data);
-			  	  	break;
-			  case(CAN_FRAME_BATTERY_SET_SERVO):
-					SERWO_SetPulseExternBattery(msg.data);
 			  	  	break;
 			  }
 		  }

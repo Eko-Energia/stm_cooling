@@ -15,7 +15,6 @@
 
 /* ================= CONFIG ================= */
 #define CAN_DATA_SIZE	(8)
-#define CAN_BUFFER_SIZE	(16)
 
 
 /* ================= FRAMES NAMES ================= */
@@ -30,11 +29,11 @@ typedef enum
 	CAN_FRAME_BMS_TEMP_7,
 	CAN_FRAME_BMS_TEMP_8,
 	CAN_FRAME_BMS_TEMP_9,
-	CAN_FRAME_CABIN_SET_FAN,
-	CAN_FRAME_CABIN_SET_SERVO,
+	CAN_FRAME_SET_SERVOS_ENGINE,
+	CAN_FRAME_SET_SERVOS_FRONT,
 	CAN_FRAME_SAFE_STATE,
 	CAN_FRAME_BATTERY_SET_FAN,
-	CAN_FRAME_BATTERY_SET_SERVO,
+	CAN_FRAME_CABIN_SET_FAN,
 	CAN_FRAME_UNKNOWN,
 } CAN_frameType_e;
 
@@ -49,47 +48,29 @@ struct CAN_bufferFrame
 };
 
 
-struct CAN_fifoBuffer
-{
-	struct CAN_bufferFrame tableBuff[CAN_BUFFER_SIZE];
-	uint8_t readIndex;
-	uint8_t writeIndex;
-	HAL_StatusTypeDef (*WriteData)(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame);
-	HAL_StatusTypeDef (*ReadData)(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame);
-	bool (*IsEmpty)(volatile struct CAN_fifoBuffer *self);
-};
-
-
 /* ================= API ================= */
 
-bool IsEmpty(volatile struct CAN_fifoBuffer *self);
-
-
 /**
- * @brief Writes a frame to the FIFO buffer.
- *
- * @param self      pointer to the FIFO buffer instance
- * @param frame     pointer to the frame to write
- * @retval HAL_OK if write was successful, HAL_ERROR if buffer is full
- */
-HAL_StatusTypeDef CAN_WriteData(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame);
-
-/**
- * @brief Reads a frame from the FIFO buffer.
- *
- * @param self      pointer to the FIFO buffer instance
- * @param frame     pointer to the frame to read into
- * @retval HAL_OK if read was successful, HAL_ERROR if buffer is empty
- */
-HAL_StatusTypeDef CAN_ReadData(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame);
-
-
-/**
- * @brief Reads an incoming CAN frame from hardware FIFO and writes it to the RX software buffer.
+ * @brief Reads an incoming CAN frame from hardware FIFO and hands it to the
+ *        library's incoming-message buffer (see CAN_AddIncomingMsg() in can_driver.h).
  *
  * @param hcan  pointer to the CAN peripheral handle
  */
 void CAN_ReadFrame(CAN_HandleTypeDef *hcan);
+
+/**
+ * @brief Retrieves the next pending incoming CAN frame and maps its hardware
+ *        ID to the application-level frame name.
+ *
+ * This wraps can_driver.h's CAN_GetLatestMessage() — the actual RX buffering
+ * (storage, FIFO ordering, overflow handling) is entirely owned by that
+ * library function; this only adds the ID -> CAN_frameType_e translation
+ * on top of it.
+ *
+ * @param frame  pointer to storage for the mapped result (name + payload)
+ * @retval HAL_OK if a frame was available, HAL_ERROR if the RX buffer was empty
+ */
+HAL_StatusTypeDef CAN_GetFrame(struct CAN_bufferFrame *frame);
 
 /**
  * @brief Adds a new periodic CAN message to the TX scheduled message list.

@@ -21,7 +21,7 @@
 #define BYTE_SIZE_PULSE         (2)
 
 /* CAN ID for the left cooling fan (0x502) */
-#define ID_COOLING_LEFT_FAN     (1282)
+#define ID_COOLING_RIGHT_FAN     (1314)
 
 #define NUMBER_OF_PACKET (9)
 

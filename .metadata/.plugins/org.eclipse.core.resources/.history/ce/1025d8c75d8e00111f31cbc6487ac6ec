@@ -1,0 +1,103 @@
+/**
+ * @file driver_can.h
+ * @brief CAN driver for receiving and transmitting CAN frames using a FIFO buffer and scheduled messages.
+ * @author AGH EKO-ENERGIA
+ * @author Karol
+ */
+
+#ifndef INC_MY_LIB_DRIVER_CAN_H_
+#define INC_MY_LIB_DRIVER_CAN_H_
+
+#include "MY_driver_can.h"
+#include "can_driver.h"
+#include "main.h"
+#include "stdbool.h"
+
+/* ================= CONFIG ================= */
+#define CAN_DATA_SIZE	(8)
+
+
+/* ================= FRAMES NAMES ================= */
+typedef enum
+{
+	CAN_FRAME_BMS_TEMP_1,
+	CAN_FRAME_BMS_TEMP_2,
+	CAN_FRAME_BMS_TEMP_3,
+	CAN_FRAME_BMS_TEMP_4,
+	CAN_FRAME_BMS_TEMP_5,
+	CAN_FRAME_BMS_TEMP_6,
+	CAN_FRAME_BMS_TEMP_7,
+	CAN_FRAME_BMS_TEMP_8,
+	CAN_FRAME_BMS_TEMP_9,
+	CAN_FRAME_SET_SERVOS_ENGINE,
+	CAN_FRAME_SET_SERVOS,
+	CAN_FRAME_SAFE_STATE,
+	CAN_FRAME_BATTERY_SET_FAN,
+	CAN_FRAME_BATTERY_SET_SERVO,
+	CAN_FRAME_UNKNOWN,
+} CAN_frameType_e;
+
+typedef void (*CAN_frameHandler_t)(uint8_t *data);
+
+
+/* ================= STRUCTS ================= */
+struct CAN_bufferFrame
+{
+	CAN_frameType_e name;
+	uint8_t data[CAN_DATA_SIZE];
+};
+
+
+/* ================= API ================= */
+
+/**
+ * @brief Reads an incoming CAN frame from hardware FIFO and hands it to the
+ *        library's incoming-message buffer (see CAN_AddIncomingMsg() in can_driver.h).
+ *
+ * @param hcan  pointer to the CAN peripheral handle
+ */
+void CAN_ReadFrame(CAN_HandleTypeDef *hcan);
+
+/**
+ * @brief Retrieves the next pending incoming CAN frame and maps its hardware
+ *        ID to the application-level frame name.
+ *
+ * This wraps can_driver.h's CAN_GetLatestMessage() — the actual RX buffering
+ * (storage, FIFO ordering, overflow handling) is entirely owned by that
+ * library function; this only adds the ID -> CAN_frameType_e translation
+ * on top of it.
+ *
+ * @param frame  pointer to storage for the mapped result (name + payload)
+ * @retval HAL_OK if a frame was available, HAL_ERROR if the RX buffer was empty
+ */
+HAL_StatusTypeDef CAN_GetFrame(struct CAN_bufferFrame *frame);
+
+/**
+ * @brief Adds a new periodic CAN message to the TX scheduled message list.
+ *
+ * @param canBufferTx   pointer to the scheduled message list
+ * @param id            standard CAN ID of the message
+ * @param size          data length code (DLC)
+ * @param fetcher       function pointer to the data-fetching callback
+ * @param period        transmission period in milliseconds
+ */
+void CAN_WriteFrame(struct CAN_scheduledMsgList *canBufferTx, uint16_t id, uint8_t size, void *fetcher, uint32_t period);
+
+/**
+ * @brief Removes a scheduled CAN message from the TX list by ID.
+ *
+ * @param canBuffer     pointer to the scheduled message list
+ * @param id            standard CAN ID of the message to remove
+ */
+void CAN_RemoveScheduledMessage(struct CAN_scheduledMsgList *canBuffer, uint32_t id);
+
+/**
+ * @brief Example data-fetching callback that fills a CAN frame with incremental bytes.
+ *
+ * @param data      pointer to the data buffer to fill (8 bytes)
+ * @param context   unused context pointer
+ */
+void CAN_ExampleFetchingFrame(uint8_t *data, void *context);
+
+
+#endif /* INC_MY_LIB_DRIVER_CAN_H_ */

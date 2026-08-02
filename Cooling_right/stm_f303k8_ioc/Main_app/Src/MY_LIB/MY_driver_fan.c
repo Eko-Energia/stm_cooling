@@ -161,7 +161,7 @@ void FAN_BatteryController() // Fix it during tests
  */
 void FAN_CabinController() // Fix it during tests
 {
-	static uint16_t lastTick = 0;
+	static uint32_t lastTick = 0;
 	static uint8_t pwmDuty = 0;
 	static int16_t tempX10 = 0;
 	static uint16_t humX10 = 0;
@@ -198,12 +198,12 @@ void FAN_CabinController() // Fix it during tests
  */
 void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
 {
-	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
+	CAN_RemoveScheduledMsg(ID_COOLING_RIGHT_FAN, CAN_Buffer_TX);
 
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse);
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse);
 
-	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_RIGHT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
 }
 
 

@@ -15,7 +15,9 @@ extern CAN_HandleTypeDef hcan;
 
 
 /* ================= BUFFERS ================= */
-volatile struct CAN_fifoBuffer canBufferRx = {0};
+/* RX buffering is owned by can_driver.h (CAN_IncomingMsgList) - kept private here,
+ * the app reaches it only through CAN_GetFrame(). */
+static struct CAN_IncomingMsgList canBufferRx = {0};
 struct CAN_scheduledMsgList canBufferTx = {0};
 
 
@@ -32,79 +34,58 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 
 
 /* ================= API ================= */
-bool IsEmpty(volatile struct CAN_fifoBuffer *self)
-{
-	if (self->readIndex == self->writeIndex)
-	{
-		return true; 	/* Buffer empty */
-	}
-	return false;
-}
-
 
 /**
- * @brief Writes a frame to the FIFO buffer.
+ * @brief Reads an incoming CAN frame from hardware FIFO and hands it to the
+ * library's incoming-message buffer.
  *
- * @param self      pointer to the FIFO buffer instance
- * @param frame     pointer to the frame to write
- * @retval HAL_OK if write was successful, HAL_ERROR if buffer is full
- */
-HAL_StatusTypeDef CAN_WriteData(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame)
-{
-	uint8_t nextIndex = (self->writeIndex + 1) % CAN_BUFFER_SIZE;
-
-	if (self->readIndex == nextIndex)
-	{
-		return HAL_ERROR; /* Buffer full */
-	}
-
-	self->tableBuff[self->writeIndex] = *frame;
-	self->writeIndex = nextIndex;
-
-	return HAL_OK;
-}
-
-/**
- * @brief Reads a frame from the FIFO buffer.
- *
- * @param self      pointer to the FIFO buffer instance
- * @param frame     pointer to the frame to read into
- * @retval HAL_OK if read was successful, HAL_ERROR if buffer is empty
- */
-HAL_StatusTypeDef CAN_ReadData(volatile struct CAN_fifoBuffer *self, struct CAN_bufferFrame *frame)
-{
-	if (IsEmpty(self))
-	{
-		return HAL_ERROR; /* Buffer empty */
-	}
-
-	*frame = self->tableBuff[self->readIndex];
-	self->readIndex = (self->readIndex + 1) % CAN_BUFFER_SIZE;
-
-	return HAL_OK;
-}
-
-/**
- * @brief Reads an incoming CAN frame from hardware FIFO and writes it to the RX software buffer.
- *
- * If the RX buffer is full the incoming frame is silently dropped.
- * TODO: consider overwriting the oldest entry instead of dropping.
+ * If the RX buffer is full, CAN_AddIncomingMsg() drops the frame (its own
+ * behaviour) - this function no longer implements any buffering itself.
  *
  * @param hcan  pointer to the CAN peripheral handle
  */
 void CAN_ReadFrame(CAN_HandleTypeDef *hcan)
 {
 	CAN_RxHeaderTypeDef rxHeader;
-	struct CAN_bufferFrame msg = {0};
+	uint8_t data[CAN_DATA_SIZE] = {0};
 
-	if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, msg.data) != HAL_OK)
+	if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rxHeader, data) != HAL_OK)
 	{
 		/* TODO: error handler */
 		return;
 	}
 
-	msg.name = MapIdToFrameEnum(rxHeader.StdId);
-	CAN_WriteData(&canBufferRx, &msg);
+	if (CAN_AddIncomingMsg(&canBufferRx, &rxHeader, data) != HAL_OK)
+	{
+		/* TODO: error handler - buffer full, frame dropped */
+	}
+}
+
+/**
+ * @brief Retrieves the next pending incoming CAN frame and maps its hardware
+ * ID to the application-level frame name.
+ *
+ * Wraps can_driver.h's CAN_GetLatestMessage() - buffering (storage, ordering,
+ * overflow handling) stays entirely inside that library function.
+ *
+ * @param frame  pointer to storage for the mapped result (name + payload)
+ * @retval HAL_OK if a frame was available, HAL_ERROR if the RX buffer was empty
+ */
+HAL_StatusTypeDef CAN_GetFrame(struct CAN_bufferFrame *frame)
+{
+	struct CAN_IncomingMsg incoming;
+
+	if (CAN_GetLatestMessage(&canBufferRx, &incoming) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
+
+	uint32_t id = (incoming.header.IDE == CAN_ID_STD) ? incoming.header.StdId : incoming.header.ExtId;
+
+	frame->name = MapIdToFrameEnum((uint16_t)id);
+	memcpy(frame->data, incoming.data, CAN_DATA_SIZE);
+
+	return HAL_OK;
 }
 
 /**
@@ -173,11 +154,13 @@ static CAN_frameType_e MapIdToFrameEnum(uint16_t id)
 	case 0x89: return CAN_FRAME_BMS_TEMP_7;
 	case 0x8A: return CAN_FRAME_BMS_TEMP_8;
 	case 0x8B: return CAN_FRAME_BMS_TEMP_9;
-	case 0xFF: return CAN_FRAME_CABIN_SET_FAN;
-	case 0x1FF: return CAN_FRAME_CABIN_SET_SERVO;
-	case 0xAAAA: return CAN_FRAME_SAFE_STATE;
-	case 0xBBBB: return CAN_FRAME_BATTERY_SET_FAN;
-	case 0xCCCC: return CAN_FRAME_BATTERY_SET_SERVO;
+	case 0x3E5: return CAN_FRAME_SET_SERVOS_ENGINE;
+	case 0x3E6: return CAN_FRAME_SET_SERVOS_FRONT;
+
+	// Rest frame for test
+	case 0xD: return CAN_FRAME_CABIN_SET_FAN;
+	case 0xD1: return CAN_FRAME_BATTERY_SET_FAN;
+	case 0xBBBB: return CAN_FRAME_SAFE_STATE;
 	default: return CAN_FRAME_UNKNOWN;
 	}
 }

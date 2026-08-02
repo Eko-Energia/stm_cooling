@@ -34,7 +34,7 @@ void TEST_Serwo()
 //		SERWO_CabinController(dutyTable);
 //		SERWO_BatteryController(dutyTable);
 //		SERWO_SetPulseInternal(&htim3, &canBufferTx);
-		SERWO_SetPulse(&htim3, &canBufferTx,dutyTable_[0], dutyTable_[1]);
+
 
 	}
 	else

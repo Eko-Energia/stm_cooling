@@ -1,0 +1,11 @@
+2026-07-20 16:25:12,518 [INFO] Activator:176 - 
+
+
+2026-07-20 16:25:12,539 [INFO] Activator:177 - !SESSION log4j initialized
+2026-07-20 16:25:19,708 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2026-07-20 20:25:54,837 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-07-20 20:25:56,918 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-07-20 20:25:56,941 [ERROR] ConfigurationRetriever:142 - IOException on connection: (internal_error) Received fatal alert: internal_error
+2026-07-20 20:25:58,978 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2026-07-20 20:25:59,009 [ERROR] ConfigurationRetriever:142 - IOException on connection: (internal_error) Received fatal alert: internal_error
+2026-07-20 20:25:59,030 [ERROR] ConfigurationRetriever:142 - IOException on connection: (internal_error) Received fatal alert: internal_error

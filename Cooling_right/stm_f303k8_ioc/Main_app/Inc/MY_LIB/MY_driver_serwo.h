@@ -22,16 +22,20 @@
 #define BYTE_SIZE_PULSE         (2)
 
 /* CAN ID for the left cooling servo (0x503) */
-#define ID_COOLING_LEFT_SERWO   (1283)
+#define ID_COOLING_RIGHT_SERWO   (1315)
 /* PWM duty that open cooling canal */
-#define SERWO_OPEN_CANAL		(100)
+#define SERWO_OPEN_CANAL		(0x07)
 /* PWM duty that close cooling canal */
-#define SERWO_CLOSE_CANAL 		(0)
-
+#define SERWO_CLOSE_CANAL 		(0x13)
+/* PWM duty scaler */
+#define SERWO_SCALER (8.33)
 
 #define DT				(500) // ms
 
 /* ================= API ================= */
+
+void SERWO_OpenCanal();
+
 
 /**
  * @brief Populates the CAN data buffer with the current pulse values of both servos.
@@ -41,41 +45,9 @@
 void SERWO_FetcherPulse(uint8_t *data);
 
 /**
- * @brief Sets PWM pulse widths for both servo channels and schedules a CAN status frame.
- *
- * Removes any previously scheduled CAN message for the left cooling servo, updates the
- * internal pulse state, applies the new compare values to TIM_CHANNEL_3 and TIM_CHANNEL_4,
- * then re-registers a periodic CAN frame.
- *
- * @param htim          Pointer to the timer handle controlling the servo PWM output.
- * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
- * @param pulse_ch3     Desired pulse value for servo 1 (TIM_CHANNEL_3), range 0–100.
- * @param pulse_ch4     Desired pulse value for servo 2 (TIM_CHANNEL_4), range 0–100.
+ * @brief Scaler gain pwm 0-100 to  range 7-19
  */
-void SERWO_SetPulse(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX, uint8_t pulse_ch3, uint8_t pulse_ch4);
-
-/**
- * @brief Forces both servo channels to the fully open canal position.
- */
-void SERWO_OpenCanal();
-
-/**
- * @brief Regulates servo 2 (cabin canal) position based on the cabin temperature.
- *
- * Runs periodically (every @ref DT ms). Reads temperature and humidity from the AM2320
- * sensor. The canal is closed when the cabin temperature drops below 17.0°C (tempX10 < 170);
- * otherwise it stays open.
- */
-void SERWO_CabinController();
-
-/**
- * @brief Regulates servo 1 (battery canal) position based on battery humidity and temperature.
- *
- * Runs periodically (every @ref DT ms). Reads temperature and humidity from the AM2320
- * sensor. The canal is closed when humidity exceeds 90.0% (humX10 > 900) and the battery
- * temperature is below 40°C; otherwise it stays open.
- */
-void SERWO_BatteryController();
+uint8_t SERWO_ScalerPulse(uint8_t pwm);
 
 /**
  * @brief Applies current servo pulse values to the PWM timer channels and schedules a CAN status frame.
@@ -90,17 +62,12 @@ void SERWO_BatteryController();
  */
 void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX);
 
-
 /**
- * @brief Sets the servo 2 (cabin canal) pulse value from an externally received pulse table.
+ * @brief Sets the servo 2 (cabin/battery canal) pulse value from an externally received pulse table.
  *
  * @param pulseTable  Pointer to a byte array whose first element holds the desired servo 2 pulse value.
  */
-void SERWO_SetPulseExternCabin();
-/**
- * @brief Sets the servo 1 (battery canal) pulse value from an externally received pulse table.
- *
- * @param pulseTable  Pointer to a byte array whose first element holds the desired servo 1 pulse value.
- */
-void SERWO_SetPulseExternBattery();
+void SERWO_SetPulseExtern();
+
+
 #endif /* INC_MY_LIB_MY_DRIVER_SERWO_H_ */

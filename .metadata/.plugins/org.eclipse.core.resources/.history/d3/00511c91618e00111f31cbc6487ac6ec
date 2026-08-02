@@ -1,0 +1,86 @@
+/**
+ * @file driver_serwo.c
+ * @brief Driver for controlling servo motors via PWM timer channels and CAN bus reporting.
+ * @author AGH EKO-ENERGIA
+ * @author Karol
+ */
+
+#include "MY_driver_serwo.h"
+#include "MY_driver_i2c.h"
+
+/* ================= PRIVATE VARIABLE ================= */
+static uint8_t serwo1Pulse = 0;
+static uint8_t serwo2Pulse = 0;
+
+
+/* ================= API ================= */
+
+/* ================= EXTERNAL ================= */
+extern float  batteryMaxTemp;
+/**
+ * @brief Populates the CAN data buffer with the current pulse values of both servos.
+ *
+ * @param data  Pointer to a byte array of at least 2 bytes; filled with servo 1 and servo 2 pulse values.
+ */
+void SERWO_FetcherPulse(uint8_t *data)
+{
+	data[0] = serwo1Pulse;
+	data[1] = serwo2Pulse;
+}
+
+/**
+ * @brief Sets PWM pulse widths for both servo channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling servo, updates the
+ * internal pulse state, applies the new compare values to TIM_CHANNEL_3 and TIM_CHANNEL_4,
+ * then re-registers a periodic CAN frame.
+ *
+ * @param htim          Pointer to the timer handle controlling the servo PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ * @param pulse_ch3     Desired pulse value for servo 1 (TIM_CHANNEL_3), range 0–100.
+ * @param pulse_ch4     Desired pulse value for servo 2 (TIM_CHANNEL_4), range 0–100.
+ */
+void SERWO_SetPulseExtern(uint8_t* pulseTable)
+{
+	serwo1Pulse = pulseTable[0];
+	serwo2Pulse = pulseTable[1];
+}
+
+uint8_t SERWO_ScalerPulse(uint8_t pwm)
+{
+	float pwmScaled = pwm/(SERWO_CLOSE_CANAL - SERWO_OPEN_CANAL) + SERWO_OPEN_CANAL;
+	return (uint8_t) pwmScaled;
+}
+
+
+
+/**
+ * @brief Forces both servo channels to the fully open canal position.
+ */
+void SERWO_OpenCanal()
+{
+	serwo1Pulse = SERWO_OPEN_CANAL;
+	serwo2Pulse = SERWO_OPEN_CANAL;
+}
+
+
+/**
+ * @brief Applies current servo pulse values to the PWM timer channels and schedules a CAN status frame.
+ *
+ * Removes any previously scheduled CAN message for the left cooling servo, applies the
+ * stored @ref serwo1Pulse and @ref serwo2Pulse values (scaled by @ref SCALER_PULSE_SERWO)
+ * to TIM_CHANNEL_3 and TIM_CHANNEL_4, then re-registers a periodic CAN frame reporting
+ * both pulse values.
+ *
+ * @param htim          Pointer to the timer handle controlling the servo PWM output.
+ * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
+ */
+void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
+{
+	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
+
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
+	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
+
+	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
+}
