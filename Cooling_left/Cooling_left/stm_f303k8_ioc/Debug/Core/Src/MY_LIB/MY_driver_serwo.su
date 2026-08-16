@@ -1,0 +1,2 @@
+../Core/Src/MY_LIB/MY_driver_serwo.c:12:6:SERWO_fetcher_pulse	16	static
+../Core/Src/MY_LIB/MY_driver_serwo.c:19:6:SERWO_set_pulse	32	static

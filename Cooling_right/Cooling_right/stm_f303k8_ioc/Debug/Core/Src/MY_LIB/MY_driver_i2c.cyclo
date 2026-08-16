@@ -1,0 +1,12 @@
+../Core/Src/MY_LIB/MY_driver_i2c.c:54:6:HAL_I2C_MasterRxCpltCallback	2
+../Core/Src/MY_LIB/MY_driver_i2c.c:70:6:HAL_I2C_MasterTxCpltCallback	1
+../Core/Src/MY_LIB/MY_driver_i2c.c:83:6:AM2320_Init	1
+../Core/Src/MY_LIB/MY_driver_i2c.c:113:16:AM2320_GetState	1
+../Core/Src/MY_LIB/MY_driver_i2c.c:123:6:AM2320_StartMeasure	3
+../Core/Src/MY_LIB/MY_driver_i2c.c:140:6:AM2320_GetTempHum	1
+../Core/Src/MY_LIB/MY_driver_i2c.c:151:6:AM2320_StateMachine	11
+../Core/Src/MY_LIB/MY_driver_i2c.c:220:13:AM2320_PrepareData	2
+../Core/Src/MY_LIB/MY_driver_i2c.c:245:13:AM2320_IsTime	1
+../Core/Src/MY_LIB/MY_driver_i2c.c:257:13:AM2320_FetchTempRh	1
+../Core/Src/MY_LIB/MY_driver_i2c.c:277:26:I2C_TransmitMessage	2
+../Core/Src/MY_LIB/MY_driver_i2c.c:301:26:I2C_ReceiveMessage	2

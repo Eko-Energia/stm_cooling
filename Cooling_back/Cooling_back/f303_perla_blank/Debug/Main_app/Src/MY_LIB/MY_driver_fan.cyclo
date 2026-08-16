@@ -1,0 +1,9 @@
+../Main_app/Src/MY_LIB/MY_driver_fan.c:31:6:FAN_FetcherPulse	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:42:6:FAN_SetPulseExternCabin	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:50:6:FAN_PulseReset	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:61:6:FAN_SetOnOff	7
+../Main_app/Src/MY_LIB/MY_driver_fan.c:108:6:FAN_SetMaxTemp	3
+../Main_app/Src/MY_LIB/MY_driver_fan.c:132:6:FAN_BatteryController	4
+../Main_app/Src/MY_LIB/MY_driver_fan.c:162:6:FAN_CabinController	4
+../Main_app/Src/MY_LIB/MY_driver_fan.c:199:6:FAN_SetPulseInternal	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:218:14:FAN_SetMaxTempPacket	3

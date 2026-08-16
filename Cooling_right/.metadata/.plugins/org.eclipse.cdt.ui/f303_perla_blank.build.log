@@ -1,0 +1,10 @@
+18:34:23 **** Incremental Build of configuration Debug for project f303_perla_blank ****
+make -j16 all 
+arm-none-eabi-size  f303_perla_blank.elf 
+   text	   data	    bss	    dec	    hex	filename
+  34940	     12	   5064	  40016	   9c50	f303_perla_blank.elf
+Finished building: default.size.stdout
+ 
+
+18:34:24 Build Finished. 0 errors, 0 warnings. (took 462ms)
+

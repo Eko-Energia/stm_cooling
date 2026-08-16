@@ -1,0 +1,16 @@
+18:41:29 **** Incremental Build of configuration Debug for project f303_perla_blank ****
+make -j16 all 
+arm-none-eabi-gcc -o "f303_perla_blank.elf" @"objects.list"   -mcpu=cortex-m4 -T"E:\Pulpit\PCB\SOFT_Nie_Git\Cooling_back\f303_perla_blank\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f303_perla_blank.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: f303_perla_blank.elf
+ 
+arm-none-eabi-size  f303_perla_blank.elf 
+arm-none-eabi-objdump -h -S f303_perla_blank.elf  > "f303_perla_blank.list"
+   text	   data	    bss	    dec	    hex	filename
+  22460	     12	   3644	  26116	   6604	f303_perla_blank.elf
+Finished building: default.size.stdout
+ 
+Finished building: f303_perla_blank.list
+ 
+
+18:41:30 Build Finished. 0 errors, 0 warnings. (took 930ms)
+

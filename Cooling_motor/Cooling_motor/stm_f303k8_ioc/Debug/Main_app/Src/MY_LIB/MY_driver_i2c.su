@@ -1,0 +1,12 @@
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:54:6:HAL_I2C_MasterRxCpltCallback	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:70:6:HAL_I2C_MasterTxCpltCallback	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:83:6:AM2320_Init	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:113:16:AM2320_GetState	4	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:123:6:AM2320_StartMeasure	8	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:140:6:AM2320_GetTempHum	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:151:6:AM2320_StateMachine	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:215:13:AM2320_PrepareData	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:240:13:AM2320_IsTime	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:252:13:AM2320_FetchTempRh	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:272:26:I2C_TransmitMessage	16	static
+../Main_app/Src/MY_LIB/MY_driver_i2c.c:296:26:I2C_ReceiveMessage	16	static

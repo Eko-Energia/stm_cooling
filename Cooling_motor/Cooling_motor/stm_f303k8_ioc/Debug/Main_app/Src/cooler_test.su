@@ -1,0 +1,4 @@
+../Main_app/Src/cooler_test.c:29:6:TEST_Serwo	4	static
+../Main_app/Src/cooler_test.c:51:6:TEST_FAN	4	static
+../Main_app/Src/cooler_test.c:66:6:TEST_AM2320	8	static
+../Main_app/Src/cooler_test.c:72:6:TEST_Function	8	static

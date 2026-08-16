@@ -1,0 +1,6 @@
+../Main_app/Src/MY_LIB/MY_driver_fan.c:26:6:FAN_SetOnOff	5
+../Main_app/Src/MY_LIB/MY_driver_fan.c:53:6:FAN_FetcherPulse	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:60:6:FAN_GetTempEngineLeft	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:66:6:FAN_GetTempEngineRight	1
+../Main_app/Src/MY_LIB/MY_driver_fan.c:72:6:FAN_EngineController	5
+../Main_app/Src/MY_LIB/MY_driver_fan.c:111:6:FAN_SetPulseInternal	1

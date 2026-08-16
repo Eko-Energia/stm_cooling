@@ -1,0 +1,3 @@
+Popraw ramki by nie były wysyłane w przerwaniach
+
+Reszta kodu - działa !

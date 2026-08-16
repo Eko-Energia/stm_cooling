@@ -1,0 +1,7 @@
+../Main_app/Src/EKO_LIB/can_driver.c:26:6:CAN_Init	56	static
+../Main_app/Src/EKO_LIB/can_driver.c:58:19:CAN_AddScheduledMsg	88	static
+../Main_app/Src/EKO_LIB/can_driver.c:88:19:CAN_RemoveScheduledMsg	32	static
+../Main_app/Src/EKO_LIB/can_driver.c:108:6:CAN_HandleScheduled	72	static
+../Main_app/Src/EKO_LIB/can_driver.c:144:17:CAN_GetIncomingMsgId	16	static
+../Main_app/Src/EKO_LIB/can_driver.c:154:19:CAN_AddIncomingMsg	40	static
+../Main_app/Src/EKO_LIB/can_driver.c:176:19:CAN_GetLatestMessage	40	static
