@@ -34,8 +34,8 @@ void SERWO_OpenCanal()
  */
 void SERWO_FetcherPulse(uint8_t *data)
 {
-	data[0] = (uint8_t)((serwo1Pulse - SERWO_OPEN_CANAL) * SERWO_SCALER); // Baterry
-	data[1] = (uint8_t)((serwo2Pulse - SERWO_OPEN_CANAL) * SERWO_SCALER);  // Cabin
+	data[0] = (uint8_t)((serwo1Pulse - SERWO_OPEN_CANAL) * SERWO_SCALER); //Left
+	data[1] = (uint8_t)((serwo2Pulse - SERWO_OPEN_CANAL) * SERWO_SCALER); // Right
 }
 
 /**
@@ -46,15 +46,26 @@ void SERWO_FetcherPulse(uint8_t *data)
  */
 void SERWO_SetPulseExtern(uint8_t* pulseTable)
 {
-	if(pulseTable[0] == 0)
+	switch(pulseTable[0])
 	{
-		serwo1Pulse = SERWO_ScalerPulse(0); // Left
-		serwo2Pulse = SERWO_ScalerPulse(0); // Right
-	}
-	else if(pulseTable[0] == 4)
-	{
-		serwo1Pulse = SERWO_ScalerPulse(100); // Left
-		serwo2Pulse = SERWO_ScalerPulse(100); // Right
+	case(0):
+			serwo1Pulse = SERWO_ScalerPulse(0); // Left
+			serwo2Pulse = SERWO_ScalerPulse(0); // Right
+			break;
+	case(2):
+			serwo1Pulse = SERWO_ScalerPulse(0); // Left
+			serwo2Pulse = SERWO_ScalerPulse(0); // Right
+			break;
+	case(3):
+			serwo1Pulse = SERWO_ScalerPulse(0); // Left
+			serwo2Pulse = SERWO_ScalerPulse(0); // Right
+			break;
+	case(4):
+			serwo1Pulse = SERWO_ScalerPulse(100); // Left
+			serwo2Pulse = SERWO_ScalerPulse(100); // Right
+			break;
+	default:
+		break;
 	}
 
 }

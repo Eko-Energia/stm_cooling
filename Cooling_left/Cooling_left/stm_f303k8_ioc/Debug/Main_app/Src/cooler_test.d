@@ -27,13 +27,13 @@ Main_app/Src/cooler_test.o: ../Main_app/Src/cooler_test.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:
@@ -63,10 +63,10 @@ Main_app/Src/cooler_test.o: ../Main_app/Src/cooler_test.c \
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_1/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_left/Cooling_left/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h:

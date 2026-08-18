@@ -1,6 +1,6 @@
 Main_app/Src/EKO_LIB/can_driver.o: ../Main_app/Src/EKO_LIB/can_driver.c \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
  ../Core/Inc/main.h ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
  ../Core/Inc/stm32f3xx_hal_conf.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
@@ -29,8 +29,8 @@ Main_app/Src/EKO_LIB/can_driver.o: ../Main_app/Src/EKO_LIB/can_driver.c \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:

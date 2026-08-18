@@ -29,15 +29,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h \
  ../Core/Inc/can.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/i2c.h \
  ../Core/Inc/tim.h ../Core/Inc/gpio.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_left_app.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_test.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_left_app.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_test.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:
@@ -73,12 +73,12 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/i2c.h:
 ../Core/Inc/tim.h:
 ../Core/Inc/gpio.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_left_app.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_test.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_3/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_left_app.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/cooler_test.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_serwo.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_fan.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_motor/Cooling_motor/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_i2c.h:

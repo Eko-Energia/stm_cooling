@@ -1,9 +1,9 @@
 Main_app/Src/MY_LIB/MY_driver_can.o: \
  ../Main_app/Src/MY_LIB/MY_driver_can.c \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
- E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h \
+ E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h \
  ../Core/Inc/main.h ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h \
  ../Core/Inc/stm32f3xx_hal_conf.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_rcc.h \
@@ -32,10 +32,10 @@ Main_app/Src/MY_LIB/MY_driver_can.o: \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim.h \
  ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_tim_ex.h
-E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
-E:/Pulpit/PCB/SOFT_Nie_Git/work_2/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/MY_LIB/MY_driver_can.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_driver.h:
+E:/Pulpit/PCB/SOFT_Nie_Git/Cooling_right/Cooling_right/stm_f303k8_ioc/Main_app/Inc/EKO_LIB/can_id_list.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h:
 ../Core/Inc/stm32f3xx_hal_conf.h:

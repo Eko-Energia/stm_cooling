@@ -1,5 +1,5 @@
 ../Main_app/Src/MY_LIB/MY_driver_serwo.c:22:6:SERWO_OpenCanal	4	static
 ../Main_app/Src/MY_LIB/MY_driver_serwo.c:35:6:SERWO_FetcherPulse	24	static
 ../Main_app/Src/MY_LIB/MY_driver_serwo.c:47:6:SERWO_SetPulseExtern	16	static
-../Main_app/Src/MY_LIB/MY_driver_serwo.c:66:9:SERWO_ScalerPulse	24	static
-../Main_app/Src/MY_LIB/MY_driver_serwo.c:84:6:SERWO_SetPulseInternal	24	static
+../Main_app/Src/MY_LIB/MY_driver_serwo.c:77:9:SERWO_ScalerPulse	24	static
+../Main_app/Src/MY_LIB/MY_driver_serwo.c:95:6:SERWO_SetPulseInternal	24	static

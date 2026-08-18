@@ -63,8 +63,8 @@ all: main-build
 main-build: f303_perla_blank.elf secondary-outputs
 
 # Tool invocations
-f303_perla_blank.elf f303_perla_blank.map: $(OBJS) $(USER_OBJS) E:\Pulpit\PCB\SOFT_Nie_Git\work\Cooling_back\f303_perla_blank\STM32F303K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "f303_perla_blank.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\Pulpit\PCB\SOFT_Nie_Git\work\Cooling_back\f303_perla_blank\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f303_perla_blank.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+f303_perla_blank.elf f303_perla_blank.map: $(OBJS) $(USER_OBJS) E:\Pulpit\PCB\SOFT_Nie_Git\Cooling_back\Cooling_back\f303_perla_blank\STM32F303K8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "f303_perla_blank.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\Pulpit\PCB\SOFT_Nie_Git\Cooling_back\Cooling_back\f303_perla_blank\STM32F303K8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="f303_perla_blank.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

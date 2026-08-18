@@ -1,206 +1,22 @@
-!SESSION 2026-08-05 18:46:36.872 -----------------------------------------------
+!SESSION 2026-08-18 19:21:24.464 -----------------------------------------------
 eclipse.buildId=Version 2.1.1
 java.version=21.0.9
 java.vendor=Eclipse Adoptium
 BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
 Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
-!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-08-05 18:46:49.180
-!MESSAGE Log4j2 initialized with config file E:\Pulpit\PCB\SOFT_Nie_Git\work_1\.metadata\.log4j2.xml
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-08-18 19:21:36.589
+!MESSAGE Log4j2 initialized with config file E:\Pulpit\PCB\SOFT_Nie_Git\Cooling_left\.metadata\.log4j2.xml
 
-!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-08-05 18:46:52.023
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-08-18 19:21:38.955
 !MESSAGE Started RMI Server, listening on port 41337
 
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-05 18:46:52.612
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-COM5
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-05 18:46:52.613
-!MESSAGE port: COM5
-
-!ENTRY org.eclipse.cdt.core 1 0 2026-08-05 18:47:08.084
-!MESSAGE Indexed 'f303_perla_blank' (39 sources, 172 headers) in 3,52 sec: 14 046 declarations; 69 652 references; 2 unresolved inclusions; 49 syntax errors; 188 unresolved names (0,22%)
-
-!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2026-08-05 18:47:57.652
-!MESSAGE Error in final launch sequence:
-
-Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-!STACK 1
-org.eclipse.core.runtime.CoreException: Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:112)
-	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:252)
-	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
-	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
-	at com.st.stm32cube.ide.mcu.debug.launch.DSFDelegate.launch(DSFDelegate.java:335)
-	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:805)
-	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:716)
-	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1054)
-	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1257)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-Contains: Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-java.lang.Exception: Error finishing flash operation
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
-!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2026-08-05 18:47:57.653
-!MESSAGE Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2026-08-05 18:47:57.653
-!MESSAGE Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-!STACK 0
-java.lang.Exception: Error finishing flash operation
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
-!SESSION 2026-08-13 18:23:52.044 -----------------------------------------------
-eclipse.buildId=Version 2.1.1
-java.version=21.0.9
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
-Command-line arguments:  -os win32 -ws win32 -arch x86_64
-
-!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-08-13 18:24:04.047
-!MESSAGE Log4j2 initialized with config file E:\Pulpit\PCB\SOFT_Nie_Git\work_1\.metadata\.log4j2.xml
-
-!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-08-13 18:24:08.876
-!MESSAGE Started RMI Server, listening on port 41339
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:24:09.315
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-18 19:21:41.021
 !MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
 
 
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:24:09.316
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-18 19:21:41.023
 !MESSAGE port: 
 
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:25:33.263
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:25:33.264
-!MESSAGE port: 
-
-!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2026-08-13 18:30:45.034
-!MESSAGE Error in final launch sequence:
-
-Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-!STACK 1
-org.eclipse.core.runtime.CoreException: Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-	at org.eclipse.cdt.dsf.concurrent.Query.get(Query.java:112)
-	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugSession(GdbLaunchDelegate.java:252)
-	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launchDebugger(GdbLaunchDelegate.java:109)
-	at org.eclipse.cdt.dsf.gdb.launching.GdbLaunchDelegate.launch(GdbLaunchDelegate.java:97)
-	at com.st.stm32cube.ide.mcu.debug.launch.DSFDelegate.launch(DSFDelegate.java:335)
-	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:805)
-	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:716)
-	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1054)
-	at org.eclipse.debug.internal.ui.DebugUIPlugin$1.run(DebugUIPlugin.java:1257)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-Contains: Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-java.lang.Exception: Error finishing flash operation
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
-!SUBENTRY 1 org.eclipse.cdt.dsf 4 10004 2026-08-13 18:30:45.035
-!MESSAGE Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-!SUBENTRY 2 org.eclipse.cdt.dsf.gdb 4 10004 2026-08-13 18:30:45.035
-!MESSAGE Failed to execute MI command:
-load E:\\Pulpit\\PCB\\SOFT_Nie_Git\\work_1\\Cooling_left\\stm_f303k8_ioc\\Debug\\f303_perla_blank.elf 
-
-Error message from debugger back end:
-Error finishing flash operation
-!STACK 0
-java.lang.Exception: Error finishing flash operation
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:1024)
-	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:853)
-!SESSION 2026-08-13 18:35:47.737 -----------------------------------------------
-eclipse.buildId=Version 2.1.1
-java.version=21.0.9
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
-Command-line arguments:  -os win32 -ws win32 -arch x86_64
-
-!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-08-13 18:35:59.231
-!MESSAGE Log4j2 initialized with config file E:\Pulpit\PCB\SOFT_Nie_Git\work_1\.metadata\.log4j2.xml
-
-!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-08-13 18:36:03.990
-!MESSAGE Started RMI Server, listening on port 41337
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:36:04.368
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:36:04.369
-!MESSAGE port: 
-!SESSION 2026-08-13 18:37:11.809 -----------------------------------------------
-eclipse.buildId=Version 2.1.1
-java.version=21.0.9
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pl_PL
-Command-line arguments:  -os win32 -ws win32 -arch x86_64
-
-!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-08-13 18:37:18.034
-!MESSAGE Log4j2 initialized with config file E:\Pulpit\PCB\SOFT_Nie_Git\work_1\.metadata\.log4j2.xml
-
-!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-08-13 18:37:22.957
-!MESSAGE Started RMI Server, listening on port 41338
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:37:23.351
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:37:23.351
-!MESSAGE port: 
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:38:54.366
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:38:54.367
-!MESSAGE port: 
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:47:49.349
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:47:49.349
-!MESSAGE port: 
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:54:49.444
-!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
-
-
-!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-08-13 18:54:49.444
-!MESSAGE port: 
+!ENTRY org.eclipse.cdt.core 1 0 2026-08-18 19:21:50.883
+!MESSAGE Indexed 'f303_perla_blank' (35 sources, 160 headers) in 3,44 sec: 13 848 declarations; 68 932 references; 2 unresolved inclusions; 49 syntax errors; 188 unresolved names (0,23%)

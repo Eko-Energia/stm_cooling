@@ -45,15 +45,26 @@ void SERWO_FetcherPulse(uint8_t *data)
  */
 void SERWO_SetPulseExtern(uint8_t* pulseTable)
 {
-	if(pulseTable[0] == 2)
+	switch(pulseTable[0])
 	{
-		serwo1Pulse = SERWO_ScalerPulse(0);
-		serwo2Pulse = SERWO_ScalerPulse(0);
-	}
-	else if(pulseTable[0] == 4)
-	{
-		serwo1Pulse = SERWO_ScalerPulse(100);
-		serwo2Pulse = SERWO_ScalerPulse(100);
+	case(0):
+			serwo1Pulse = SERWO_ScalerPulse(0); // Battery
+			serwo2Pulse = SERWO_ScalerPulse(0); // Cabin
+			break;
+	case(2):
+			serwo1Pulse = SERWO_ScalerPulse(0); // Battery
+			serwo2Pulse = SERWO_ScalerPulse(100); // Cabin
+			break;
+	case(3):
+			serwo1Pulse = SERWO_ScalerPulse(100); // Battery
+			serwo2Pulse = SERWO_ScalerPulse(0); // Cabin
+			break;
+	case(4):
+			serwo1Pulse = SERWO_ScalerPulse(100); // Battery
+			serwo2Pulse = SERWO_ScalerPulse(100); // Cabin
+			break;
+	default:
+		break;
 	}
 
 }
