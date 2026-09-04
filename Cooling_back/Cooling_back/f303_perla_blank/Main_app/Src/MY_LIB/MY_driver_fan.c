@@ -137,19 +137,24 @@ void FAN_BatteryController() // Fix it during tests
 	if(HAL_GetTick() - lastTick >= DT)
 	{
 		lastTick = HAL_GetTick();
-
-		pwmDuty = 20 + (batteryMaxTemp - 30)*2;
-
-		if(batteryMaxTemp < 30)
+		pwmDuty = 100 - ((batteryMaxTemp) + 5)*2;
+		if(batteryMaxTemp < 20)
 		{
+			FAN_SetOnOff(FAN_OFF_BOTH);
+			pwmDuty = 100;
+		}
+		else if(batteryMaxTemp > 50)
+		{
+			FAN_SetOnOff(FAN_ON_BOTH);
 			pwmDuty = 0;
 		}
-		else if(pwmDuty > 100)
+		else
 		{
-			pwmDuty = 100;
+			FAN_SetOnOff(FAN_ON_BOTH);
 		}
 	}
 	fan1Pulse = pwmDuty;
+	fan2Pulse = pwmDuty;
 }
 
 /**

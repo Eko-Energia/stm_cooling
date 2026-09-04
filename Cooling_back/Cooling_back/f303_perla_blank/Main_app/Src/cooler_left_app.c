@@ -93,7 +93,7 @@ void Init_Cooler()
 void COOLER_app()
 {
   Init_Cooler();
-  FAN_SetOnOff(FAN_OFF_BOTH);
+  FAN_SetOnOff(FAN_ON_BOTH);
 
   while (1)
   {

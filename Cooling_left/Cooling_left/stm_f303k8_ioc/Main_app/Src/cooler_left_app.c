@@ -31,7 +31,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == TIM7)
 	{
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
 		interuptCanFlag = CAN_TIME_TO_SEND_MSG;
 	}
 	else if(htim->Instance == TIM6)
@@ -95,7 +95,7 @@ void COOLER_app()
 {
   Init_Cooler();
   FAN_SetOnOff(FAN_OFF_BOTH);
-
+  FAN_PulseReset();
   SERWO_OpenCanal();
 
   while (1)

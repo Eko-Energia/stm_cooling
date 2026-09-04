@@ -13,7 +13,7 @@
 static uint8_t fan1Pulse = 0;
 static uint8_t fan2Pulse = 0;
 
-float  batteryMaxTemp = 0;
+uint8_t  batteryMaxTemp = 0;
 
 /* ================= PRIVATE FUNCTION DECLARATIONS ================= */
 
@@ -49,8 +49,8 @@ void FAN_SetPulseExternCabin(uint8_t* pulseTable)
  */
 void FAN_PulseReset()
 {
-	fan1Pulse = 0;
-	fan2Pulse = 0;
+	fan1Pulse = 100;
+	fan2Pulse = 100;
 }
 
 /**
@@ -64,34 +64,28 @@ void FAN_SetOnOff(fan_state_e setter)
 	{
 	case FAN_ON_1:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_SET);
-		FAN_PulseReset();
 		break;
 
 	case FAN_OFF_1:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_RESET);
-		FAN_PulseReset();
 		break;
 
 	case FAN_ON_2:
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_SET);
-		FAN_PulseReset();
 		break;
 
 	case FAN_OFF_2:
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_RESET);
-		FAN_PulseReset();
 		break;
 
 	case FAN_ON_BOTH:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_SET);
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_SET);
-		FAN_PulseReset();
 		break;
 
 	case FAN_OFF_BOTH:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_RESET);
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_RESET);
-		FAN_PulseReset();
 		break;
 	}
 }
@@ -108,7 +102,7 @@ void FAN_SetOnOff(fan_state_e setter)
 void FAN_SetMaxTemp(struct CAN_bufferFrame* frame)
 {
 	static float  tempPacket[NUMBER_OF_PACKET] = {0};
-	float maxTemp = 0;
+	uint8_t maxTemp = 0;
 
 	tempPacket[frame->name] = FAN_SetMaxTempPacket(frame->data);
 	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
@@ -137,16 +131,20 @@ void FAN_BatteryController() // Fix it during tests
 	if(HAL_GetTick() - lastTick >= DT)
 	{
 		lastTick = HAL_GetTick();
-
-		pwmDuty = 20 + (batteryMaxTemp - 30)*2;
-
-		if(batteryMaxTemp < 30)
+		pwmDuty = 100 - ((batteryMaxTemp) + 5)*2;
+		if(batteryMaxTemp < 20)
 		{
+			FAN_SetOnOff(FAN_OFF_1);
+			pwmDuty = 100;
+		}
+		else if(batteryMaxTemp > 50)
+		{
+			FAN_SetOnOff(FAN_ON_1);
 			pwmDuty = 0;
 		}
-		else if(pwmDuty > 100)
+		else
 		{
-			pwmDuty = 100;
+			FAN_SetOnOff(FAN_ON_1);
 		}
 	}
 	fan1Pulse = pwmDuty;
@@ -165,21 +163,27 @@ void FAN_CabinController() // Fix it during tests
 	static uint8_t pwmDuty = 0;
 	static int16_t tempX10 = 0;
 	static uint16_t humX10 = 0;
-	tempX10 = 210;
+
+
 	if(HAL_GetTick() - lastTick >= DT)
 	{
 		lastTick = HAL_GetTick();
 		AM2320_GetTempHum(&tempX10, &humX10);
-
-		pwmDuty = 0 + (tempX10 - 200)*2;
+		pwmDuty = 100 - (tempX10 - 200);
 
 		if(tempX10 < 200)
 		{
+			FAN_SetOnOff(FAN_OFF_2);
+			pwmDuty = 100;
+		}
+		else if(tempX10 > 300)
+		{
+			FAN_SetOnOff(FAN_ON_2);
 			pwmDuty = 0;
 		}
-		else if(pwmDuty > 100)
+		else
 		{
-			pwmDuty = 100;
+			FAN_SetOnOff(FAN_ON_2);
 		}
 		fan2Pulse = pwmDuty;
 	}
@@ -227,5 +231,5 @@ static float FAN_SetMaxTempPacket(uint8_t* data)
 		}
 	}
 	//return (float)maxTemp;
-	return (float)maxTemp * TEMP_FACTOR + TEMP_OFFSET; //CHANGE IT WHEN TESTING WITH BMS
+	return (float)maxTemp * TEMP_FACTOR + TEMP_OFFSET; //CHANGE IT WHEN TESTING WITH BMS;
 }

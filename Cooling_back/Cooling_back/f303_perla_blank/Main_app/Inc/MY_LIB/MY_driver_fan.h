@@ -27,7 +27,7 @@
 
 #define TEMP_FACTOR 	(0.39216)
 
-#define TEMP_OFFSET 	(49.8039)
+#define TEMP_OFFSET 	(0)
 
 
 #define TEMP_REF        (50)

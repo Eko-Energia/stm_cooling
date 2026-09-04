@@ -5,21 +5,21 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   00000188  08000000  08000000  00001000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00008710  08000188  08000188  00001188  2**3
+  1 .text         0000870c  08000188  08000188  00001188  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000034  08008898  08008898  00009898  2**2
+  2 .rodata       00000034  08008894  08008894  00009894  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  080088cc  080088cc  0000a00c  2**0
+  3 .ARM.extab    00000000  080088c8  080088c8  0000a00c  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000000  080088cc  080088cc  0000a00c  2**0
+  4 .ARM          00000000  080088c8  080088c8  0000a00c  2**0
                   CONTENTS, READONLY
-  5 .preinit_array 00000000  080088cc  080088cc  0000a00c  2**0
+  5 .preinit_array 00000000  080088c8  080088c8  0000a00c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080088cc  080088cc  000098cc  2**2
+  6 .init_array   00000004  080088c8  080088c8  000098c8  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  080088d0  080088d0  000098d0  2**2
+  7 .fini_array   00000004  080088cc  080088cc  000098cc  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         0000000c  20000000  080088d4  0000a000  2**2
+  8 .data         0000000c  20000000  080088d0  0000a000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   9 .ccmram       00000000  10000000  10000000  0000a00c  2**0
                   CONTENTS
@@ -29,25 +29,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  0000a00c  2**0
                   CONTENTS, READONLY
- 13 .debug_info   0001366c  00000000  00000000  0000a03c  2**0
+ 13 .debug_info   00013679  00000000  00000000  0000a03c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000036cb  00000000  00000000  0001d6a8  2**0
+ 14 .debug_abbrev 000036cb  00000000  00000000  0001d6b5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001110  00000000  00000000  00020d78  2**3
+ 15 .debug_aranges 00001110  00000000  00000000  00020d80  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000d3f  00000000  00000000  00021e88  2**0
+ 16 .debug_rnglists 00000d40  00000000  00000000  00021e90  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0001d445  00000000  00000000  00022bc7  2**0
+ 17 .debug_macro  0001d445  00000000  00000000  00022bd0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   000187a0  00000000  00000000  0004000c  2**0
+ 18 .debug_line   000187a9  00000000  00000000  00040015  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000a4850  00000000  00000000  000587ac  2**0
+ 19 .debug_str    000a484a  00000000  00000000  000587be  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000043  00000000  00000000  000fcffc  2**0
+ 20 .comment      00000043  00000000  00000000  000fd008  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00004364  00000000  00000000  000fd040  2**2
+ 21 .debug_frame  0000435c  00000000  00000000  000fd04c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000072  00000000  00000000  001013a4  2**0
+ 22 .debug_line_str 00000072  00000000  00000000  001013a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -66,7 +66,7 @@ Disassembly of section .text:
  800019e:	bd10      	pop	{r4, pc}
  80001a0:	20000010 	.word	0x20000010
  80001a4:	00000000 	.word	0x00000000
- 80001a8:	08008880 	.word	0x08008880
+ 80001a8:	0800887c 	.word	0x0800887c
 
 080001ac <frame_dummy>:
  80001ac:	b508      	push	{r3, lr}
@@ -78,7 +78,7 @@ Disassembly of section .text:
  80001ba:	bd08      	pop	{r3, pc}
  80001bc:	00000000 	.word	0x00000000
  80001c0:	20000014 	.word	0x20000014
- 80001c4:	08008880 	.word	0x08008880
+ 80001c4:	0800887c 	.word	0x0800887c
 
 080001c8 <__aeabi_drsub>:
  80001c8:	f081 4100 	eor.w	r1, r1, #2147483648	@ 0x80000000
@@ -1500,7 +1500,7 @@ int main(void)
 //	Init_Cooler();
 //	TEST_Function();
 	COOLER_app();
- 8000e60:	f007 fc9c 	bl	800879c <COOLER_app>
+ 8000e60:	f007 fc98 	bl	8008794 <COOLER_app>
  8000e64:	e7fc      	b.n	8000e60 <main+0x2c>
 
 08000e66 <SystemClock_Config>:
@@ -1518,7 +1518,7 @@ void SystemClock_Config(void)
  8000e70:	2228      	movs	r2, #40	@ 0x28
  8000e72:	2100      	movs	r1, #0
  8000e74:	4618      	mov	r0, r3
- 8000e76:	f007 fcc9 	bl	800880c <memset>
+ 8000e76:	f007 fcc7 	bl	8008808 <memset>
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
  8000e7a:	f107 031c 	add.w	r3, r7, #28
  8000e7e:	2200      	movs	r2, #0
@@ -2886,7 +2886,7 @@ LoopFillZerobss:
 
 /* Call static constructors */
     bl __libc_init_array
- 800152e:	f007 f975 	bl	800881c <__libc_init_array>
+ 800152e:	f007 f973 	bl	8008818 <__libc_init_array>
 /* Call the application's entry point.*/
 	bl	main
  8001532:	f7ff fc7f 	bl	8000e34 <main>
@@ -2903,7 +2903,7 @@ LoopForever:
   ldr r1, =_edata
  8001540:	2000000c 	.word	0x2000000c
   ldr r2, =_sidata
- 8001544:	080088d4 	.word	0x080088d4
+ 8001544:	080088d0 	.word	0x080088d0
   ldr r2, =_sbss
  8001548:	20000010 	.word	0x20000010
   ldr r4, =_ebss
@@ -10639,7 +10639,7 @@ static void I2C_ITMasterSeqCplt(I2C_HandleTypeDef *hi2c)
 #else
     HAL_I2C_MasterTxCpltCallback(hi2c);
  8003e5e:	6878      	ldr	r0, [r7, #4]
- 8003e60:	f004 f936 	bl	80080d0 <HAL_I2C_MasterTxCpltCallback>
+ 8003e60:	f004 f932 	bl	80080c8 <HAL_I2C_MasterTxCpltCallback>
     hi2c->MasterRxCpltCallback(hi2c);
 #else
     HAL_I2C_MasterRxCpltCallback(hi2c);
@@ -10669,7 +10669,7 @@ static void I2C_ITMasterSeqCplt(I2C_HandleTypeDef *hi2c)
  8003e86:	f883 2040 	strb.w	r2, [r3, #64]	@ 0x40
     HAL_I2C_MasterRxCpltCallback(hi2c);
  8003e8a:	6878      	ldr	r0, [r7, #4]
- 8003e8c:	f004 f908 	bl	80080a0 <HAL_I2C_MasterRxCpltCallback>
+ 8003e8c:	f004 f904 	bl	8008098 <HAL_I2C_MasterRxCpltCallback>
 }
  8003e90:	bf00      	nop
  8003e92:	3708      	adds	r7, #8
@@ -11022,7 +11022,7 @@ static void I2C_ITMasterCplt(I2C_HandleTypeDef *hi2c, uint32_t ITFlags)
  8004076:	f883 2040 	strb.w	r2, [r3, #64]	@ 0x40
       HAL_I2C_MasterTxCpltCallback(hi2c);
  800407a:	6878      	ldr	r0, [r7, #4]
- 800407c:	f004 f828 	bl	80080d0 <HAL_I2C_MasterTxCpltCallback>
+ 800407c:	f004 f824 	bl	80080c8 <HAL_I2C_MasterTxCpltCallback>
 }
  8004080:	e029      	b.n	80040d6 <I2C_ITMasterCplt+0x182>
   else if (hi2c->State == HAL_I2C_STATE_BUSY_RX)
@@ -11068,7 +11068,7 @@ static void I2C_ITMasterCplt(I2C_HandleTypeDef *hi2c, uint32_t ITFlags)
  80040cc:	f883 2040 	strb.w	r2, [r3, #64]	@ 0x40
       HAL_I2C_MasterRxCpltCallback(hi2c);
  80040d0:	6878      	ldr	r0, [r7, #4]
- 80040d2:	f003 ffe5 	bl	80080a0 <HAL_I2C_MasterRxCpltCallback>
+ 80040d2:	f003 ffe1 	bl	8008098 <HAL_I2C_MasterRxCpltCallback>
 }
  80040d6:	bf00      	nop
  80040d8:	3718      	adds	r7, #24
@@ -15356,7 +15356,7 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  8005ecc:	bd80      	pop	{r7, pc}
  8005ece:	bf00      	nop
  8005ed0:	40021000 	.word	0x40021000
- 8005ed4:	0800889c 	.word	0x0800889c
+ 8005ed4:	08008898 	.word	0x08008898
  8005ed8:	20000000 	.word	0x20000000
  8005edc:	20000004 	.word	0x20000004
 
@@ -15479,8 +15479,8 @@ uint32_t HAL_RCC_GetSysClockFreq(void)
  8005f72:	bf00      	nop
  8005f74:	40021000 	.word	0x40021000
  8005f78:	00f42400 	.word	0x00f42400
- 8005f7c:	080088ac 	.word	0x080088ac
- 8005f80:	080088bc 	.word	0x080088bc
+ 8005f7c:	080088a8 	.word	0x080088a8
+ 8005f80:	080088b8 	.word	0x080088b8
  8005f84:	003d0900 	.word	0x003d0900
  8005f88:	007a1200 	.word	0x007a1200
 
@@ -16791,7 +16791,7 @@ void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim)
 #else
       HAL_TIM_PeriodElapsedCallback(htim);
  800673e:	6878      	ldr	r0, [r7, #4]
- 8006740:	f001 ffa0 	bl	8008684 <HAL_TIM_PeriodElapsedCallback>
+ 8006740:	f001 ff9c 	bl	800867c <HAL_TIM_PeriodElapsedCallback>
 #endif /* USE_HAL_TIM_REGISTER_CALLBACKS */
     }
   }
@@ -19931,7 +19931,7 @@ HAL_StatusTypeDef CAN_AddIncomingMsg(struct CAN_IncomingMsgList *buffer, CAN_RxH
  80078c0:	2208      	movs	r2, #8
  80078c2:	6879      	ldr	r1, [r7, #4]
  80078c4:	4618      	mov	r0, r3
- 80078c6:	f000 ffcd 	bl	8008864 <memcpy>
+ 80078c6:	f000 ffcb 	bl	8008860 <memcpy>
 
 	buffer->count++;
  80078ca:	68fb      	ldr	r3, [r7, #12]
@@ -20551,13 +20551,13 @@ void FAN_PulseReset()
 {
  8007d38:	b480      	push	{r7}
  8007d3a:	af00      	add	r7, sp, #0
-	fan1Pulse = 0;
+	fan1Pulse = 100;
  8007d3c:	4b05      	ldr	r3, [pc, #20]	@ (8007d54 <FAN_PulseReset+0x1c>)
- 8007d3e:	2200      	movs	r2, #0
+ 8007d3e:	2264      	movs	r2, #100	@ 0x64
  8007d40:	701a      	strb	r2, [r3, #0]
-	fan2Pulse = 0;
+	fan2Pulse = 100;
  8007d42:	4b05      	ldr	r3, [pc, #20]	@ (8007d58 <FAN_PulseReset+0x20>)
- 8007d44:	2200      	movs	r2, #0
+ 8007d44:	2264      	movs	r2, #100	@ 0x64
  8007d46:	701a      	strb	r2, [r3, #0]
 }
  8007d48:	bf00      	nop
@@ -20583,16 +20583,16 @@ void FAN_SetOnOff(fan_state_e setter)
 	switch (setter)
  8007d66:	79fb      	ldrb	r3, [r7, #7]
  8007d68:	2b05      	cmp	r3, #5
- 8007d6a:	d851      	bhi.n	8007e10 <FAN_SetOnOff+0xb4>
+ 8007d6a:	d845      	bhi.n	8007df8 <FAN_SetOnOff+0x9c>
  8007d6c:	a201      	add	r2, pc, #4	@ (adr r2, 8007d74 <FAN_SetOnOff+0x18>)
  8007d6e:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
  8007d72:	bf00      	nop
  8007d74:	08007d8d 	.word	0x08007d8d
- 8007d78:	08007da1 	.word	0x08007da1
- 8007d7c:	08007db5 	.word	0x08007db5
- 8007d80:	08007dc5 	.word	0x08007dc5
- 8007d84:	08007dd5 	.word	0x08007dd5
- 8007d88:	08007df3 	.word	0x08007df3
+ 8007d78:	08007d9d 	.word	0x08007d9d
+ 8007d7c:	08007dad 	.word	0x08007dad
+ 8007d80:	08007db9 	.word	0x08007db9
+ 8007d84:	08007dc5 	.word	0x08007dc5
+ 8007d88:	08007ddf 	.word	0x08007ddf
 	{
 	case FAN_ON_1:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_SET);
@@ -20600,1735 +20600,1739 @@ void FAN_SetOnOff(fan_state_e setter)
  8007d8e:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
  8007d92:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
  8007d96:	f7fa fef9 	bl	8002b8c <HAL_GPIO_WritePin>
-		FAN_PulseReset();
- 8007d9a:	f7ff ffcd 	bl	8007d38 <FAN_PulseReset>
 		break;
- 8007d9e:	e037      	b.n	8007e10 <FAN_SetOnOff+0xb4>
+ 8007d9a:	e02d      	b.n	8007df8 <FAN_SetOnOff+0x9c>
 
 	case FAN_OFF_1:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_RESET);
- 8007da0:	2200      	movs	r2, #0
- 8007da2:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
- 8007da6:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
- 8007daa:	f7fa feef 	bl	8002b8c <HAL_GPIO_WritePin>
-		FAN_PulseReset();
- 8007dae:	f7ff ffc3 	bl	8007d38 <FAN_PulseReset>
+ 8007d9c:	2200      	movs	r2, #0
+ 8007d9e:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
+ 8007da2:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
+ 8007da6:	f7fa fef1 	bl	8002b8c <HAL_GPIO_WritePin>
 		break;
- 8007db2:	e02d      	b.n	8007e10 <FAN_SetOnOff+0xb4>
+ 8007daa:	e025      	b.n	8007df8 <FAN_SetOnOff+0x9c>
 
 	case FAN_ON_2:
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_SET);
- 8007db4:	2201      	movs	r2, #1
- 8007db6:	2108      	movs	r1, #8
- 8007db8:	4817      	ldr	r0, [pc, #92]	@ (8007e18 <FAN_SetOnOff+0xbc>)
- 8007dba:	f7fa fee7 	bl	8002b8c <HAL_GPIO_WritePin>
-		FAN_PulseReset();
- 8007dbe:	f7ff ffbb 	bl	8007d38 <FAN_PulseReset>
+ 8007dac:	2201      	movs	r2, #1
+ 8007dae:	2108      	movs	r1, #8
+ 8007db0:	4813      	ldr	r0, [pc, #76]	@ (8007e00 <FAN_SetOnOff+0xa4>)
+ 8007db2:	f7fa feeb 	bl	8002b8c <HAL_GPIO_WritePin>
 		break;
- 8007dc2:	e025      	b.n	8007e10 <FAN_SetOnOff+0xb4>
+ 8007db6:	e01f      	b.n	8007df8 <FAN_SetOnOff+0x9c>
 
 	case FAN_OFF_2:
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_RESET);
- 8007dc4:	2200      	movs	r2, #0
- 8007dc6:	2108      	movs	r1, #8
- 8007dc8:	4813      	ldr	r0, [pc, #76]	@ (8007e18 <FAN_SetOnOff+0xbc>)
- 8007dca:	f7fa fedf 	bl	8002b8c <HAL_GPIO_WritePin>
-		FAN_PulseReset();
- 8007dce:	f7ff ffb3 	bl	8007d38 <FAN_PulseReset>
+ 8007db8:	2200      	movs	r2, #0
+ 8007dba:	2108      	movs	r1, #8
+ 8007dbc:	4810      	ldr	r0, [pc, #64]	@ (8007e00 <FAN_SetOnOff+0xa4>)
+ 8007dbe:	f7fa fee5 	bl	8002b8c <HAL_GPIO_WritePin>
 		break;
- 8007dd2:	e01d      	b.n	8007e10 <FAN_SetOnOff+0xb4>
+ 8007dc2:	e019      	b.n	8007df8 <FAN_SetOnOff+0x9c>
 
 	case FAN_ON_BOTH:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_SET);
- 8007dd4:	2201      	movs	r2, #1
- 8007dd6:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
- 8007dda:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
- 8007dde:	f7fa fed5 	bl	8002b8c <HAL_GPIO_WritePin>
+ 8007dc4:	2201      	movs	r2, #1
+ 8007dc6:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
+ 8007dca:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
+ 8007dce:	f7fa fedd 	bl	8002b8c <HAL_GPIO_WritePin>
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_SET);
- 8007de2:	2201      	movs	r2, #1
- 8007de4:	2108      	movs	r1, #8
- 8007de6:	480c      	ldr	r0, [pc, #48]	@ (8007e18 <FAN_SetOnOff+0xbc>)
- 8007de8:	f7fa fed0 	bl	8002b8c <HAL_GPIO_WritePin>
-		FAN_PulseReset();
- 8007dec:	f7ff ffa4 	bl	8007d38 <FAN_PulseReset>
+ 8007dd2:	2201      	movs	r2, #1
+ 8007dd4:	2108      	movs	r1, #8
+ 8007dd6:	480a      	ldr	r0, [pc, #40]	@ (8007e00 <FAN_SetOnOff+0xa4>)
+ 8007dd8:	f7fa fed8 	bl	8002b8c <HAL_GPIO_WritePin>
 		break;
- 8007df0:	e00e      	b.n	8007e10 <FAN_SetOnOff+0xb4>
+ 8007ddc:	e00c      	b.n	8007df8 <FAN_SetOnOff+0x9c>
 
 	case FAN_OFF_BOTH:
 		HAL_GPIO_WritePin(FAN1_ON_GPIO_Port, FAN1_ON_Pin, GPIO_PIN_RESET);
- 8007df2:	2200      	movs	r2, #0
- 8007df4:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
- 8007df8:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
- 8007dfc:	f7fa fec6 	bl	8002b8c <HAL_GPIO_WritePin>
+ 8007dde:	2200      	movs	r2, #0
+ 8007de0:	f44f 4100 	mov.w	r1, #32768	@ 0x8000
+ 8007de4:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
+ 8007de8:	f7fa fed0 	bl	8002b8c <HAL_GPIO_WritePin>
 		HAL_GPIO_WritePin(FAN2_ON_GPIO_Port, FAN2_ON_Pin, GPIO_PIN_RESET);
- 8007e00:	2200      	movs	r2, #0
- 8007e02:	2108      	movs	r1, #8
- 8007e04:	4804      	ldr	r0, [pc, #16]	@ (8007e18 <FAN_SetOnOff+0xbc>)
- 8007e06:	f7fa fec1 	bl	8002b8c <HAL_GPIO_WritePin>
-		FAN_PulseReset();
- 8007e0a:	f7ff ff95 	bl	8007d38 <FAN_PulseReset>
+ 8007dec:	2200      	movs	r2, #0
+ 8007dee:	2108      	movs	r1, #8
+ 8007df0:	4803      	ldr	r0, [pc, #12]	@ (8007e00 <FAN_SetOnOff+0xa4>)
+ 8007df2:	f7fa fecb 	bl	8002b8c <HAL_GPIO_WritePin>
 		break;
- 8007e0e:	bf00      	nop
+ 8007df6:	bf00      	nop
 	}
 }
- 8007e10:	bf00      	nop
- 8007e12:	3708      	adds	r7, #8
- 8007e14:	46bd      	mov	sp, r7
- 8007e16:	bd80      	pop	{r7, pc}
- 8007e18:	48000400 	.word	0x48000400
+ 8007df8:	bf00      	nop
+ 8007dfa:	3708      	adds	r7, #8
+ 8007dfc:	46bd      	mov	sp, r7
+ 8007dfe:	bd80      	pop	{r7, pc}
+ 8007e00:	48000400 	.word	0x48000400
 
-08007e1c <FAN_SetMaxTemp>:
+08007e04 <FAN_SetMaxTemp>:
  * temperature value in the global @ref batteryMaxTemp.
  *
  * @param frame  Pointer to the received CAN buffer frame containing the raw temperature data.
  */
 void FAN_SetMaxTemp(struct CAN_bufferFrame* frame)
 {
- 8007e1c:	b590      	push	{r4, r7, lr}
- 8007e1e:	b085      	sub	sp, #20
- 8007e20:	af00      	add	r7, sp, #0
- 8007e22:	6078      	str	r0, [r7, #4]
+ 8007e04:	b590      	push	{r4, r7, lr}
+ 8007e06:	b085      	sub	sp, #20
+ 8007e08:	af00      	add	r7, sp, #0
+ 8007e0a:	6078      	str	r0, [r7, #4]
 	static float  tempPacket[NUMBER_OF_PACKET] = {0};
-	float maxTemp = 0;
- 8007e24:	f04f 0300 	mov.w	r3, #0
- 8007e28:	60fb      	str	r3, [r7, #12]
+	uint8_t maxTemp = 0;
+ 8007e0c:	2300      	movs	r3, #0
+ 8007e0e:	73fb      	strb	r3, [r7, #15]
 
 	tempPacket[frame->name] = FAN_SetMaxTempPacket(frame->data);
- 8007e2a:	687b      	ldr	r3, [r7, #4]
- 8007e2c:	1c5a      	adds	r2, r3, #1
- 8007e2e:	687b      	ldr	r3, [r7, #4]
- 8007e30:	781b      	ldrb	r3, [r3, #0]
- 8007e32:	461c      	mov	r4, r3
- 8007e34:	4610      	mov	r0, r2
- 8007e36:	f000 f8e3 	bl	8008000 <FAN_SetMaxTempPacket>
- 8007e3a:	eef0 7a40 	vmov.f32	s15, s0
- 8007e3e:	4a14      	ldr	r2, [pc, #80]	@ (8007e90 <FAN_SetMaxTemp+0x74>)
- 8007e40:	00a3      	lsls	r3, r4, #2
- 8007e42:	4413      	add	r3, r2
- 8007e44:	edc3 7a00 	vstr	s15, [r3]
+ 8007e10:	687b      	ldr	r3, [r7, #4]
+ 8007e12:	1c5a      	adds	r2, r3, #1
+ 8007e14:	687b      	ldr	r3, [r7, #4]
+ 8007e16:	781b      	ldrb	r3, [r3, #0]
+ 8007e18:	461c      	mov	r4, r3
+ 8007e1a:	4610      	mov	r0, r2
+ 8007e1c:	f000 f8ec 	bl	8007ff8 <FAN_SetMaxTempPacket>
+ 8007e20:	eef0 7a40 	vmov.f32	s15, s0
+ 8007e24:	4a18      	ldr	r2, [pc, #96]	@ (8007e88 <FAN_SetMaxTemp+0x84>)
+ 8007e26:	00a3      	lsls	r3, r4, #2
+ 8007e28:	4413      	add	r3, r2
+ 8007e2a:	edc3 7a00 	vstr	s15, [r3]
 	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
- 8007e48:	2300      	movs	r3, #0
- 8007e4a:	72fb      	strb	r3, [r7, #11]
- 8007e4c:	e015      	b.n	8007e7a <FAN_SetMaxTemp+0x5e>
+ 8007e2e:	2300      	movs	r3, #0
+ 8007e30:	73bb      	strb	r3, [r7, #14]
+ 8007e32:	e01e      	b.n	8007e72 <FAN_SetMaxTemp+0x6e>
 	{
 		if(maxTemp < tempPacket[i])
- 8007e4e:	7afb      	ldrb	r3, [r7, #11]
- 8007e50:	4a0f      	ldr	r2, [pc, #60]	@ (8007e90 <FAN_SetMaxTemp+0x74>)
- 8007e52:	009b      	lsls	r3, r3, #2
- 8007e54:	4413      	add	r3, r2
- 8007e56:	edd3 7a00 	vldr	s15, [r3]
- 8007e5a:	ed97 7a03 	vldr	s14, [r7, #12]
- 8007e5e:	eeb4 7ae7 	vcmpe.f32	s14, s15
- 8007e62:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 8007e66:	d505      	bpl.n	8007e74 <FAN_SetMaxTemp+0x58>
+ 8007e34:	7bfb      	ldrb	r3, [r7, #15]
+ 8007e36:	ee07 3a90 	vmov	s15, r3
+ 8007e3a:	eeb8 7ae7 	vcvt.f32.s32	s14, s15
+ 8007e3e:	7bbb      	ldrb	r3, [r7, #14]
+ 8007e40:	4a11      	ldr	r2, [pc, #68]	@ (8007e88 <FAN_SetMaxTemp+0x84>)
+ 8007e42:	009b      	lsls	r3, r3, #2
+ 8007e44:	4413      	add	r3, r2
+ 8007e46:	edd3 7a00 	vldr	s15, [r3]
+ 8007e4a:	eeb4 7ae7 	vcmpe.f32	s14, s15
+ 8007e4e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 8007e52:	d50b      	bpl.n	8007e6c <FAN_SetMaxTemp+0x68>
 		{
 			maxTemp = tempPacket[i];
- 8007e68:	7afb      	ldrb	r3, [r7, #11]
- 8007e6a:	4a09      	ldr	r2, [pc, #36]	@ (8007e90 <FAN_SetMaxTemp+0x74>)
- 8007e6c:	009b      	lsls	r3, r3, #2
- 8007e6e:	4413      	add	r3, r2
- 8007e70:	681b      	ldr	r3, [r3, #0]
- 8007e72:	60fb      	str	r3, [r7, #12]
+ 8007e54:	7bbb      	ldrb	r3, [r7, #14]
+ 8007e56:	4a0c      	ldr	r2, [pc, #48]	@ (8007e88 <FAN_SetMaxTemp+0x84>)
+ 8007e58:	009b      	lsls	r3, r3, #2
+ 8007e5a:	4413      	add	r3, r2
+ 8007e5c:	edd3 7a00 	vldr	s15, [r3]
+ 8007e60:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 8007e64:	edc7 7a00 	vstr	s15, [r7]
+ 8007e68:	783b      	ldrb	r3, [r7, #0]
+ 8007e6a:	73fb      	strb	r3, [r7, #15]
 	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
- 8007e74:	7afb      	ldrb	r3, [r7, #11]
- 8007e76:	3301      	adds	r3, #1
- 8007e78:	72fb      	strb	r3, [r7, #11]
- 8007e7a:	7afb      	ldrb	r3, [r7, #11]
- 8007e7c:	2b08      	cmp	r3, #8
- 8007e7e:	d9e6      	bls.n	8007e4e <FAN_SetMaxTemp+0x32>
+ 8007e6c:	7bbb      	ldrb	r3, [r7, #14]
+ 8007e6e:	3301      	adds	r3, #1
+ 8007e70:	73bb      	strb	r3, [r7, #14]
+ 8007e72:	7bbb      	ldrb	r3, [r7, #14]
+ 8007e74:	2b08      	cmp	r3, #8
+ 8007e76:	d9dd      	bls.n	8007e34 <FAN_SetMaxTemp+0x30>
 		}
 	}
 	batteryMaxTemp = maxTemp;
- 8007e80:	4a04      	ldr	r2, [pc, #16]	@ (8007e94 <FAN_SetMaxTemp+0x78>)
- 8007e82:	68fb      	ldr	r3, [r7, #12]
- 8007e84:	6013      	str	r3, [r2, #0]
+ 8007e78:	4a04      	ldr	r2, [pc, #16]	@ (8007e8c <FAN_SetMaxTemp+0x88>)
+ 8007e7a:	7bfb      	ldrb	r3, [r7, #15]
+ 8007e7c:	7013      	strb	r3, [r2, #0]
 
 }
+ 8007e7e:	bf00      	nop
+ 8007e80:	3714      	adds	r7, #20
+ 8007e82:	46bd      	mov	sp, r7
+ 8007e84:	bd90      	pop	{r4, r7, pc}
  8007e86:	bf00      	nop
- 8007e88:	3714      	adds	r7, #20
- 8007e8a:	46bd      	mov	sp, r7
- 8007e8c:	bd90      	pop	{r4, r7, pc}
- 8007e8e:	bf00      	nop
- 8007e90:	20000cf8 	.word	0x20000cf8
- 8007e94:	20000cf4 	.word	0x20000cf4
+ 8007e88:	20000cf4 	.word	0x20000cf4
+ 8007e8c:	20000cf2 	.word	0x20000cf2
 
-08007e98 <FAN_BatteryController>:
+08007e90 <FAN_BatteryController>:
  * Runs periodically (every @ref DT ms). Duty cycle scales linearly with
  * @ref batteryMaxTemp above 30°C, is forced to 0 below 30°C, and is clamped
  * to a maximum of 100.
  */
 void FAN_BatteryController() // Fix it during tests
 {
- 8007e98:	b580      	push	{r7, lr}
- 8007e9a:	b082      	sub	sp, #8
- 8007e9c:	af00      	add	r7, sp, #0
+ 8007e90:	b580      	push	{r7, lr}
+ 8007e92:	af00      	add	r7, sp, #0
 	static uint8_t pwmDuty = 0;
 	static uint32_t lastTick = 0;
 
 	if(HAL_GetTick() - lastTick >= DT)
- 8007e9e:	f7f9 fbb3 	bl	8001608 <HAL_GetTick>
- 8007ea2:	4602      	mov	r2, r0
- 8007ea4:	4b1e      	ldr	r3, [pc, #120]	@ (8007f20 <FAN_BatteryController+0x88>)
- 8007ea6:	681b      	ldr	r3, [r3, #0]
- 8007ea8:	1ad3      	subs	r3, r2, r3
- 8007eaa:	f5b3 7ffa 	cmp.w	r3, #500	@ 0x1f4
- 8007eae:	d32e      	bcc.n	8007f0e <FAN_BatteryController+0x76>
+ 8007e94:	f7f9 fbb8 	bl	8001608 <HAL_GetTick>
+ 8007e98:	4602      	mov	r2, r0
+ 8007e9a:	4b19      	ldr	r3, [pc, #100]	@ (8007f00 <FAN_BatteryController+0x70>)
+ 8007e9c:	681b      	ldr	r3, [r3, #0]
+ 8007e9e:	1ad3      	subs	r3, r2, r3
+ 8007ea0:	f5b3 7ffa 	cmp.w	r3, #500	@ 0x1f4
+ 8007ea4:	d326      	bcc.n	8007ef4 <FAN_BatteryController+0x64>
 	{
 		lastTick = HAL_GetTick();
- 8007eb0:	f7f9 fbaa 	bl	8001608 <HAL_GetTick>
- 8007eb4:	4603      	mov	r3, r0
- 8007eb6:	4a1a      	ldr	r2, [pc, #104]	@ (8007f20 <FAN_BatteryController+0x88>)
- 8007eb8:	6013      	str	r3, [r2, #0]
-
-		pwmDuty = 20 + (batteryMaxTemp - 30)*2;
- 8007eba:	4b1a      	ldr	r3, [pc, #104]	@ (8007f24 <FAN_BatteryController+0x8c>)
- 8007ebc:	edd3 7a00 	vldr	s15, [r3]
- 8007ec0:	eeb3 7a0e 	vmov.f32	s14, #62	@ 0x41f00000  30.0
- 8007ec4:	ee77 7ac7 	vsub.f32	s15, s15, s14
- 8007ec8:	ee77 7aa7 	vadd.f32	s15, s15, s15
- 8007ecc:	eeb3 7a04 	vmov.f32	s14, #52	@ 0x41a00000  20.0
- 8007ed0:	ee77 7a87 	vadd.f32	s15, s15, s14
- 8007ed4:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 8007ed8:	edc7 7a01 	vstr	s15, [r7, #4]
- 8007edc:	793b      	ldrb	r3, [r7, #4]
- 8007ede:	b2da      	uxtb	r2, r3
- 8007ee0:	4b11      	ldr	r3, [pc, #68]	@ (8007f28 <FAN_BatteryController+0x90>)
- 8007ee2:	701a      	strb	r2, [r3, #0]
-
-		if(batteryMaxTemp < 30)
- 8007ee4:	4b0f      	ldr	r3, [pc, #60]	@ (8007f24 <FAN_BatteryController+0x8c>)
- 8007ee6:	edd3 7a00 	vldr	s15, [r3]
- 8007eea:	eeb3 7a0e 	vmov.f32	s14, #62	@ 0x41f00000  30.0
- 8007eee:	eef4 7ac7 	vcmpe.f32	s15, s14
- 8007ef2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 8007ef6:	d503      	bpl.n	8007f00 <FAN_BatteryController+0x68>
+ 8007ea6:	f7f9 fbaf 	bl	8001608 <HAL_GetTick>
+ 8007eaa:	4603      	mov	r3, r0
+ 8007eac:	4a14      	ldr	r2, [pc, #80]	@ (8007f00 <FAN_BatteryController+0x70>)
+ 8007eae:	6013      	str	r3, [r2, #0]
+		pwmDuty = 100 - ((batteryMaxTemp) + 5)*2;
+ 8007eb0:	4b14      	ldr	r3, [pc, #80]	@ (8007f04 <FAN_BatteryController+0x74>)
+ 8007eb2:	781b      	ldrb	r3, [r3, #0]
+ 8007eb4:	f1c3 032d 	rsb	r3, r3, #45	@ 0x2d
+ 8007eb8:	b2db      	uxtb	r3, r3
+ 8007eba:	005b      	lsls	r3, r3, #1
+ 8007ebc:	b2da      	uxtb	r2, r3
+ 8007ebe:	4b12      	ldr	r3, [pc, #72]	@ (8007f08 <FAN_BatteryController+0x78>)
+ 8007ec0:	701a      	strb	r2, [r3, #0]
+		if(batteryMaxTemp < 20)
+ 8007ec2:	4b10      	ldr	r3, [pc, #64]	@ (8007f04 <FAN_BatteryController+0x74>)
+ 8007ec4:	781b      	ldrb	r3, [r3, #0]
+ 8007ec6:	2b13      	cmp	r3, #19
+ 8007ec8:	d806      	bhi.n	8007ed8 <FAN_BatteryController+0x48>
 		{
-			pwmDuty = 0;
- 8007ef8:	4b0b      	ldr	r3, [pc, #44]	@ (8007f28 <FAN_BatteryController+0x90>)
- 8007efa:	2200      	movs	r2, #0
- 8007efc:	701a      	strb	r2, [r3, #0]
- 8007efe:	e006      	b.n	8007f0e <FAN_BatteryController+0x76>
-		}
-		else if(pwmDuty > 100)
- 8007f00:	4b09      	ldr	r3, [pc, #36]	@ (8007f28 <FAN_BatteryController+0x90>)
- 8007f02:	781b      	ldrb	r3, [r3, #0]
- 8007f04:	2b64      	cmp	r3, #100	@ 0x64
- 8007f06:	d902      	bls.n	8007f0e <FAN_BatteryController+0x76>
-		{
+			FAN_SetOnOff(FAN_OFF_1);
+ 8007eca:	2001      	movs	r0, #1
+ 8007ecc:	f7ff ff46 	bl	8007d5c <FAN_SetOnOff>
 			pwmDuty = 100;
- 8007f08:	4b07      	ldr	r3, [pc, #28]	@ (8007f28 <FAN_BatteryController+0x90>)
- 8007f0a:	2264      	movs	r2, #100	@ 0x64
- 8007f0c:	701a      	strb	r2, [r3, #0]
+ 8007ed0:	4b0d      	ldr	r3, [pc, #52]	@ (8007f08 <FAN_BatteryController+0x78>)
+ 8007ed2:	2264      	movs	r2, #100	@ 0x64
+ 8007ed4:	701a      	strb	r2, [r3, #0]
+ 8007ed6:	e00d      	b.n	8007ef4 <FAN_BatteryController+0x64>
+		}
+		else if(batteryMaxTemp > 50)
+ 8007ed8:	4b0a      	ldr	r3, [pc, #40]	@ (8007f04 <FAN_BatteryController+0x74>)
+ 8007eda:	781b      	ldrb	r3, [r3, #0]
+ 8007edc:	2b32      	cmp	r3, #50	@ 0x32
+ 8007ede:	d906      	bls.n	8007eee <FAN_BatteryController+0x5e>
+		{
+			FAN_SetOnOff(FAN_ON_1);
+ 8007ee0:	2000      	movs	r0, #0
+ 8007ee2:	f7ff ff3b 	bl	8007d5c <FAN_SetOnOff>
+			pwmDuty = 0;
+ 8007ee6:	4b08      	ldr	r3, [pc, #32]	@ (8007f08 <FAN_BatteryController+0x78>)
+ 8007ee8:	2200      	movs	r2, #0
+ 8007eea:	701a      	strb	r2, [r3, #0]
+ 8007eec:	e002      	b.n	8007ef4 <FAN_BatteryController+0x64>
+		}
+		else
+		{
+			FAN_SetOnOff(FAN_ON_1);
+ 8007eee:	2000      	movs	r0, #0
+ 8007ef0:	f7ff ff34 	bl	8007d5c <FAN_SetOnOff>
 		}
 	}
 	fan1Pulse = pwmDuty;
- 8007f0e:	4b06      	ldr	r3, [pc, #24]	@ (8007f28 <FAN_BatteryController+0x90>)
- 8007f10:	781a      	ldrb	r2, [r3, #0]
- 8007f12:	4b06      	ldr	r3, [pc, #24]	@ (8007f2c <FAN_BatteryController+0x94>)
- 8007f14:	701a      	strb	r2, [r3, #0]
+ 8007ef4:	4b04      	ldr	r3, [pc, #16]	@ (8007f08 <FAN_BatteryController+0x78>)
+ 8007ef6:	781a      	ldrb	r2, [r3, #0]
+ 8007ef8:	4b04      	ldr	r3, [pc, #16]	@ (8007f0c <FAN_BatteryController+0x7c>)
+ 8007efa:	701a      	strb	r2, [r3, #0]
 }
- 8007f16:	bf00      	nop
- 8007f18:	3708      	adds	r7, #8
- 8007f1a:	46bd      	mov	sp, r7
- 8007f1c:	bd80      	pop	{r7, pc}
- 8007f1e:	bf00      	nop
- 8007f20:	20000d1c 	.word	0x20000d1c
- 8007f24:	20000cf4 	.word	0x20000cf4
- 8007f28:	20000d20 	.word	0x20000d20
- 8007f2c:	20000cf0 	.word	0x20000cf0
+ 8007efc:	bf00      	nop
+ 8007efe:	bd80      	pop	{r7, pc}
+ 8007f00:	20000d18 	.word	0x20000d18
+ 8007f04:	20000cf2 	.word	0x20000cf2
+ 8007f08:	20000d1c 	.word	0x20000d1c
+ 8007f0c:	20000cf0 	.word	0x20000cf0
 
-08007f30 <FAN_CabinController>:
+08007f10 <FAN_CabinController>:
  * Runs periodically (every @ref DT ms). Reads temperature and humidity from the AM2320
  * sensor, then scales the duty cycle linearly with temperature above 20.0°C (tempX10 > 200),
  * forces it to 0 below that threshold, and clamps it to a maximum of 100.
  */
 void FAN_CabinController() // Fix it during tests
 {
- 8007f30:	b580      	push	{r7, lr}
- 8007f32:	af00      	add	r7, sp, #0
-	static uint32_t lastTick = 0;
+ 8007f10:	b580      	push	{r7, lr}
+ 8007f12:	af00      	add	r7, sp, #0
 	static uint8_t pwmDuty = 0;
 	static int16_t tempX10 = 0;
 	static uint16_t humX10 = 0;
-	tempX10 = 210;
- 8007f34:	4b19      	ldr	r3, [pc, #100]	@ (8007f9c <FAN_CabinController+0x6c>)
- 8007f36:	22d2      	movs	r2, #210	@ 0xd2
- 8007f38:	801a      	strh	r2, [r3, #0]
+
+
 	if(HAL_GetTick() - lastTick >= DT)
- 8007f3a:	f7f9 fb65 	bl	8001608 <HAL_GetTick>
- 8007f3e:	4602      	mov	r2, r0
- 8007f40:	4b17      	ldr	r3, [pc, #92]	@ (8007fa0 <FAN_CabinController+0x70>)
- 8007f42:	681b      	ldr	r3, [r3, #0]
- 8007f44:	1ad3      	subs	r3, r2, r3
- 8007f46:	f5b3 7ffa 	cmp.w	r3, #500	@ 0x1f4
- 8007f4a:	d325      	bcc.n	8007f98 <FAN_CabinController+0x68>
+ 8007f14:	f7f9 fb78 	bl	8001608 <HAL_GetTick>
+ 8007f18:	4602      	mov	r2, r0
+ 8007f1a:	4b1d      	ldr	r3, [pc, #116]	@ (8007f90 <FAN_CabinController+0x80>)
+ 8007f1c:	681b      	ldr	r3, [r3, #0]
+ 8007f1e:	1ad3      	subs	r3, r2, r3
+ 8007f20:	f5b3 7ffa 	cmp.w	r3, #500	@ 0x1f4
+ 8007f24:	d331      	bcc.n	8007f8a <FAN_CabinController+0x7a>
 	{
 		lastTick = HAL_GetTick();
- 8007f4c:	f7f9 fb5c 	bl	8001608 <HAL_GetTick>
- 8007f50:	4603      	mov	r3, r0
- 8007f52:	4a13      	ldr	r2, [pc, #76]	@ (8007fa0 <FAN_CabinController+0x70>)
- 8007f54:	6013      	str	r3, [r2, #0]
+ 8007f26:	f7f9 fb6f 	bl	8001608 <HAL_GetTick>
+ 8007f2a:	4603      	mov	r3, r0
+ 8007f2c:	4a18      	ldr	r2, [pc, #96]	@ (8007f90 <FAN_CabinController+0x80>)
+ 8007f2e:	6013      	str	r3, [r2, #0]
 		AM2320_GetTempHum(&tempX10, &humX10);
- 8007f56:	4913      	ldr	r1, [pc, #76]	@ (8007fa4 <FAN_CabinController+0x74>)
- 8007f58:	4810      	ldr	r0, [pc, #64]	@ (8007f9c <FAN_CabinController+0x6c>)
- 8007f5a:	f000 f92f 	bl	80081bc <AM2320_GetTempHum>
-
-		pwmDuty = 0 + (tempX10 - 200)*2;
- 8007f5e:	4b0f      	ldr	r3, [pc, #60]	@ (8007f9c <FAN_CabinController+0x6c>)
- 8007f60:	f9b3 3000 	ldrsh.w	r3, [r3]
- 8007f64:	3bc8      	subs	r3, #200	@ 0xc8
- 8007f66:	b2db      	uxtb	r3, r3
- 8007f68:	005b      	lsls	r3, r3, #1
- 8007f6a:	b2da      	uxtb	r2, r3
- 8007f6c:	4b0e      	ldr	r3, [pc, #56]	@ (8007fa8 <FAN_CabinController+0x78>)
- 8007f6e:	701a      	strb	r2, [r3, #0]
+ 8007f30:	4918      	ldr	r1, [pc, #96]	@ (8007f94 <FAN_CabinController+0x84>)
+ 8007f32:	4819      	ldr	r0, [pc, #100]	@ (8007f98 <FAN_CabinController+0x88>)
+ 8007f34:	f000 f93e 	bl	80081b4 <AM2320_GetTempHum>
+		pwmDuty = 100 - (tempX10 - 200);
+ 8007f38:	4b17      	ldr	r3, [pc, #92]	@ (8007f98 <FAN_CabinController+0x88>)
+ 8007f3a:	f9b3 3000 	ldrsh.w	r3, [r3]
+ 8007f3e:	b2db      	uxtb	r3, r3
+ 8007f40:	f1c3 032c 	rsb	r3, r3, #44	@ 0x2c
+ 8007f44:	b2da      	uxtb	r2, r3
+ 8007f46:	4b15      	ldr	r3, [pc, #84]	@ (8007f9c <FAN_CabinController+0x8c>)
+ 8007f48:	701a      	strb	r2, [r3, #0]
 
 		if(tempX10 < 200)
- 8007f70:	4b0a      	ldr	r3, [pc, #40]	@ (8007f9c <FAN_CabinController+0x6c>)
- 8007f72:	f9b3 3000 	ldrsh.w	r3, [r3]
- 8007f76:	2bc7      	cmp	r3, #199	@ 0xc7
- 8007f78:	dc03      	bgt.n	8007f82 <FAN_CabinController+0x52>
+ 8007f4a:	4b13      	ldr	r3, [pc, #76]	@ (8007f98 <FAN_CabinController+0x88>)
+ 8007f4c:	f9b3 3000 	ldrsh.w	r3, [r3]
+ 8007f50:	2bc7      	cmp	r3, #199	@ 0xc7
+ 8007f52:	dc06      	bgt.n	8007f62 <FAN_CabinController+0x52>
 		{
-			pwmDuty = 0;
- 8007f7a:	4b0b      	ldr	r3, [pc, #44]	@ (8007fa8 <FAN_CabinController+0x78>)
- 8007f7c:	2200      	movs	r2, #0
- 8007f7e:	701a      	strb	r2, [r3, #0]
- 8007f80:	e006      	b.n	8007f90 <FAN_CabinController+0x60>
-		}
-		else if(pwmDuty > 100)
- 8007f82:	4b09      	ldr	r3, [pc, #36]	@ (8007fa8 <FAN_CabinController+0x78>)
- 8007f84:	781b      	ldrb	r3, [r3, #0]
- 8007f86:	2b64      	cmp	r3, #100	@ 0x64
- 8007f88:	d902      	bls.n	8007f90 <FAN_CabinController+0x60>
-		{
+			FAN_SetOnOff(FAN_OFF_2);
+ 8007f54:	2003      	movs	r0, #3
+ 8007f56:	f7ff ff01 	bl	8007d5c <FAN_SetOnOff>
 			pwmDuty = 100;
- 8007f8a:	4b07      	ldr	r3, [pc, #28]	@ (8007fa8 <FAN_CabinController+0x78>)
- 8007f8c:	2264      	movs	r2, #100	@ 0x64
- 8007f8e:	701a      	strb	r2, [r3, #0]
+ 8007f5a:	4b10      	ldr	r3, [pc, #64]	@ (8007f9c <FAN_CabinController+0x8c>)
+ 8007f5c:	2264      	movs	r2, #100	@ 0x64
+ 8007f5e:	701a      	strb	r2, [r3, #0]
+ 8007f60:	e00f      	b.n	8007f82 <FAN_CabinController+0x72>
+		}
+		else if(tempX10 > 300)
+ 8007f62:	4b0d      	ldr	r3, [pc, #52]	@ (8007f98 <FAN_CabinController+0x88>)
+ 8007f64:	f9b3 3000 	ldrsh.w	r3, [r3]
+ 8007f68:	f5b3 7f96 	cmp.w	r3, #300	@ 0x12c
+ 8007f6c:	dd06      	ble.n	8007f7c <FAN_CabinController+0x6c>
+		{
+			FAN_SetOnOff(FAN_ON_2);
+ 8007f6e:	2002      	movs	r0, #2
+ 8007f70:	f7ff fef4 	bl	8007d5c <FAN_SetOnOff>
+			pwmDuty = 0;
+ 8007f74:	4b09      	ldr	r3, [pc, #36]	@ (8007f9c <FAN_CabinController+0x8c>)
+ 8007f76:	2200      	movs	r2, #0
+ 8007f78:	701a      	strb	r2, [r3, #0]
+ 8007f7a:	e002      	b.n	8007f82 <FAN_CabinController+0x72>
+		}
+		else
+		{
+			FAN_SetOnOff(FAN_ON_2);
+ 8007f7c:	2002      	movs	r0, #2
+ 8007f7e:	f7ff feed 	bl	8007d5c <FAN_SetOnOff>
 		}
 		fan2Pulse = pwmDuty;
- 8007f90:	4b05      	ldr	r3, [pc, #20]	@ (8007fa8 <FAN_CabinController+0x78>)
- 8007f92:	781a      	ldrb	r2, [r3, #0]
- 8007f94:	4b05      	ldr	r3, [pc, #20]	@ (8007fac <FAN_CabinController+0x7c>)
- 8007f96:	701a      	strb	r2, [r3, #0]
+ 8007f82:	4b06      	ldr	r3, [pc, #24]	@ (8007f9c <FAN_CabinController+0x8c>)
+ 8007f84:	781a      	ldrb	r2, [r3, #0]
+ 8007f86:	4b06      	ldr	r3, [pc, #24]	@ (8007fa0 <FAN_CabinController+0x90>)
+ 8007f88:	701a      	strb	r2, [r3, #0]
 	}
 }
- 8007f98:	bf00      	nop
- 8007f9a:	bd80      	pop	{r7, pc}
- 8007f9c:	20000d22 	.word	0x20000d22
- 8007fa0:	20000d24 	.word	0x20000d24
- 8007fa4:	20000d28 	.word	0x20000d28
- 8007fa8:	20000d2a 	.word	0x20000d2a
- 8007fac:	20000cf1 	.word	0x20000cf1
+ 8007f8a:	bf00      	nop
+ 8007f8c:	bd80      	pop	{r7, pc}
+ 8007f8e:	bf00      	nop
+ 8007f90:	20000d20 	.word	0x20000d20
+ 8007f94:	20000d26 	.word	0x20000d26
+ 8007f98:	20000d24 	.word	0x20000d24
+ 8007f9c:	20000d28 	.word	0x20000d28
+ 8007fa0:	20000cf1 	.word	0x20000cf1
 
-08007fb0 <FAN_SetPulseInternal>:
+08007fa4 <FAN_SetPulseInternal>:
  *
  * @param htim          Pointer to the timer handle controlling the fan PWM output.
  * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
  */
 void FAN_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
 {
- 8007fb0:	b580      	push	{r7, lr}
- 8007fb2:	b084      	sub	sp, #16
- 8007fb4:	af02      	add	r7, sp, #8
- 8007fb6:	6078      	str	r0, [r7, #4]
- 8007fb8:	6039      	str	r1, [r7, #0]
+ 8007fa4:	b580      	push	{r7, lr}
+ 8007fa6:	b084      	sub	sp, #16
+ 8007fa8:	af02      	add	r7, sp, #8
+ 8007faa:	6078      	str	r0, [r7, #4]
+ 8007fac:	6039      	str	r1, [r7, #0]
 	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_FAN, CAN_Buffer_TX);
- 8007fba:	6839      	ldr	r1, [r7, #0]
- 8007fbc:	f240 5002 	movw	r0, #1282	@ 0x502
- 8007fc0:	f7ff fb4d 	bl	800765e <CAN_RemoveScheduledMsg>
+ 8007fae:	6839      	ldr	r1, [r7, #0]
+ 8007fb0:	f240 5002 	movw	r0, #1282	@ 0x502
+ 8007fb4:	f7ff fb53 	bl	800765e <CAN_RemoveScheduledMsg>
 
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, fan1Pulse);
- 8007fc4:	4b0b      	ldr	r3, [pc, #44]	@ (8007ff4 <FAN_SetPulseInternal+0x44>)
- 8007fc6:	781a      	ldrb	r2, [r3, #0]
- 8007fc8:	687b      	ldr	r3, [r7, #4]
- 8007fca:	681b      	ldr	r3, [r3, #0]
- 8007fcc:	635a      	str	r2, [r3, #52]	@ 0x34
+ 8007fb8:	4b0b      	ldr	r3, [pc, #44]	@ (8007fe8 <FAN_SetPulseInternal+0x44>)
+ 8007fba:	781a      	ldrb	r2, [r3, #0]
+ 8007fbc:	687b      	ldr	r3, [r7, #4]
+ 8007fbe:	681b      	ldr	r3, [r3, #0]
+ 8007fc0:	635a      	str	r2, [r3, #52]	@ 0x34
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_2, fan2Pulse);
- 8007fce:	4b0a      	ldr	r3, [pc, #40]	@ (8007ff8 <FAN_SetPulseInternal+0x48>)
- 8007fd0:	781a      	ldrb	r2, [r3, #0]
- 8007fd2:	687b      	ldr	r3, [r7, #4]
- 8007fd4:	681b      	ldr	r3, [r3, #0]
- 8007fd6:	639a      	str	r2, [r3, #56]	@ 0x38
+ 8007fc2:	4b0a      	ldr	r3, [pc, #40]	@ (8007fec <FAN_SetPulseInternal+0x48>)
+ 8007fc4:	781a      	ldrb	r2, [r3, #0]
+ 8007fc6:	687b      	ldr	r3, [r7, #4]
+ 8007fc8:	681b      	ldr	r3, [r3, #0]
+ 8007fca:	639a      	str	r2, [r3, #56]	@ 0x38
 
 	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_FAN, BYTE_SIZE_PULSE, FAN_FetcherPulse, PERIOD_PULSE_SEND);
- 8007fd8:	2364      	movs	r3, #100	@ 0x64
- 8007fda:	9300      	str	r3, [sp, #0]
- 8007fdc:	4b07      	ldr	r3, [pc, #28]	@ (8007ffc <FAN_SetPulseInternal+0x4c>)
- 8007fde:	2202      	movs	r2, #2
- 8007fe0:	f240 5102 	movw	r1, #1282	@ 0x502
- 8007fe4:	6838      	ldr	r0, [r7, #0]
- 8007fe6:	f7ff fd5d 	bl	8007aa4 <CAN_WriteFrame>
+ 8007fcc:	2364      	movs	r3, #100	@ 0x64
+ 8007fce:	9300      	str	r3, [sp, #0]
+ 8007fd0:	4b07      	ldr	r3, [pc, #28]	@ (8007ff0 <FAN_SetPulseInternal+0x4c>)
+ 8007fd2:	2202      	movs	r2, #2
+ 8007fd4:	f240 5102 	movw	r1, #1282	@ 0x502
+ 8007fd8:	6838      	ldr	r0, [r7, #0]
+ 8007fda:	f7ff fd63 	bl	8007aa4 <CAN_WriteFrame>
 }
- 8007fea:	bf00      	nop
- 8007fec:	3708      	adds	r7, #8
- 8007fee:	46bd      	mov	sp, r7
- 8007ff0:	bd80      	pop	{r7, pc}
- 8007ff2:	bf00      	nop
- 8007ff4:	20000cf0 	.word	0x20000cf0
- 8007ff8:	20000cf1 	.word	0x20000cf1
- 8007ffc:	08007ce9 	.word	0x08007ce9
+ 8007fde:	bf00      	nop
+ 8007fe0:	3708      	adds	r7, #8
+ 8007fe2:	46bd      	mov	sp, r7
+ 8007fe4:	bd80      	pop	{r7, pc}
+ 8007fe6:	bf00      	nop
+ 8007fe8:	20000cf0 	.word	0x20000cf0
+ 8007fec:	20000cf1 	.word	0x20000cf1
+ 8007ff0:	08007ce9 	.word	0x08007ce9
+ 8007ff4:	00000000 	.word	0x00000000
 
-08008000 <FAN_SetMaxTempPacket>:
+08007ff8 <FAN_SetMaxTempPacket>:
  *
  * @param data  Pointer to the byte array containing raw per-cell/per-sensor temperature values.
  * @return      The highest temperature value found in the packet, as a float.
  */
 static float FAN_SetMaxTempPacket(uint8_t* data)
 {
- 8008000:	b580      	push	{r7, lr}
- 8008002:	b084      	sub	sp, #16
- 8008004:	af00      	add	r7, sp, #0
- 8008006:	6078      	str	r0, [r7, #4]
+ 8007ff8:	b580      	push	{r7, lr}
+ 8007ffa:	b084      	sub	sp, #16
+ 8007ffc:	af00      	add	r7, sp, #0
+ 8007ffe:	6078      	str	r0, [r7, #4]
 	float maxTemp = 0;
- 8008008:	f04f 0300 	mov.w	r3, #0
- 800800c:	60fb      	str	r3, [r7, #12]
+ 8008000:	f04f 0300 	mov.w	r3, #0
+ 8008004:	60fb      	str	r3, [r7, #12]
 
 	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
- 800800e:	2300      	movs	r3, #0
- 8008010:	72fb      	strb	r3, [r7, #11]
- 8008012:	e01b      	b.n	800804c <FAN_SetMaxTempPacket+0x4c>
+ 8008006:	2300      	movs	r3, #0
+ 8008008:	72fb      	strb	r3, [r7, #11]
+ 800800a:	e01b      	b.n	8008044 <FAN_SetMaxTempPacket+0x4c>
 	{
 		if(maxTemp < data[i])
- 8008014:	7afb      	ldrb	r3, [r7, #11]
- 8008016:	687a      	ldr	r2, [r7, #4]
- 8008018:	4413      	add	r3, r2
- 800801a:	781b      	ldrb	r3, [r3, #0]
- 800801c:	ee07 3a90 	vmov	s15, r3
- 8008020:	eef8 7ae7 	vcvt.f32.s32	s15, s15
- 8008024:	ed97 7a03 	vldr	s14, [r7, #12]
- 8008028:	eeb4 7ae7 	vcmpe.f32	s14, s15
- 800802c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
- 8008030:	d509      	bpl.n	8008046 <FAN_SetMaxTempPacket+0x46>
+ 800800c:	7afb      	ldrb	r3, [r7, #11]
+ 800800e:	687a      	ldr	r2, [r7, #4]
+ 8008010:	4413      	add	r3, r2
+ 8008012:	781b      	ldrb	r3, [r3, #0]
+ 8008014:	ee07 3a90 	vmov	s15, r3
+ 8008018:	eef8 7ae7 	vcvt.f32.s32	s15, s15
+ 800801c:	ed97 7a03 	vldr	s14, [r7, #12]
+ 8008020:	eeb4 7ae7 	vcmpe.f32	s14, s15
+ 8008024:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+ 8008028:	d509      	bpl.n	800803e <FAN_SetMaxTempPacket+0x46>
 		{
 			maxTemp = data[i];
- 8008032:	7afb      	ldrb	r3, [r7, #11]
- 8008034:	687a      	ldr	r2, [r7, #4]
- 8008036:	4413      	add	r3, r2
- 8008038:	781b      	ldrb	r3, [r3, #0]
- 800803a:	ee07 3a90 	vmov	s15, r3
- 800803e:	eef8 7a67 	vcvt.f32.u32	s15, s15
- 8008042:	edc7 7a03 	vstr	s15, [r7, #12]
+ 800802a:	7afb      	ldrb	r3, [r7, #11]
+ 800802c:	687a      	ldr	r2, [r7, #4]
+ 800802e:	4413      	add	r3, r2
+ 8008030:	781b      	ldrb	r3, [r3, #0]
+ 8008032:	ee07 3a90 	vmov	s15, r3
+ 8008036:	eef8 7a67 	vcvt.f32.u32	s15, s15
+ 800803a:	edc7 7a03 	vstr	s15, [r7, #12]
 	for(uint8_t i = 0; i < NUMBER_OF_PACKET; ++i)
- 8008046:	7afb      	ldrb	r3, [r7, #11]
- 8008048:	3301      	adds	r3, #1
- 800804a:	72fb      	strb	r3, [r7, #11]
- 800804c:	7afb      	ldrb	r3, [r7, #11]
- 800804e:	2b08      	cmp	r3, #8
- 8008050:	d9e0      	bls.n	8008014 <FAN_SetMaxTempPacket+0x14>
+ 800803e:	7afb      	ldrb	r3, [r7, #11]
+ 8008040:	3301      	adds	r3, #1
+ 8008042:	72fb      	strb	r3, [r7, #11]
+ 8008044:	7afb      	ldrb	r3, [r7, #11]
+ 8008046:	2b08      	cmp	r3, #8
+ 8008048:	d9e0      	bls.n	800800c <FAN_SetMaxTempPacket+0x14>
 		}
 	}
 	//return (float)maxTemp;
 	return (float)maxTemp * TEMP_FACTOR + TEMP_OFFSET; //CHANGE IT WHEN TESTING WITH BMS;
- 8008052:	68f8      	ldr	r0, [r7, #12]
- 8008054:	f7f8 fa1c 	bl	8000490 <__aeabi_f2d>
- 8008058:	a30d      	add	r3, pc, #52	@ (adr r3, 8008090 <FAN_SetMaxTempPacket+0x90>)
- 800805a:	e9d3 2300 	ldrd	r2, r3, [r3]
- 800805e:	f7f8 fa6f 	bl	8000540 <__aeabi_dmul>
- 8008062:	4602      	mov	r2, r0
- 8008064:	460b      	mov	r3, r1
- 8008066:	4610      	mov	r0, r2
- 8008068:	4619      	mov	r1, r3
- 800806a:	a30b      	add	r3, pc, #44	@ (adr r3, 8008098 <FAN_SetMaxTempPacket+0x98>)
- 800806c:	e9d3 2300 	ldrd	r2, r3, [r3]
- 8008070:	f7f8 f8b0 	bl	80001d4 <__adddf3>
- 8008074:	4602      	mov	r2, r0
- 8008076:	460b      	mov	r3, r1
- 8008078:	4610      	mov	r0, r2
- 800807a:	4619      	mov	r1, r3
- 800807c:	f7f8 fc92 	bl	80009a4 <__aeabi_d2f>
- 8008080:	4603      	mov	r3, r0
- 8008082:	ee07 3a90 	vmov	s15, r3
+ 800804a:	68f8      	ldr	r0, [r7, #12]
+ 800804c:	f7f8 fa20 	bl	8000490 <__aeabi_f2d>
+ 8008050:	a30f      	add	r3, pc, #60	@ (adr r3, 8008090 <FAN_SetMaxTempPacket+0x98>)
+ 8008052:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 8008056:	f7f8 fa73 	bl	8000540 <__aeabi_dmul>
+ 800805a:	4602      	mov	r2, r0
+ 800805c:	460b      	mov	r3, r1
+ 800805e:	4610      	mov	r0, r2
+ 8008060:	4619      	mov	r1, r3
+ 8008062:	f04f 0200 	mov.w	r2, #0
+ 8008066:	f04f 0300 	mov.w	r3, #0
+ 800806a:	f7f8 f8b3 	bl	80001d4 <__adddf3>
+ 800806e:	4602      	mov	r2, r0
+ 8008070:	460b      	mov	r3, r1
+ 8008072:	4610      	mov	r0, r2
+ 8008074:	4619      	mov	r1, r3
+ 8008076:	f7f8 fc95 	bl	80009a4 <__aeabi_d2f>
+ 800807a:	4603      	mov	r3, r0
+ 800807c:	ee07 3a90 	vmov	s15, r3
 }
- 8008086:	eeb0 0a67 	vmov.f32	s0, s15
- 800808a:	3710      	adds	r7, #16
- 800808c:	46bd      	mov	sp, r7
- 800808e:	bd80      	pop	{r7, pc}
+ 8008080:	eeb0 0a67 	vmov.f32	s0, s15
+ 8008084:	3710      	adds	r7, #16
+ 8008086:	46bd      	mov	sp, r7
+ 8008088:	bd80      	pop	{r7, pc}
+ 800808a:	bf00      	nop
+ 800808c:	f3af 8000 	nop.w
  8008090:	41b328b7 	.word	0x41b328b7
  8008094:	3fd91926 	.word	0x3fd91926
- 8008098:	31f8a090 	.word	0x31f8a090
- 800809c:	4048e6e6 	.word	0x4048e6e6
 
-080080a0 <HAL_I2C_MasterRxCpltCallback>:
+08008098 <HAL_I2C_MasterRxCpltCallback>:
  * Only handles I2C1 — returns early for any other instance.
  *
  * @param hi2c  pointer to the I2C handle that triggered the callback
  */
 void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
- 80080a0:	b580      	push	{r7, lr}
- 80080a2:	b082      	sub	sp, #8
- 80080a4:	af00      	add	r7, sp, #0
- 80080a6:	6078      	str	r0, [r7, #4]
+ 8008098:	b580      	push	{r7, lr}
+ 800809a:	b082      	sub	sp, #8
+ 800809c:	af00      	add	r7, sp, #0
+ 800809e:	6078      	str	r0, [r7, #4]
     if (hi2c->Instance != I2C1)
- 80080a8:	687b      	ldr	r3, [r7, #4]
- 80080aa:	681b      	ldr	r3, [r3, #0]
- 80080ac:	4a06      	ldr	r2, [pc, #24]	@ (80080c8 <HAL_I2C_MasterRxCpltCallback+0x28>)
- 80080ae:	4293      	cmp	r3, r2
- 80080b0:	d105      	bne.n	80080be <HAL_I2C_MasterRxCpltCallback+0x1e>
+ 80080a0:	687b      	ldr	r3, [r7, #4]
+ 80080a2:	681b      	ldr	r3, [r3, #0]
+ 80080a4:	4a06      	ldr	r2, [pc, #24]	@ (80080c0 <HAL_I2C_MasterRxCpltCallback+0x28>)
+ 80080a6:	4293      	cmp	r3, r2
+ 80080a8:	d105      	bne.n	80080b6 <HAL_I2C_MasterRxCpltCallback+0x1e>
     {
         return;
     }
 
     AM2320_PrepareData();
- 80080b2:	f000 f91f 	bl	80082f4 <AM2320_PrepareData>
+ 80080aa:	f000 f91f 	bl	80082ec <AM2320_PrepareData>
     am2320State = AM2320_UPDATE_CAN;
- 80080b6:	4b05      	ldr	r3, [pc, #20]	@ (80080cc <HAL_I2C_MasterRxCpltCallback+0x2c>)
- 80080b8:	2206      	movs	r2, #6
- 80080ba:	701a      	strb	r2, [r3, #0]
- 80080bc:	e000      	b.n	80080c0 <HAL_I2C_MasterRxCpltCallback+0x20>
+ 80080ae:	4b05      	ldr	r3, [pc, #20]	@ (80080c4 <HAL_I2C_MasterRxCpltCallback+0x2c>)
+ 80080b0:	2206      	movs	r2, #6
+ 80080b2:	701a      	strb	r2, [r3, #0]
+ 80080b4:	e000      	b.n	80080b8 <HAL_I2C_MasterRxCpltCallback+0x20>
         return;
- 80080be:	bf00      	nop
+ 80080b6:	bf00      	nop
 }
- 80080c0:	3708      	adds	r7, #8
- 80080c2:	46bd      	mov	sp, r7
- 80080c4:	bd80      	pop	{r7, pc}
- 80080c6:	bf00      	nop
- 80080c8:	40005400 	.word	0x40005400
- 80080cc:	20000d2b 	.word	0x20000d2b
+ 80080b8:	3708      	adds	r7, #8
+ 80080ba:	46bd      	mov	sp, r7
+ 80080bc:	bd80      	pop	{r7, pc}
+ 80080be:	bf00      	nop
+ 80080c0:	40005400 	.word	0x40005400
+ 80080c4:	20000d29 	.word	0x20000d29
 
-080080d0 <HAL_I2C_MasterTxCpltCallback>:
+080080c8 <HAL_I2C_MasterTxCpltCallback>:
  * @brief HAL callback triggered when I2C DMA transmission completes.
  *
  * @param hi2c  pointer to the I2C handle that triggered the callback
  */
 void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
 {
- 80080d0:	b480      	push	{r7}
- 80080d2:	b083      	sub	sp, #12
- 80080d4:	af00      	add	r7, sp, #0
- 80080d6:	6078      	str	r0, [r7, #4]
+ 80080c8:	b480      	push	{r7}
+ 80080ca:	b083      	sub	sp, #12
+ 80080cc:	af00      	add	r7, sp, #0
+ 80080ce:	6078      	str	r0, [r7, #4]
     return;
- 80080d8:	bf00      	nop
+ 80080d0:	bf00      	nop
 }
- 80080da:	370c      	adds	r7, #12
- 80080dc:	46bd      	mov	sp, r7
- 80080de:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80080e2:	4770      	bx	lr
+ 80080d2:	370c      	adds	r7, #12
+ 80080d4:	46bd      	mov	sp, r7
+ 80080d6:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80080da:	4770      	bx	lr
 
-080080e4 <AM2320_Init>:
+080080dc <AM2320_Init>:
  *
  * Prepares three I2C frames: wake-up (empty write), measure command (0x03 0x00 0x04),
  * and read (8-byte receive buffer).
  */
 void AM2320_Init(void)
 {
- 80080e4:	b480      	push	{r7}
- 80080e6:	b083      	sub	sp, #12
- 80080e8:	af00      	add	r7, sp, #0
+ 80080dc:	b480      	push	{r7}
+ 80080de:	b083      	sub	sp, #12
+ 80080e0:	af00      	add	r7, sp, #0
     am2320State = AM2320_IDLE;
- 80080ea:	4b23      	ldr	r3, [pc, #140]	@ (8008178 <AM2320_Init+0x94>)
- 80080ec:	2200      	movs	r2, #0
- 80080ee:	701a      	strb	r2, [r3, #0]
+ 80080e2:	4b23      	ldr	r3, [pc, #140]	@ (8008170 <AM2320_Init+0x94>)
+ 80080e4:	2200      	movs	r2, #0
+ 80080e6:	701a      	strb	r2, [r3, #0]
 
     uint8_t measureCmd[3] = {0x03, 0x00, 0x04};
- 80080f0:	4a22      	ldr	r2, [pc, #136]	@ (800817c <AM2320_Init+0x98>)
- 80080f2:	1d3b      	adds	r3, r7, #4
- 80080f4:	6812      	ldr	r2, [r2, #0]
- 80080f6:	4611      	mov	r1, r2
- 80080f8:	8019      	strh	r1, [r3, #0]
- 80080fa:	3302      	adds	r3, #2
- 80080fc:	0c12      	lsrs	r2, r2, #16
- 80080fe:	701a      	strb	r2, [r3, #0]
+ 80080e8:	4a22      	ldr	r2, [pc, #136]	@ (8008174 <AM2320_Init+0x98>)
+ 80080ea:	1d3b      	adds	r3, r7, #4
+ 80080ec:	6812      	ldr	r2, [r2, #0]
+ 80080ee:	4611      	mov	r1, r2
+ 80080f0:	8019      	strh	r1, [r3, #0]
+ 80080f2:	3302      	adds	r3, #2
+ 80080f4:	0c12      	lsrs	r2, r2, #16
+ 80080f6:	701a      	strb	r2, [r3, #0]
     uint8_t empty[1] = {0};
- 8008100:	2300      	movs	r3, #0
- 8008102:	703b      	strb	r3, [r7, #0]
+ 80080f8:	2300      	movs	r3, #0
+ 80080fa:	703b      	strb	r3, [r7, #0]
 
     am2320WakeUp.hi2c = &hi2c1;
- 8008104:	4b1e      	ldr	r3, [pc, #120]	@ (8008180 <AM2320_Init+0x9c>)
- 8008106:	4a1f      	ldr	r2, [pc, #124]	@ (8008184 <AM2320_Init+0xa0>)
- 8008108:	601a      	str	r2, [r3, #0]
+ 80080fc:	4b1e      	ldr	r3, [pc, #120]	@ (8008178 <AM2320_Init+0x9c>)
+ 80080fe:	4a1f      	ldr	r2, [pc, #124]	@ (800817c <AM2320_Init+0xa0>)
+ 8008100:	601a      	str	r2, [r3, #0]
     am2320WakeUp.address = 0xB8;
- 800810a:	4b1d      	ldr	r3, [pc, #116]	@ (8008180 <AM2320_Init+0x9c>)
- 800810c:	22b8      	movs	r2, #184	@ 0xb8
- 800810e:	809a      	strh	r2, [r3, #4]
+ 8008102:	4b1d      	ldr	r3, [pc, #116]	@ (8008178 <AM2320_Init+0x9c>)
+ 8008104:	22b8      	movs	r2, #184	@ 0xb8
+ 8008106:	809a      	strh	r2, [r3, #4]
     am2320WakeUp.sizeData = 0;
- 8008110:	4b1b      	ldr	r3, [pc, #108]	@ (8008180 <AM2320_Init+0x9c>)
- 8008112:	2200      	movs	r2, #0
- 8008114:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
+ 8008108:	4b1b      	ldr	r3, [pc, #108]	@ (8008178 <AM2320_Init+0x9c>)
+ 800810a:	2200      	movs	r2, #0
+ 800810c:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
     am2320WakeUp.delayMs = 3;
- 8008118:	4b19      	ldr	r3, [pc, #100]	@ (8008180 <AM2320_Init+0x9c>)
- 800811a:	2203      	movs	r2, #3
- 800811c:	f883 202c 	strb.w	r2, [r3, #44]	@ 0x2c
+ 8008110:	4b19      	ldr	r3, [pc, #100]	@ (8008178 <AM2320_Init+0x9c>)
+ 8008112:	2203      	movs	r2, #3
+ 8008114:	f883 202c 	strb.w	r2, [r3, #44]	@ 0x2c
     memcpy(am2320WakeUp.data, empty, 1);
- 8008120:	783a      	ldrb	r2, [r7, #0]
- 8008122:	4b17      	ldr	r3, [pc, #92]	@ (8008180 <AM2320_Init+0x9c>)
- 8008124:	719a      	strb	r2, [r3, #6]
+ 8008118:	783a      	ldrb	r2, [r7, #0]
+ 800811a:	4b17      	ldr	r3, [pc, #92]	@ (8008178 <AM2320_Init+0x9c>)
+ 800811c:	719a      	strb	r2, [r3, #6]
 
     am2320Measure.hi2c = &hi2c1;
- 8008126:	4b18      	ldr	r3, [pc, #96]	@ (8008188 <AM2320_Init+0xa4>)
- 8008128:	4a16      	ldr	r2, [pc, #88]	@ (8008184 <AM2320_Init+0xa0>)
- 800812a:	601a      	str	r2, [r3, #0]
+ 800811e:	4b18      	ldr	r3, [pc, #96]	@ (8008180 <AM2320_Init+0xa4>)
+ 8008120:	4a16      	ldr	r2, [pc, #88]	@ (800817c <AM2320_Init+0xa0>)
+ 8008122:	601a      	str	r2, [r3, #0]
     am2320Measure.address = 0xB8;
- 800812c:	4b16      	ldr	r3, [pc, #88]	@ (8008188 <AM2320_Init+0xa4>)
- 800812e:	22b8      	movs	r2, #184	@ 0xb8
- 8008130:	809a      	strh	r2, [r3, #4]
+ 8008124:	4b16      	ldr	r3, [pc, #88]	@ (8008180 <AM2320_Init+0xa4>)
+ 8008126:	22b8      	movs	r2, #184	@ 0xb8
+ 8008128:	809a      	strh	r2, [r3, #4]
     am2320Measure.sizeData = 3;
- 8008132:	4b15      	ldr	r3, [pc, #84]	@ (8008188 <AM2320_Init+0xa4>)
- 8008134:	2203      	movs	r2, #3
- 8008136:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
+ 800812a:	4b15      	ldr	r3, [pc, #84]	@ (8008180 <AM2320_Init+0xa4>)
+ 800812c:	2203      	movs	r2, #3
+ 800812e:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
     am2320Measure.delayMs = 3;
- 800813a:	4b13      	ldr	r3, [pc, #76]	@ (8008188 <AM2320_Init+0xa4>)
- 800813c:	2203      	movs	r2, #3
- 800813e:	f883 202c 	strb.w	r2, [r3, #44]	@ 0x2c
+ 8008132:	4b13      	ldr	r3, [pc, #76]	@ (8008180 <AM2320_Init+0xa4>)
+ 8008134:	2203      	movs	r2, #3
+ 8008136:	f883 202c 	strb.w	r2, [r3, #44]	@ 0x2c
     memcpy(am2320Measure.data, measureCmd, 3);
- 8008142:	4b11      	ldr	r3, [pc, #68]	@ (8008188 <AM2320_Init+0xa4>)
- 8008144:	3306      	adds	r3, #6
- 8008146:	1d3a      	adds	r2, r7, #4
- 8008148:	8811      	ldrh	r1, [r2, #0]
- 800814a:	7892      	ldrb	r2, [r2, #2]
- 800814c:	8019      	strh	r1, [r3, #0]
- 800814e:	709a      	strb	r2, [r3, #2]
+ 800813a:	4b11      	ldr	r3, [pc, #68]	@ (8008180 <AM2320_Init+0xa4>)
+ 800813c:	3306      	adds	r3, #6
+ 800813e:	1d3a      	adds	r2, r7, #4
+ 8008140:	8811      	ldrh	r1, [r2, #0]
+ 8008142:	7892      	ldrb	r2, [r2, #2]
+ 8008144:	8019      	strh	r1, [r3, #0]
+ 8008146:	709a      	strb	r2, [r3, #2]
 
     am2320Read.hi2c = &hi2c1;
- 8008150:	4b0e      	ldr	r3, [pc, #56]	@ (800818c <AM2320_Init+0xa8>)
- 8008152:	4a0c      	ldr	r2, [pc, #48]	@ (8008184 <AM2320_Init+0xa0>)
- 8008154:	601a      	str	r2, [r3, #0]
+ 8008148:	4b0e      	ldr	r3, [pc, #56]	@ (8008184 <AM2320_Init+0xa8>)
+ 800814a:	4a0c      	ldr	r2, [pc, #48]	@ (800817c <AM2320_Init+0xa0>)
+ 800814c:	601a      	str	r2, [r3, #0]
     am2320Read.address = 0xB8;
- 8008156:	4b0d      	ldr	r3, [pc, #52]	@ (800818c <AM2320_Init+0xa8>)
- 8008158:	22b8      	movs	r2, #184	@ 0xb8
- 800815a:	809a      	strh	r2, [r3, #4]
+ 800814e:	4b0d      	ldr	r3, [pc, #52]	@ (8008184 <AM2320_Init+0xa8>)
+ 8008150:	22b8      	movs	r2, #184	@ 0xb8
+ 8008152:	809a      	strh	r2, [r3, #4]
     am2320Read.sizeData = 8;
- 800815c:	4b0b      	ldr	r3, [pc, #44]	@ (800818c <AM2320_Init+0xa8>)
- 800815e:	2208      	movs	r2, #8
- 8008160:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
+ 8008154:	4b0b      	ldr	r3, [pc, #44]	@ (8008184 <AM2320_Init+0xa8>)
+ 8008156:	2208      	movs	r2, #8
+ 8008158:	f883 2026 	strb.w	r2, [r3, #38]	@ 0x26
     am2320Read.delayMs = 2;
- 8008164:	4b09      	ldr	r3, [pc, #36]	@ (800818c <AM2320_Init+0xa8>)
- 8008166:	2202      	movs	r2, #2
- 8008168:	f883 202c 	strb.w	r2, [r3, #44]	@ 0x2c
+ 800815c:	4b09      	ldr	r3, [pc, #36]	@ (8008184 <AM2320_Init+0xa8>)
+ 800815e:	2202      	movs	r2, #2
+ 8008160:	f883 202c 	strb.w	r2, [r3, #44]	@ 0x2c
 }
- 800816c:	bf00      	nop
- 800816e:	370c      	adds	r7, #12
- 8008170:	46bd      	mov	sp, r7
- 8008172:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8008176:	4770      	bx	lr
- 8008178:	20000d2b 	.word	0x20000d2b
- 800817c:	08008898 	.word	0x08008898
- 8008180:	20000d30 	.word	0x20000d30
- 8008184:	20000054 	.word	0x20000054
- 8008188:	20000d60 	.word	0x20000d60
- 800818c:	20000d90 	.word	0x20000d90
+ 8008164:	bf00      	nop
+ 8008166:	370c      	adds	r7, #12
+ 8008168:	46bd      	mov	sp, r7
+ 800816a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800816e:	4770      	bx	lr
+ 8008170:	20000d29 	.word	0x20000d29
+ 8008174:	08008894 	.word	0x08008894
+ 8008178:	20000d30 	.word	0x20000d30
+ 800817c:	20000054 	.word	0x20000054
+ 8008180:	20000d60 	.word	0x20000d60
+ 8008184:	20000d90 	.word	0x20000d90
 
-08008190 <AM2320_StartMeasure>:
+08008188 <AM2320_StartMeasure>:
  * @brief Requests a new measurement if the sensor is idle and I2C is ready.
  *
  * Does nothing if a measurement is already in progress.
  */
 void AM2320_StartMeasure(void)
 {
- 8008190:	b580      	push	{r7, lr}
- 8008192:	af00      	add	r7, sp, #0
+ 8008188:	b580      	push	{r7, lr}
+ 800818a:	af00      	add	r7, sp, #0
     if (am2320State == AM2320_IDLE &&
- 8008194:	4b07      	ldr	r3, [pc, #28]	@ (80081b4 <AM2320_StartMeasure+0x24>)
- 8008196:	781b      	ldrb	r3, [r3, #0]
- 8008198:	2b00      	cmp	r3, #0
- 800819a:	d108      	bne.n	80081ae <AM2320_StartMeasure+0x1e>
+ 800818c:	4b07      	ldr	r3, [pc, #28]	@ (80081ac <AM2320_StartMeasure+0x24>)
+ 800818e:	781b      	ldrb	r3, [r3, #0]
+ 8008190:	2b00      	cmp	r3, #0
+ 8008192:	d108      	bne.n	80081a6 <AM2320_StartMeasure+0x1e>
         HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_READY)
- 800819c:	4806      	ldr	r0, [pc, #24]	@ (80081b8 <AM2320_StartMeasure+0x28>)
- 800819e:	f7fb f835 	bl	800320c <HAL_I2C_GetState>
- 80081a2:	4603      	mov	r3, r0
+ 8008194:	4806      	ldr	r0, [pc, #24]	@ (80081b0 <AM2320_StartMeasure+0x28>)
+ 8008196:	f7fb f839 	bl	800320c <HAL_I2C_GetState>
+ 800819a:	4603      	mov	r3, r0
     if (am2320State == AM2320_IDLE &&
- 80081a4:	2b20      	cmp	r3, #32
- 80081a6:	d102      	bne.n	80081ae <AM2320_StartMeasure+0x1e>
+ 800819c:	2b20      	cmp	r3, #32
+ 800819e:	d102      	bne.n	80081a6 <AM2320_StartMeasure+0x1e>
     {
         am2320State = AM2320_START;
- 80081a8:	4b02      	ldr	r3, [pc, #8]	@ (80081b4 <AM2320_StartMeasure+0x24>)
- 80081aa:	2201      	movs	r2, #1
- 80081ac:	701a      	strb	r2, [r3, #0]
+ 80081a0:	4b02      	ldr	r3, [pc, #8]	@ (80081ac <AM2320_StartMeasure+0x24>)
+ 80081a2:	2201      	movs	r2, #1
+ 80081a4:	701a      	strb	r2, [r3, #0]
     }
 }
- 80081ae:	bf00      	nop
- 80081b0:	bd80      	pop	{r7, pc}
- 80081b2:	bf00      	nop
- 80081b4:	20000d2b 	.word	0x20000d2b
- 80081b8:	20000054 	.word	0x20000054
+ 80081a6:	bf00      	nop
+ 80081a8:	bd80      	pop	{r7, pc}
+ 80081aa:	bf00      	nop
+ 80081ac:	20000d29 	.word	0x20000d29
+ 80081b0:	20000054 	.word	0x20000054
 
-080081bc <AM2320_GetTempHum>:
+080081b4 <AM2320_GetTempHum>:
  *
  * @param tempX10   pointer to store temperature * 10 (signed, degrees Celsius)
  * @param humX10    pointer to store relative humidity * 10 (unsigned, percent)
  */
 void AM2320_GetTempHum(int16_t* tempX10, uint16_t* humX10)
 {
- 80081bc:	b480      	push	{r7}
- 80081be:	b083      	sub	sp, #12
- 80081c0:	af00      	add	r7, sp, #0
- 80081c2:	6078      	str	r0, [r7, #4]
- 80081c4:	6039      	str	r1, [r7, #0]
+ 80081b4:	b480      	push	{r7}
+ 80081b6:	b083      	sub	sp, #12
+ 80081b8:	af00      	add	r7, sp, #0
+ 80081ba:	6078      	str	r0, [r7, #4]
+ 80081bc:	6039      	str	r1, [r7, #0]
     *tempX10 = am2320TempX10;
- 80081c6:	4b07      	ldr	r3, [pc, #28]	@ (80081e4 <AM2320_GetTempHum+0x28>)
- 80081c8:	f9b3 2000 	ldrsh.w	r2, [r3]
- 80081cc:	687b      	ldr	r3, [r7, #4]
- 80081ce:	801a      	strh	r2, [r3, #0]
+ 80081be:	4b07      	ldr	r3, [pc, #28]	@ (80081dc <AM2320_GetTempHum+0x28>)
+ 80081c0:	f9b3 2000 	ldrsh.w	r2, [r3]
+ 80081c4:	687b      	ldr	r3, [r7, #4]
+ 80081c6:	801a      	strh	r2, [r3, #0]
     *humX10 = am2320RhX10;
- 80081d0:	4b05      	ldr	r3, [pc, #20]	@ (80081e8 <AM2320_GetTempHum+0x2c>)
- 80081d2:	881a      	ldrh	r2, [r3, #0]
- 80081d4:	683b      	ldr	r3, [r7, #0]
- 80081d6:	801a      	strh	r2, [r3, #0]
+ 80081c8:	4b05      	ldr	r3, [pc, #20]	@ (80081e0 <AM2320_GetTempHum+0x2c>)
+ 80081ca:	881a      	ldrh	r2, [r3, #0]
+ 80081cc:	683b      	ldr	r3, [r7, #0]
+ 80081ce:	801a      	strh	r2, [r3, #0]
 }
- 80081d8:	bf00      	nop
- 80081da:	370c      	adds	r7, #12
- 80081dc:	46bd      	mov	sp, r7
- 80081de:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80081e2:	4770      	bx	lr
- 80081e4:	20000d2c 	.word	0x20000d2c
- 80081e8:	20000d2e 	.word	0x20000d2e
+ 80081d0:	bf00      	nop
+ 80081d2:	370c      	adds	r7, #12
+ 80081d4:	46bd      	mov	sp, r7
+ 80081d6:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80081da:	4770      	bx	lr
+ 80081dc:	20000d2a 	.word	0x20000d2a
+ 80081e0:	20000d2c 	.word	0x20000d2c
 
-080081ec <AM2320_StateMachine>:
+080081e4 <AM2320_StateMachine>:
  * @brief Advances the AM2320 state machine. Should be called periodically from the main loop.
  *
  * Drives the full measurement sequence: wake-up → measure command → data read → CAN update.
  */
 void AM2320_StateMachine(void)
 {
- 80081ec:	b580      	push	{r7, lr}
- 80081ee:	b082      	sub	sp, #8
- 80081f0:	af02      	add	r7, sp, #8
+ 80081e4:	b580      	push	{r7, lr}
+ 80081e6:	b082      	sub	sp, #8
+ 80081e8:	af02      	add	r7, sp, #8
     switch (am2320State)
- 80081f2:	4b39      	ldr	r3, [pc, #228]	@ (80082d8 <AM2320_StateMachine+0xec>)
- 80081f4:	781b      	ldrb	r3, [r3, #0]
- 80081f6:	3b01      	subs	r3, #1
- 80081f8:	2b05      	cmp	r3, #5
- 80081fa:	d86a      	bhi.n	80082d2 <AM2320_StateMachine+0xe6>
- 80081fc:	a201      	add	r2, pc, #4	@ (adr r2, 8008204 <AM2320_StateMachine+0x18>)
- 80081fe:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8008202:	bf00      	nop
- 8008204:	0800821d 	.word	0x0800821d
- 8008208:	0800822b 	.word	0x0800822b
- 800820c:	08008249 	.word	0x08008249
- 8008210:	08008263 	.word	0x08008263
- 8008214:	08008281 	.word	0x08008281
- 8008218:	0800829f 	.word	0x0800829f
+ 80081ea:	4b39      	ldr	r3, [pc, #228]	@ (80082d0 <AM2320_StateMachine+0xec>)
+ 80081ec:	781b      	ldrb	r3, [r3, #0]
+ 80081ee:	3b01      	subs	r3, #1
+ 80081f0:	2b05      	cmp	r3, #5
+ 80081f2:	d86a      	bhi.n	80082ca <AM2320_StateMachine+0xe6>
+ 80081f4:	a201      	add	r2, pc, #4	@ (adr r2, 80081fc <AM2320_StateMachine+0x18>)
+ 80081f6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80081fa:	bf00      	nop
+ 80081fc:	08008215 	.word	0x08008215
+ 8008200:	08008223 	.word	0x08008223
+ 8008204:	08008241 	.word	0x08008241
+ 8008208:	0800825b 	.word	0x0800825b
+ 800820c:	08008279 	.word	0x08008279
+ 8008210:	08008297 	.word	0x08008297
     {
         case AM2320_START:
             I2C_TransmitMessage(&am2320WakeUp);
- 800821c:	482f      	ldr	r0, [pc, #188]	@ (80082dc <AM2320_StateMachine+0xf0>)
- 800821e:	f000 f8eb 	bl	80083f8 <I2C_TransmitMessage>
+ 8008214:	482f      	ldr	r0, [pc, #188]	@ (80082d4 <AM2320_StateMachine+0xf0>)
+ 8008216:	f000 f8eb 	bl	80083f0 <I2C_TransmitMessage>
             am2320State = AM2320_DMA_END;
- 8008222:	4b2d      	ldr	r3, [pc, #180]	@ (80082d8 <AM2320_StateMachine+0xec>)
- 8008224:	2202      	movs	r2, #2
- 8008226:	701a      	strb	r2, [r3, #0]
+ 800821a:	4b2d      	ldr	r3, [pc, #180]	@ (80082d0 <AM2320_StateMachine+0xec>)
+ 800821c:	2202      	movs	r2, #2
+ 800821e:	701a      	strb	r2, [r3, #0]
             break;
- 8008228:	e053      	b.n	80082d2 <AM2320_StateMachine+0xe6>
+ 8008220:	e053      	b.n	80082ca <AM2320_StateMachine+0xe6>
 
         case AM2320_DMA_END:
         	if(HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_READY)
- 800822a:	482d      	ldr	r0, [pc, #180]	@ (80082e0 <AM2320_StateMachine+0xf4>)
- 800822c:	f7fa ffee 	bl	800320c <HAL_I2C_GetState>
- 8008230:	4603      	mov	r3, r0
- 8008232:	2b20      	cmp	r3, #32
- 8008234:	d146      	bne.n	80082c4 <AM2320_StateMachine+0xd8>
+ 8008222:	482d      	ldr	r0, [pc, #180]	@ (80082d8 <AM2320_StateMachine+0xf4>)
+ 8008224:	f7fa fff2 	bl	800320c <HAL_I2C_GetState>
+ 8008228:	4603      	mov	r3, r0
+ 800822a:	2b20      	cmp	r3, #32
+ 800822c:	d146      	bne.n	80082bc <AM2320_StateMachine+0xd8>
         	{
         		am2320WakeUp.lastTick = HAL_GetTick();
- 8008236:	f7f9 f9e7 	bl	8001608 <HAL_GetTick>
- 800823a:	4603      	mov	r3, r0
- 800823c:	4a27      	ldr	r2, [pc, #156]	@ (80082dc <AM2320_StateMachine+0xf0>)
- 800823e:	6293      	str	r3, [r2, #40]	@ 0x28
+ 800822e:	f7f9 f9eb 	bl	8001608 <HAL_GetTick>
+ 8008232:	4603      	mov	r3, r0
+ 8008234:	4a27      	ldr	r2, [pc, #156]	@ (80082d4 <AM2320_StateMachine+0xf0>)
+ 8008236:	6293      	str	r3, [r2, #40]	@ 0x28
         		am2320State = AM2320_WAKE_UP;
- 8008240:	4b25      	ldr	r3, [pc, #148]	@ (80082d8 <AM2320_StateMachine+0xec>)
- 8008242:	2203      	movs	r2, #3
- 8008244:	701a      	strb	r2, [r3, #0]
+ 8008238:	4b25      	ldr	r3, [pc, #148]	@ (80082d0 <AM2320_StateMachine+0xec>)
+ 800823a:	2203      	movs	r2, #3
+ 800823c:	701a      	strb	r2, [r3, #0]
         	}
         	break;
- 8008246:	e03d      	b.n	80082c4 <AM2320_StateMachine+0xd8>
+ 800823e:	e03d      	b.n	80082bc <AM2320_StateMachine+0xd8>
 
         case AM2320_WAKE_UP:
             if (AM2320_IsTime(&am2320WakeUp))
- 8008248:	4824      	ldr	r0, [pc, #144]	@ (80082dc <AM2320_StateMachine+0xf0>)
- 800824a:	f000 f893 	bl	8008374 <AM2320_IsTime>
- 800824e:	4603      	mov	r3, r0
- 8008250:	2b00      	cmp	r3, #0
- 8008252:	d039      	beq.n	80082c8 <AM2320_StateMachine+0xdc>
+ 8008240:	4824      	ldr	r0, [pc, #144]	@ (80082d4 <AM2320_StateMachine+0xf0>)
+ 8008242:	f000 f893 	bl	800836c <AM2320_IsTime>
+ 8008246:	4603      	mov	r3, r0
+ 8008248:	2b00      	cmp	r3, #0
+ 800824a:	d039      	beq.n	80082c0 <AM2320_StateMachine+0xdc>
             {
                 I2C_TransmitMessage(&am2320Measure);
- 8008254:	4823      	ldr	r0, [pc, #140]	@ (80082e4 <AM2320_StateMachine+0xf8>)
- 8008256:	f000 f8cf 	bl	80083f8 <I2C_TransmitMessage>
+ 800824c:	4823      	ldr	r0, [pc, #140]	@ (80082dc <AM2320_StateMachine+0xf8>)
+ 800824e:	f000 f8cf 	bl	80083f0 <I2C_TransmitMessage>
                 am2320State = AM2320_MEASURE;
- 800825a:	4b1f      	ldr	r3, [pc, #124]	@ (80082d8 <AM2320_StateMachine+0xec>)
- 800825c:	2204      	movs	r2, #4
- 800825e:	701a      	strb	r2, [r3, #0]
+ 8008252:	4b1f      	ldr	r3, [pc, #124]	@ (80082d0 <AM2320_StateMachine+0xec>)
+ 8008254:	2204      	movs	r2, #4
+ 8008256:	701a      	strb	r2, [r3, #0]
             }
             break;
- 8008260:	e032      	b.n	80082c8 <AM2320_StateMachine+0xdc>
+ 8008258:	e032      	b.n	80082c0 <AM2320_StateMachine+0xdc>
 
         case AM2320_MEASURE:
             if (HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_READY)
- 8008262:	481f      	ldr	r0, [pc, #124]	@ (80082e0 <AM2320_StateMachine+0xf4>)
- 8008264:	f7fa ffd2 	bl	800320c <HAL_I2C_GetState>
- 8008268:	4603      	mov	r3, r0
- 800826a:	2b20      	cmp	r3, #32
- 800826c:	d12e      	bne.n	80082cc <AM2320_StateMachine+0xe0>
+ 800825a:	481f      	ldr	r0, [pc, #124]	@ (80082d8 <AM2320_StateMachine+0xf4>)
+ 800825c:	f7fa ffd6 	bl	800320c <HAL_I2C_GetState>
+ 8008260:	4603      	mov	r3, r0
+ 8008262:	2b20      	cmp	r3, #32
+ 8008264:	d12e      	bne.n	80082c4 <AM2320_StateMachine+0xe0>
             {
                 am2320Measure.lastTick = HAL_GetTick();
- 800826e:	f7f9 f9cb 	bl	8001608 <HAL_GetTick>
- 8008272:	4603      	mov	r3, r0
- 8008274:	4a1b      	ldr	r2, [pc, #108]	@ (80082e4 <AM2320_StateMachine+0xf8>)
- 8008276:	6293      	str	r3, [r2, #40]	@ 0x28
+ 8008266:	f7f9 f9cf 	bl	8001608 <HAL_GetTick>
+ 800826a:	4603      	mov	r3, r0
+ 800826c:	4a1b      	ldr	r2, [pc, #108]	@ (80082dc <AM2320_StateMachine+0xf8>)
+ 800826e:	6293      	str	r3, [r2, #40]	@ 0x28
                 am2320State = AM2320_DATA_READY;
- 8008278:	4b17      	ldr	r3, [pc, #92]	@ (80082d8 <AM2320_StateMachine+0xec>)
- 800827a:	2205      	movs	r2, #5
- 800827c:	701a      	strb	r2, [r3, #0]
+ 8008270:	4b17      	ldr	r3, [pc, #92]	@ (80082d0 <AM2320_StateMachine+0xec>)
+ 8008272:	2205      	movs	r2, #5
+ 8008274:	701a      	strb	r2, [r3, #0]
             }
             break;
- 800827e:	e025      	b.n	80082cc <AM2320_StateMachine+0xe0>
+ 8008276:	e025      	b.n	80082c4 <AM2320_StateMachine+0xe0>
 
         case AM2320_DATA_READY:
             if (AM2320_IsTime(&am2320Measure))
- 8008280:	4818      	ldr	r0, [pc, #96]	@ (80082e4 <AM2320_StateMachine+0xf8>)
- 8008282:	f000 f877 	bl	8008374 <AM2320_IsTime>
- 8008286:	4603      	mov	r3, r0
- 8008288:	2b00      	cmp	r3, #0
- 800828a:	d021      	beq.n	80082d0 <AM2320_StateMachine+0xe4>
+ 8008278:	4818      	ldr	r0, [pc, #96]	@ (80082dc <AM2320_StateMachine+0xf8>)
+ 800827a:	f000 f877 	bl	800836c <AM2320_IsTime>
+ 800827e:	4603      	mov	r3, r0
+ 8008280:	2b00      	cmp	r3, #0
+ 8008282:	d021      	beq.n	80082c8 <AM2320_StateMachine+0xe4>
             {
                 am2320Read.lastTick = HAL_GetTick();
- 800828c:	f7f9 f9bc 	bl	8001608 <HAL_GetTick>
- 8008290:	4603      	mov	r3, r0
- 8008292:	4a15      	ldr	r2, [pc, #84]	@ (80082e8 <AM2320_StateMachine+0xfc>)
- 8008294:	6293      	str	r3, [r2, #40]	@ 0x28
+ 8008284:	f7f9 f9c0 	bl	8001608 <HAL_GetTick>
+ 8008288:	4603      	mov	r3, r0
+ 800828a:	4a15      	ldr	r2, [pc, #84]	@ (80082e0 <AM2320_StateMachine+0xfc>)
+ 800828c:	6293      	str	r3, [r2, #40]	@ 0x28
                 I2C_ReceiveMessage(&am2320Read);
- 8008296:	4814      	ldr	r0, [pc, #80]	@ (80082e8 <AM2320_StateMachine+0xfc>)
- 8008298:	f000 f8c8 	bl	800842c <I2C_ReceiveMessage>
+ 800828e:	4814      	ldr	r0, [pc, #80]	@ (80082e0 <AM2320_StateMachine+0xfc>)
+ 8008290:	f000 f8c8 	bl	8008424 <I2C_ReceiveMessage>
             }
             break;
- 800829c:	e018      	b.n	80082d0 <AM2320_StateMachine+0xe4>
+ 8008294:	e018      	b.n	80082c8 <AM2320_StateMachine+0xe4>
 
         case AM2320_UPDATE_CAN:
         	CAN_RemoveScheduledMsg(AM2320_CAN_ID_SENSOR, &canBufferTx);             /* Remove stale entry before re-adding with fresh data */
- 800829e:	4913      	ldr	r1, [pc, #76]	@ (80082ec <AM2320_StateMachine+0x100>)
- 80082a0:	f240 5001 	movw	r0, #1281	@ 0x501
- 80082a4:	f7ff f9db 	bl	800765e <CAN_RemoveScheduledMsg>
+ 8008296:	4913      	ldr	r1, [pc, #76]	@ (80082e4 <AM2320_StateMachine+0x100>)
+ 8008298:	f240 5001 	movw	r0, #1281	@ 0x501
+ 800829c:	f7ff f9df 	bl	800765e <CAN_RemoveScheduledMsg>
 
         	CAN_WriteFrame(&canBufferTx,
- 80082a8:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
- 80082ac:	9300      	str	r3, [sp, #0]
- 80082ae:	4b10      	ldr	r3, [pc, #64]	@ (80082f0 <AM2320_StateMachine+0x104>)
- 80082b0:	2204      	movs	r2, #4
- 80082b2:	f240 5101 	movw	r1, #1281	@ 0x501
- 80082b6:	480d      	ldr	r0, [pc, #52]	@ (80082ec <AM2320_StateMachine+0x100>)
- 80082b8:	f7ff fbf4 	bl	8007aa4 <CAN_WriteFrame>
+ 80082a0:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
+ 80082a4:	9300      	str	r3, [sp, #0]
+ 80082a6:	4b10      	ldr	r3, [pc, #64]	@ (80082e8 <AM2320_StateMachine+0x104>)
+ 80082a8:	2204      	movs	r2, #4
+ 80082aa:	f240 5101 	movw	r1, #1281	@ 0x501
+ 80082ae:	480d      	ldr	r0, [pc, #52]	@ (80082e4 <AM2320_StateMachine+0x100>)
+ 80082b0:	f7ff fbf8 	bl	8007aa4 <CAN_WriteFrame>
             				AM2320_CAN_ID_SENSOR,
                             AM2320_TEMP_RH_BYTES,
                             AM2320_FetchTempRh,
                             AM2320_MEASURE_PERIOD_MS);
 
             am2320State = AM2320_IDLE;
- 80082bc:	4b06      	ldr	r3, [pc, #24]	@ (80082d8 <AM2320_StateMachine+0xec>)
- 80082be:	2200      	movs	r2, #0
- 80082c0:	701a      	strb	r2, [r3, #0]
+ 80082b4:	4b06      	ldr	r3, [pc, #24]	@ (80082d0 <AM2320_StateMachine+0xec>)
+ 80082b6:	2200      	movs	r2, #0
+ 80082b8:	701a      	strb	r2, [r3, #0]
             break;
- 80082c2:	e006      	b.n	80082d2 <AM2320_StateMachine+0xe6>
+ 80082ba:	e006      	b.n	80082ca <AM2320_StateMachine+0xe6>
         	break;
+ 80082bc:	bf00      	nop
+ 80082be:	e004      	b.n	80082ca <AM2320_StateMachine+0xe6>
+            break;
+ 80082c0:	bf00      	nop
+ 80082c2:	e002      	b.n	80082ca <AM2320_StateMachine+0xe6>
+            break;
  80082c4:	bf00      	nop
- 80082c6:	e004      	b.n	80082d2 <AM2320_StateMachine+0xe6>
+ 80082c6:	e000      	b.n	80082ca <AM2320_StateMachine+0xe6>
             break;
  80082c8:	bf00      	nop
- 80082ca:	e002      	b.n	80082d2 <AM2320_StateMachine+0xe6>
-            break;
- 80082cc:	bf00      	nop
- 80082ce:	e000      	b.n	80082d2 <AM2320_StateMachine+0xe6>
-            break;
- 80082d0:	bf00      	nop
     }
 }
- 80082d2:	bf00      	nop
- 80082d4:	46bd      	mov	sp, r7
- 80082d6:	bd80      	pop	{r7, pc}
- 80082d8:	20000d2b 	.word	0x20000d2b
- 80082dc:	20000d30 	.word	0x20000d30
- 80082e0:	20000054 	.word	0x20000054
- 80082e4:	20000d60 	.word	0x20000d60
- 80082e8:	20000d90 	.word	0x20000d90
- 80082ec:	200006e8 	.word	0x200006e8
- 80082f0:	080083a1 	.word	0x080083a1
+ 80082ca:	bf00      	nop
+ 80082cc:	46bd      	mov	sp, r7
+ 80082ce:	bd80      	pop	{r7, pc}
+ 80082d0:	20000d29 	.word	0x20000d29
+ 80082d4:	20000d30 	.word	0x20000d30
+ 80082d8:	20000054 	.word	0x20000054
+ 80082dc:	20000d60 	.word	0x20000d60
+ 80082e0:	20000d90 	.word	0x20000d90
+ 80082e4:	200006e8 	.word	0x200006e8
+ 80082e8:	08008399 	.word	0x08008399
 
-080082f4 <AM2320_PrepareData>:
+080082ec <AM2320_PrepareData>:
  * AM2320 response layout (bytes 2-5 of 8-byte frame):
  * - byte 2-3: raw temperature (MSB first, bit 15 = sign)
  * - byte 4-5: raw humidity (MSB first)
  */
 static void AM2320_PrepareData(void)
 {
- 80082f4:	b480      	push	{r7}
- 80082f6:	b083      	sub	sp, #12
- 80082f8:	af00      	add	r7, sp, #0
+ 80082ec:	b480      	push	{r7}
+ 80082ee:	b083      	sub	sp, #12
+ 80082f0:	af00      	add	r7, sp, #0
     uint8_t* data = am2320Read.data;
- 80082fa:	4b1b      	ldr	r3, [pc, #108]	@ (8008368 <AM2320_PrepareData+0x74>)
- 80082fc:	607b      	str	r3, [r7, #4]
+ 80082f2:	4b1b      	ldr	r3, [pc, #108]	@ (8008360 <AM2320_PrepareData+0x74>)
+ 80082f4:	607b      	str	r3, [r7, #4]
 
     am2320RhX10 = (uint16_t)(data[2] << 8 | data[3]);
- 80082fe:	687b      	ldr	r3, [r7, #4]
- 8008300:	3302      	adds	r3, #2
- 8008302:	781b      	ldrb	r3, [r3, #0]
- 8008304:	b21b      	sxth	r3, r3
- 8008306:	021b      	lsls	r3, r3, #8
- 8008308:	b21a      	sxth	r2, r3
- 800830a:	687b      	ldr	r3, [r7, #4]
- 800830c:	3303      	adds	r3, #3
- 800830e:	781b      	ldrb	r3, [r3, #0]
- 8008310:	b21b      	sxth	r3, r3
- 8008312:	4313      	orrs	r3, r2
- 8008314:	b21b      	sxth	r3, r3
- 8008316:	b29a      	uxth	r2, r3
- 8008318:	4b14      	ldr	r3, [pc, #80]	@ (800836c <AM2320_PrepareData+0x78>)
- 800831a:	801a      	strh	r2, [r3, #0]
+ 80082f6:	687b      	ldr	r3, [r7, #4]
+ 80082f8:	3302      	adds	r3, #2
+ 80082fa:	781b      	ldrb	r3, [r3, #0]
+ 80082fc:	b21b      	sxth	r3, r3
+ 80082fe:	021b      	lsls	r3, r3, #8
+ 8008300:	b21a      	sxth	r2, r3
+ 8008302:	687b      	ldr	r3, [r7, #4]
+ 8008304:	3303      	adds	r3, #3
+ 8008306:	781b      	ldrb	r3, [r3, #0]
+ 8008308:	b21b      	sxth	r3, r3
+ 800830a:	4313      	orrs	r3, r2
+ 800830c:	b21b      	sxth	r3, r3
+ 800830e:	b29a      	uxth	r2, r3
+ 8008310:	4b14      	ldr	r3, [pc, #80]	@ (8008364 <AM2320_PrepareData+0x78>)
+ 8008312:	801a      	strh	r2, [r3, #0]
 
     uint16_t rawTemp = (uint16_t)(data[4] << 8 | data[5]);
- 800831c:	687b      	ldr	r3, [r7, #4]
- 800831e:	3304      	adds	r3, #4
- 8008320:	781b      	ldrb	r3, [r3, #0]
- 8008322:	b21b      	sxth	r3, r3
- 8008324:	021b      	lsls	r3, r3, #8
- 8008326:	b21a      	sxth	r2, r3
- 8008328:	687b      	ldr	r3, [r7, #4]
- 800832a:	3305      	adds	r3, #5
- 800832c:	781b      	ldrb	r3, [r3, #0]
- 800832e:	b21b      	sxth	r3, r3
- 8008330:	4313      	orrs	r3, r2
- 8008332:	b21b      	sxth	r3, r3
- 8008334:	807b      	strh	r3, [r7, #2]
+ 8008314:	687b      	ldr	r3, [r7, #4]
+ 8008316:	3304      	adds	r3, #4
+ 8008318:	781b      	ldrb	r3, [r3, #0]
+ 800831a:	b21b      	sxth	r3, r3
+ 800831c:	021b      	lsls	r3, r3, #8
+ 800831e:	b21a      	sxth	r2, r3
+ 8008320:	687b      	ldr	r3, [r7, #4]
+ 8008322:	3305      	adds	r3, #5
+ 8008324:	781b      	ldrb	r3, [r3, #0]
+ 8008326:	b21b      	sxth	r3, r3
+ 8008328:	4313      	orrs	r3, r2
+ 800832a:	b21b      	sxth	r3, r3
+ 800832c:	807b      	strh	r3, [r7, #2]
 
     if (rawTemp & 0x8000)
- 8008336:	f9b7 3002 	ldrsh.w	r3, [r7, #2]
- 800833a:	2b00      	cmp	r3, #0
- 800833c:	da0a      	bge.n	8008354 <AM2320_PrepareData+0x60>
+ 800832e:	f9b7 3002 	ldrsh.w	r3, [r7, #2]
+ 8008332:	2b00      	cmp	r3, #0
+ 8008334:	da0a      	bge.n	800834c <AM2320_PrepareData+0x60>
     {
         rawTemp &= 0x7FFF;
- 800833e:	887b      	ldrh	r3, [r7, #2]
- 8008340:	f3c3 030e 	ubfx	r3, r3, #0, #15
- 8008344:	807b      	strh	r3, [r7, #2]
+ 8008336:	887b      	ldrh	r3, [r7, #2]
+ 8008338:	f3c3 030e 	ubfx	r3, r3, #0, #15
+ 800833c:	807b      	strh	r3, [r7, #2]
         am2320TempX10 = -(int16_t)rawTemp;
- 8008346:	887b      	ldrh	r3, [r7, #2]
- 8008348:	425b      	negs	r3, r3
- 800834a:	b29b      	uxth	r3, r3
- 800834c:	b21a      	sxth	r2, r3
- 800834e:	4b08      	ldr	r3, [pc, #32]	@ (8008370 <AM2320_PrepareData+0x7c>)
- 8008350:	801a      	strh	r2, [r3, #0]
+ 800833e:	887b      	ldrh	r3, [r7, #2]
+ 8008340:	425b      	negs	r3, r3
+ 8008342:	b29b      	uxth	r3, r3
+ 8008344:	b21a      	sxth	r2, r3
+ 8008346:	4b08      	ldr	r3, [pc, #32]	@ (8008368 <AM2320_PrepareData+0x7c>)
+ 8008348:	801a      	strh	r2, [r3, #0]
     }
     else
     {
         am2320TempX10 = (int16_t)rawTemp;
     }
 }
- 8008352:	e003      	b.n	800835c <AM2320_PrepareData+0x68>
+ 800834a:	e003      	b.n	8008354 <AM2320_PrepareData+0x68>
         am2320TempX10 = (int16_t)rawTemp;
- 8008354:	f9b7 2002 	ldrsh.w	r2, [r7, #2]
- 8008358:	4b05      	ldr	r3, [pc, #20]	@ (8008370 <AM2320_PrepareData+0x7c>)
- 800835a:	801a      	strh	r2, [r3, #0]
+ 800834c:	f9b7 2002 	ldrsh.w	r2, [r7, #2]
+ 8008350:	4b05      	ldr	r3, [pc, #20]	@ (8008368 <AM2320_PrepareData+0x7c>)
+ 8008352:	801a      	strh	r2, [r3, #0]
 }
- 800835c:	bf00      	nop
- 800835e:	370c      	adds	r7, #12
- 8008360:	46bd      	mov	sp, r7
- 8008362:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8008366:	4770      	bx	lr
- 8008368:	20000d96 	.word	0x20000d96
- 800836c:	20000d2e 	.word	0x20000d2e
- 8008370:	20000d2c 	.word	0x20000d2c
+ 8008354:	bf00      	nop
+ 8008356:	370c      	adds	r7, #12
+ 8008358:	46bd      	mov	sp, r7
+ 800835a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800835e:	4770      	bx	lr
+ 8008360:	20000d96 	.word	0x20000d96
+ 8008364:	20000d2c 	.word	0x20000d2c
+ 8008368:	20000d2a 	.word	0x20000d2a
 
-08008374 <AM2320_IsTime>:
+0800836c <AM2320_IsTime>:
  *
  * @param frame     pointer to the frame whose delayMs and lastTick are checked
  * @retval true if enough time has passed, false otherwise
  */
 static bool AM2320_IsTime(const struct I2C_frame* frame)
 {
- 8008374:	b580      	push	{r7, lr}
- 8008376:	b082      	sub	sp, #8
- 8008378:	af00      	add	r7, sp, #0
- 800837a:	6078      	str	r0, [r7, #4]
+ 800836c:	b580      	push	{r7, lr}
+ 800836e:	b082      	sub	sp, #8
+ 8008370:	af00      	add	r7, sp, #0
+ 8008372:	6078      	str	r0, [r7, #4]
     return (HAL_GetTick() - frame->lastTick) >= frame->delayMs;
- 800837c:	f7f9 f944 	bl	8001608 <HAL_GetTick>
- 8008380:	4602      	mov	r2, r0
- 8008382:	687b      	ldr	r3, [r7, #4]
- 8008384:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
- 8008386:	1ad3      	subs	r3, r2, r3
- 8008388:	687a      	ldr	r2, [r7, #4]
- 800838a:	f892 202c 	ldrb.w	r2, [r2, #44]	@ 0x2c
- 800838e:	4293      	cmp	r3, r2
- 8008390:	bf2c      	ite	cs
- 8008392:	2301      	movcs	r3, #1
- 8008394:	2300      	movcc	r3, #0
- 8008396:	b2db      	uxtb	r3, r3
+ 8008374:	f7f9 f948 	bl	8001608 <HAL_GetTick>
+ 8008378:	4602      	mov	r2, r0
+ 800837a:	687b      	ldr	r3, [r7, #4]
+ 800837c:	6a9b      	ldr	r3, [r3, #40]	@ 0x28
+ 800837e:	1ad3      	subs	r3, r2, r3
+ 8008380:	687a      	ldr	r2, [r7, #4]
+ 8008382:	f892 202c 	ldrb.w	r2, [r2, #44]	@ 0x2c
+ 8008386:	4293      	cmp	r3, r2
+ 8008388:	bf2c      	ite	cs
+ 800838a:	2301      	movcs	r3, #1
+ 800838c:	2300      	movcc	r3, #0
+ 800838e:	b2db      	uxtb	r3, r3
 }
- 8008398:	4618      	mov	r0, r3
- 800839a:	3708      	adds	r7, #8
- 800839c:	46bd      	mov	sp, r7
- 800839e:	bd80      	pop	{r7, pc}
+ 8008390:	4618      	mov	r0, r3
+ 8008392:	3708      	adds	r7, #8
+ 8008394:	46bd      	mov	sp, r7
+ 8008396:	bd80      	pop	{r7, pc}
 
-080083a0 <AM2320_FetchTempRh>:
+08008398 <AM2320_FetchTempRh>:
  * Byte layout: [tempHigh, tempLow, humHigh, humLow]
  *
  * @param data  pointer to the 4-byte output buffer
  */
 static void AM2320_FetchTempRh(uint8_t* const data)
 {
- 80083a0:	b480      	push	{r7}
- 80083a2:	b083      	sub	sp, #12
- 80083a4:	af00      	add	r7, sp, #0
- 80083a6:	6078      	str	r0, [r7, #4]
+ 8008398:	b480      	push	{r7}
+ 800839a:	b083      	sub	sp, #12
+ 800839c:	af00      	add	r7, sp, #0
+ 800839e:	6078      	str	r0, [r7, #4]
     data[0] = (uint8_t)(am2320TempX10 >> 8);
- 80083a8:	4b11      	ldr	r3, [pc, #68]	@ (80083f0 <AM2320_FetchTempRh+0x50>)
- 80083aa:	f9b3 3000 	ldrsh.w	r3, [r3]
- 80083ae:	121b      	asrs	r3, r3, #8
- 80083b0:	b21b      	sxth	r3, r3
- 80083b2:	b2da      	uxtb	r2, r3
- 80083b4:	687b      	ldr	r3, [r7, #4]
- 80083b6:	701a      	strb	r2, [r3, #0]
+ 80083a0:	4b11      	ldr	r3, [pc, #68]	@ (80083e8 <AM2320_FetchTempRh+0x50>)
+ 80083a2:	f9b3 3000 	ldrsh.w	r3, [r3]
+ 80083a6:	121b      	asrs	r3, r3, #8
+ 80083a8:	b21b      	sxth	r3, r3
+ 80083aa:	b2da      	uxtb	r2, r3
+ 80083ac:	687b      	ldr	r3, [r7, #4]
+ 80083ae:	701a      	strb	r2, [r3, #0]
     data[1] = (uint8_t)(am2320TempX10);
- 80083b8:	4b0d      	ldr	r3, [pc, #52]	@ (80083f0 <AM2320_FetchTempRh+0x50>)
- 80083ba:	f9b3 2000 	ldrsh.w	r2, [r3]
- 80083be:	687b      	ldr	r3, [r7, #4]
- 80083c0:	3301      	adds	r3, #1
- 80083c2:	b2d2      	uxtb	r2, r2
- 80083c4:	701a      	strb	r2, [r3, #0]
+ 80083b0:	4b0d      	ldr	r3, [pc, #52]	@ (80083e8 <AM2320_FetchTempRh+0x50>)
+ 80083b2:	f9b3 2000 	ldrsh.w	r2, [r3]
+ 80083b6:	687b      	ldr	r3, [r7, #4]
+ 80083b8:	3301      	adds	r3, #1
+ 80083ba:	b2d2      	uxtb	r2, r2
+ 80083bc:	701a      	strb	r2, [r3, #0]
 
     data[2] = (uint8_t)(am2320RhX10 >> 8);
- 80083c6:	4b0b      	ldr	r3, [pc, #44]	@ (80083f4 <AM2320_FetchTempRh+0x54>)
- 80083c8:	881b      	ldrh	r3, [r3, #0]
- 80083ca:	0a1b      	lsrs	r3, r3, #8
- 80083cc:	b29a      	uxth	r2, r3
- 80083ce:	687b      	ldr	r3, [r7, #4]
- 80083d0:	3302      	adds	r3, #2
- 80083d2:	b2d2      	uxtb	r2, r2
- 80083d4:	701a      	strb	r2, [r3, #0]
+ 80083be:	4b0b      	ldr	r3, [pc, #44]	@ (80083ec <AM2320_FetchTempRh+0x54>)
+ 80083c0:	881b      	ldrh	r3, [r3, #0]
+ 80083c2:	0a1b      	lsrs	r3, r3, #8
+ 80083c4:	b29a      	uxth	r2, r3
+ 80083c6:	687b      	ldr	r3, [r7, #4]
+ 80083c8:	3302      	adds	r3, #2
+ 80083ca:	b2d2      	uxtb	r2, r2
+ 80083cc:	701a      	strb	r2, [r3, #0]
     data[3] = (uint8_t)(am2320RhX10);
- 80083d6:	4b07      	ldr	r3, [pc, #28]	@ (80083f4 <AM2320_FetchTempRh+0x54>)
- 80083d8:	881a      	ldrh	r2, [r3, #0]
- 80083da:	687b      	ldr	r3, [r7, #4]
- 80083dc:	3303      	adds	r3, #3
- 80083de:	b2d2      	uxtb	r2, r2
- 80083e0:	701a      	strb	r2, [r3, #0]
+ 80083ce:	4b07      	ldr	r3, [pc, #28]	@ (80083ec <AM2320_FetchTempRh+0x54>)
+ 80083d0:	881a      	ldrh	r2, [r3, #0]
+ 80083d2:	687b      	ldr	r3, [r7, #4]
+ 80083d4:	3303      	adds	r3, #3
+ 80083d6:	b2d2      	uxtb	r2, r2
+ 80083d8:	701a      	strb	r2, [r3, #0]
 }
- 80083e2:	bf00      	nop
- 80083e4:	370c      	adds	r7, #12
- 80083e6:	46bd      	mov	sp, r7
- 80083e8:	f85d 7b04 	ldr.w	r7, [sp], #4
- 80083ec:	4770      	bx	lr
- 80083ee:	bf00      	nop
- 80083f0:	20000d2c 	.word	0x20000d2c
- 80083f4:	20000d2e 	.word	0x20000d2e
+ 80083da:	bf00      	nop
+ 80083dc:	370c      	adds	r7, #12
+ 80083de:	46bd      	mov	sp, r7
+ 80083e0:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 80083e4:	4770      	bx	lr
+ 80083e6:	bf00      	nop
+ 80083e8:	20000d2a 	.word	0x20000d2a
+ 80083ec:	20000d2c 	.word	0x20000d2c
 
-080083f8 <I2C_TransmitMessage>:
+080083f0 <I2C_TransmitMessage>:
  *
  * @param frame     pointer to the I2C frame to transmit
  * @retval HAL_StatusTypeDef result of the DMA transmit call
  */
 static HAL_StatusTypeDef I2C_TransmitMessage(struct I2C_frame* frame)
 {
- 80083f8:	b580      	push	{r7, lr}
- 80083fa:	b082      	sub	sp, #8
- 80083fc:	af00      	add	r7, sp, #0
- 80083fe:	6078      	str	r0, [r7, #4]
+ 80083f0:	b580      	push	{r7, lr}
+ 80083f2:	b082      	sub	sp, #8
+ 80083f4:	af00      	add	r7, sp, #0
+ 80083f6:	6078      	str	r0, [r7, #4]
     if (frame->address <= 0x7F)
- 8008400:	687b      	ldr	r3, [r7, #4]
- 8008402:	889b      	ldrh	r3, [r3, #4]
- 8008404:	2b7f      	cmp	r3, #127	@ 0x7f
- 8008406:	d801      	bhi.n	800840c <I2C_TransmitMessage+0x14>
+ 80083f8:	687b      	ldr	r3, [r7, #4]
+ 80083fa:	889b      	ldrh	r3, [r3, #4]
+ 80083fc:	2b7f      	cmp	r3, #127	@ 0x7f
+ 80083fe:	d801      	bhi.n	8008404 <I2C_TransmitMessage+0x14>
     {
         return HAL_ERROR;
- 8008408:	2301      	movs	r3, #1
- 800840a:	e00b      	b.n	8008424 <I2C_TransmitMessage+0x2c>
+ 8008400:	2301      	movs	r3, #1
+ 8008402:	e00b      	b.n	800841c <I2C_TransmitMessage+0x2c>
     }
 
     return HAL_I2C_Master_Transmit_DMA(
- 800840c:	687b      	ldr	r3, [r7, #4]
- 800840e:	6818      	ldr	r0, [r3, #0]
- 8008410:	687b      	ldr	r3, [r7, #4]
- 8008412:	8899      	ldrh	r1, [r3, #4]
+ 8008404:	687b      	ldr	r3, [r7, #4]
+ 8008406:	6818      	ldr	r0, [r3, #0]
+ 8008408:	687b      	ldr	r3, [r7, #4]
+ 800840a:	8899      	ldrh	r1, [r3, #4]
         frame->hi2c,
         frame->address,
         frame->data,
- 8008414:	687b      	ldr	r3, [r7, #4]
- 8008416:	1d9a      	adds	r2, r3, #6
+ 800840c:	687b      	ldr	r3, [r7, #4]
+ 800840e:	1d9a      	adds	r2, r3, #6
         frame->sizeData
- 8008418:	687b      	ldr	r3, [r7, #4]
- 800841a:	f893 3026 	ldrb.w	r3, [r3, #38]	@ 0x26
+ 8008410:	687b      	ldr	r3, [r7, #4]
+ 8008412:	f893 3026 	ldrb.w	r3, [r3, #38]	@ 0x26
     return HAL_I2C_Master_Transmit_DMA(
- 800841e:	f7fa fc83 	bl	8002d28 <HAL_I2C_Master_Transmit_DMA>
- 8008422:	4603      	mov	r3, r0
+ 8008416:	f7fa fc87 	bl	8002d28 <HAL_I2C_Master_Transmit_DMA>
+ 800841a:	4603      	mov	r3, r0
     );
 }
- 8008424:	4618      	mov	r0, r3
- 8008426:	3708      	adds	r7, #8
- 8008428:	46bd      	mov	sp, r7
- 800842a:	bd80      	pop	{r7, pc}
+ 800841c:	4618      	mov	r0, r3
+ 800841e:	3708      	adds	r7, #8
+ 8008420:	46bd      	mov	sp, r7
+ 8008422:	bd80      	pop	{r7, pc}
 
-0800842c <I2C_ReceiveMessage>:
+08008424 <I2C_ReceiveMessage>:
  *
  * @param frame     pointer to the I2C frame whose buffer will be filled
  * @retval HAL_StatusTypeDef result of the DMA receive call
  */
 static HAL_StatusTypeDef I2C_ReceiveMessage(struct I2C_frame* frame)
 {
- 800842c:	b580      	push	{r7, lr}
- 800842e:	b082      	sub	sp, #8
- 8008430:	af00      	add	r7, sp, #0
- 8008432:	6078      	str	r0, [r7, #4]
+ 8008424:	b580      	push	{r7, lr}
+ 8008426:	b082      	sub	sp, #8
+ 8008428:	af00      	add	r7, sp, #0
+ 800842a:	6078      	str	r0, [r7, #4]
     if (frame->address <= 0x7F)
- 8008434:	687b      	ldr	r3, [r7, #4]
- 8008436:	889b      	ldrh	r3, [r3, #4]
- 8008438:	2b7f      	cmp	r3, #127	@ 0x7f
- 800843a:	d801      	bhi.n	8008440 <I2C_ReceiveMessage+0x14>
+ 800842c:	687b      	ldr	r3, [r7, #4]
+ 800842e:	889b      	ldrh	r3, [r3, #4]
+ 8008430:	2b7f      	cmp	r3, #127	@ 0x7f
+ 8008432:	d801      	bhi.n	8008438 <I2C_ReceiveMessage+0x14>
     {
         return HAL_ERROR;
- 800843c:	2301      	movs	r3, #1
- 800843e:	e00b      	b.n	8008458 <I2C_ReceiveMessage+0x2c>
+ 8008434:	2301      	movs	r3, #1
+ 8008436:	e00b      	b.n	8008450 <I2C_ReceiveMessage+0x2c>
     }
 
     return HAL_I2C_Master_Receive_DMA(
- 8008440:	687b      	ldr	r3, [r7, #4]
- 8008442:	6818      	ldr	r0, [r3, #0]
- 8008444:	687b      	ldr	r3, [r7, #4]
- 8008446:	8899      	ldrh	r1, [r3, #4]
+ 8008438:	687b      	ldr	r3, [r7, #4]
+ 800843a:	6818      	ldr	r0, [r3, #0]
+ 800843c:	687b      	ldr	r3, [r7, #4]
+ 800843e:	8899      	ldrh	r1, [r3, #4]
         frame->hi2c,
         frame->address,
         frame->data,
- 8008448:	687b      	ldr	r3, [r7, #4]
- 800844a:	1d9a      	adds	r2, r3, #6
+ 8008440:	687b      	ldr	r3, [r7, #4]
+ 8008442:	1d9a      	adds	r2, r3, #6
         frame->sizeData
- 800844c:	687b      	ldr	r3, [r7, #4]
- 800844e:	f893 3026 	ldrb.w	r3, [r3, #38]	@ 0x26
+ 8008444:	687b      	ldr	r3, [r7, #4]
+ 8008446:	f893 3026 	ldrb.w	r3, [r3, #38]	@ 0x26
     return HAL_I2C_Master_Receive_DMA(
- 8008452:	f7fa fd7d 	bl	8002f50 <HAL_I2C_Master_Receive_DMA>
- 8008456:	4603      	mov	r3, r0
+ 800844a:	f7fa fd81 	bl	8002f50 <HAL_I2C_Master_Receive_DMA>
+ 800844e:	4603      	mov	r3, r0
     );
 }
- 8008458:	4618      	mov	r0, r3
- 800845a:	3708      	adds	r7, #8
- 800845c:	46bd      	mov	sp, r7
- 800845e:	bd80      	pop	{r7, pc}
+ 8008450:	4618      	mov	r0, r3
+ 8008452:	3708      	adds	r7, #8
+ 8008454:	46bd      	mov	sp, r7
+ 8008456:	bd80      	pop	{r7, pc}
 
-08008460 <SERWO_OpenCanal>:
+08008458 <SERWO_OpenCanal>:
 /* ================= EXTERNAL ================= */
 extern float  batteryMaxTemp;
 
 
 void SERWO_OpenCanal()
 {
- 8008460:	b480      	push	{r7}
- 8008462:	af00      	add	r7, sp, #0
+ 8008458:	b480      	push	{r7}
+ 800845a:	af00      	add	r7, sp, #0
 	serwo1Pulse = SERWO_OPEN_CANAL;
- 8008464:	4b05      	ldr	r3, [pc, #20]	@ (800847c <SERWO_OpenCanal+0x1c>)
- 8008466:	2207      	movs	r2, #7
- 8008468:	701a      	strb	r2, [r3, #0]
+ 800845c:	4b05      	ldr	r3, [pc, #20]	@ (8008474 <SERWO_OpenCanal+0x1c>)
+ 800845e:	2208      	movs	r2, #8
+ 8008460:	701a      	strb	r2, [r3, #0]
 	serwo2Pulse = SERWO_OPEN_CANAL;
- 800846a:	4b05      	ldr	r3, [pc, #20]	@ (8008480 <SERWO_OpenCanal+0x20>)
- 800846c:	2207      	movs	r2, #7
- 800846e:	701a      	strb	r2, [r3, #0]
+ 8008462:	4b05      	ldr	r3, [pc, #20]	@ (8008478 <SERWO_OpenCanal+0x20>)
+ 8008464:	2208      	movs	r2, #8
+ 8008466:	701a      	strb	r2, [r3, #0]
 }
- 8008470:	bf00      	nop
- 8008472:	46bd      	mov	sp, r7
- 8008474:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8008478:	4770      	bx	lr
- 800847a:	bf00      	nop
- 800847c:	20000dc0 	.word	0x20000dc0
- 8008480:	20000dc1 	.word	0x20000dc1
- 8008484:	00000000 	.word	0x00000000
+ 8008468:	bf00      	nop
+ 800846a:	46bd      	mov	sp, r7
+ 800846c:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 8008470:	4770      	bx	lr
+ 8008472:	bf00      	nop
+ 8008474:	20000dc0 	.word	0x20000dc0
+ 8008478:	20000dc1 	.word	0x20000dc1
+ 800847c:	00000000 	.word	0x00000000
 
-08008488 <SERWO_FetcherPulse>:
+08008480 <SERWO_FetcherPulse>:
  * @brief Populates the CAN data buffer with the current pulse values of both servos.
  *
  * @param data  Pointer to a byte array of at least 2 bytes; filled with servo 1 and servo 2 pulse values.
  */
 void SERWO_FetcherPulse(uint8_t *data)
 {
- 8008488:	b590      	push	{r4, r7, lr}
- 800848a:	b083      	sub	sp, #12
- 800848c:	af00      	add	r7, sp, #0
- 800848e:	6078      	str	r0, [r7, #4]
+ 8008480:	b590      	push	{r4, r7, lr}
+ 8008482:	b083      	sub	sp, #12
+ 8008484:	af00      	add	r7, sp, #0
+ 8008486:	6078      	str	r0, [r7, #4]
 	data[0] = (uint8_t)(serwo1Pulse - SERWO_OPEN_CANAL) * SERWO_SCALER;; // Baterry
- 8008490:	4b1b      	ldr	r3, [pc, #108]	@ (8008500 <SERWO_FetcherPulse+0x78>)
- 8008492:	781b      	ldrb	r3, [r3, #0]
- 8008494:	3b07      	subs	r3, #7
- 8008496:	b2db      	uxtb	r3, r3
- 8008498:	4618      	mov	r0, r3
- 800849a:	f7f7 ffe7 	bl	800046c <__aeabi_i2d>
- 800849e:	a316      	add	r3, pc, #88	@ (adr r3, 80084f8 <SERWO_FetcherPulse+0x70>)
- 80084a0:	e9d3 2300 	ldrd	r2, r3, [r3]
- 80084a4:	f7f8 f84c 	bl	8000540 <__aeabi_dmul>
- 80084a8:	4602      	mov	r2, r0
- 80084aa:	460b      	mov	r3, r1
- 80084ac:	4610      	mov	r0, r2
- 80084ae:	4619      	mov	r1, r3
- 80084b0:	f7f8 fa58 	bl	8000964 <__aeabi_d2uiz>
- 80084b4:	4603      	mov	r3, r0
- 80084b6:	b2da      	uxtb	r2, r3
- 80084b8:	687b      	ldr	r3, [r7, #4]
- 80084ba:	701a      	strb	r2, [r3, #0]
+ 8008488:	4b1b      	ldr	r3, [pc, #108]	@ (80084f8 <SERWO_FetcherPulse+0x78>)
+ 800848a:	781b      	ldrb	r3, [r3, #0]
+ 800848c:	3b08      	subs	r3, #8
+ 800848e:	b2db      	uxtb	r3, r3
+ 8008490:	4618      	mov	r0, r3
+ 8008492:	f7f7 ffeb 	bl	800046c <__aeabi_i2d>
+ 8008496:	a316      	add	r3, pc, #88	@ (adr r3, 80084f0 <SERWO_FetcherPulse+0x70>)
+ 8008498:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 800849c:	f7f8 f850 	bl	8000540 <__aeabi_dmul>
+ 80084a0:	4602      	mov	r2, r0
+ 80084a2:	460b      	mov	r3, r1
+ 80084a4:	4610      	mov	r0, r2
+ 80084a6:	4619      	mov	r1, r3
+ 80084a8:	f7f8 fa5c 	bl	8000964 <__aeabi_d2uiz>
+ 80084ac:	4603      	mov	r3, r0
+ 80084ae:	b2da      	uxtb	r2, r3
+ 80084b0:	687b      	ldr	r3, [r7, #4]
+ 80084b2:	701a      	strb	r2, [r3, #0]
 	data[1] = (uint8_t)(serwo2Pulse - SERWO_OPEN_CANAL) * SERWO_SCALER;  // Cabin
- 80084bc:	4b11      	ldr	r3, [pc, #68]	@ (8008504 <SERWO_FetcherPulse+0x7c>)
- 80084be:	781b      	ldrb	r3, [r3, #0]
- 80084c0:	3b07      	subs	r3, #7
- 80084c2:	b2db      	uxtb	r3, r3
- 80084c4:	4618      	mov	r0, r3
- 80084c6:	f7f7 ffd1 	bl	800046c <__aeabi_i2d>
- 80084ca:	a30b      	add	r3, pc, #44	@ (adr r3, 80084f8 <SERWO_FetcherPulse+0x70>)
- 80084cc:	e9d3 2300 	ldrd	r2, r3, [r3]
- 80084d0:	f7f8 f836 	bl	8000540 <__aeabi_dmul>
- 80084d4:	4602      	mov	r2, r0
- 80084d6:	460b      	mov	r3, r1
- 80084d8:	4610      	mov	r0, r2
- 80084da:	4619      	mov	r1, r3
- 80084dc:	687b      	ldr	r3, [r7, #4]
- 80084de:	1c5c      	adds	r4, r3, #1
- 80084e0:	f7f8 fa40 	bl	8000964 <__aeabi_d2uiz>
- 80084e4:	4603      	mov	r3, r0
- 80084e6:	b2db      	uxtb	r3, r3
- 80084e8:	7023      	strb	r3, [r4, #0]
+ 80084b4:	4b11      	ldr	r3, [pc, #68]	@ (80084fc <SERWO_FetcherPulse+0x7c>)
+ 80084b6:	781b      	ldrb	r3, [r3, #0]
+ 80084b8:	3b08      	subs	r3, #8
+ 80084ba:	b2db      	uxtb	r3, r3
+ 80084bc:	4618      	mov	r0, r3
+ 80084be:	f7f7 ffd5 	bl	800046c <__aeabi_i2d>
+ 80084c2:	a30b      	add	r3, pc, #44	@ (adr r3, 80084f0 <SERWO_FetcherPulse+0x70>)
+ 80084c4:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 80084c8:	f7f8 f83a 	bl	8000540 <__aeabi_dmul>
+ 80084cc:	4602      	mov	r2, r0
+ 80084ce:	460b      	mov	r3, r1
+ 80084d0:	4610      	mov	r0, r2
+ 80084d2:	4619      	mov	r1, r3
+ 80084d4:	687b      	ldr	r3, [r7, #4]
+ 80084d6:	1c5c      	adds	r4, r3, #1
+ 80084d8:	f7f8 fa44 	bl	8000964 <__aeabi_d2uiz>
+ 80084dc:	4603      	mov	r3, r0
+ 80084de:	b2db      	uxtb	r3, r3
+ 80084e0:	7023      	strb	r3, [r4, #0]
 }
+ 80084e2:	bf00      	nop
+ 80084e4:	370c      	adds	r7, #12
+ 80084e6:	46bd      	mov	sp, r7
+ 80084e8:	bd90      	pop	{r4, r7, pc}
  80084ea:	bf00      	nop
- 80084ec:	370c      	adds	r7, #12
- 80084ee:	46bd      	mov	sp, r7
- 80084f0:	bd90      	pop	{r4, r7, pc}
- 80084f2:	bf00      	nop
- 80084f4:	f3af 8000 	nop.w
- 80084f8:	c28f5c29 	.word	0xc28f5c29
- 80084fc:	4020a8f5 	.word	0x4020a8f5
- 8008500:	20000dc0 	.word	0x20000dc0
- 8008504:	20000dc1 	.word	0x20000dc1
+ 80084ec:	f3af 8000 	nop.w
+ 80084f0:	c28f5c29 	.word	0xc28f5c29
+ 80084f4:	4020a8f5 	.word	0x4020a8f5
+ 80084f8:	20000dc0 	.word	0x20000dc0
+ 80084fc:	20000dc1 	.word	0x20000dc1
 
-08008508 <SERWO_SetPulseExtern>:
+08008500 <SERWO_SetPulseExtern>:
  *
  * @param data  Pointer to a byte array of at least 2 bytes; filled with servo 1 and servo 2 pulse values.
  *
  */
 void SERWO_SetPulseExtern(uint8_t* pulseTable)
 {
- 8008508:	b580      	push	{r7, lr}
- 800850a:	b082      	sub	sp, #8
- 800850c:	af00      	add	r7, sp, #0
- 800850e:	6078      	str	r0, [r7, #4]
+ 8008500:	b580      	push	{r7, lr}
+ 8008502:	b082      	sub	sp, #8
+ 8008504:	af00      	add	r7, sp, #0
+ 8008506:	6078      	str	r0, [r7, #4]
 	switch(pulseTable[0])
- 8008510:	687b      	ldr	r3, [r7, #4]
- 8008512:	781b      	ldrb	r3, [r3, #0]
- 8008514:	2b04      	cmp	r3, #4
- 8008516:	d849      	bhi.n	80085ac <SERWO_SetPulseExtern+0xa4>
- 8008518:	a201      	add	r2, pc, #4	@ (adr r2, 8008520 <SERWO_SetPulseExtern+0x18>)
- 800851a:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 800851e:	bf00      	nop
- 8008520:	08008535 	.word	0x08008535
- 8008524:	080085ad 	.word	0x080085ad
- 8008528:	08008553 	.word	0x08008553
- 800852c:	08008571 	.word	0x08008571
- 8008530:	0800858f 	.word	0x0800858f
+ 8008508:	687b      	ldr	r3, [r7, #4]
+ 800850a:	781b      	ldrb	r3, [r3, #0]
+ 800850c:	2b04      	cmp	r3, #4
+ 800850e:	d849      	bhi.n	80085a4 <SERWO_SetPulseExtern+0xa4>
+ 8008510:	a201      	add	r2, pc, #4	@ (adr r2, 8008518 <SERWO_SetPulseExtern+0x18>)
+ 8008512:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8008516:	bf00      	nop
+ 8008518:	0800852d 	.word	0x0800852d
+ 800851c:	080085a5 	.word	0x080085a5
+ 8008520:	0800854b 	.word	0x0800854b
+ 8008524:	08008569 	.word	0x08008569
+ 8008528:	08008587 	.word	0x08008587
 	{
 	case(0):
 			serwo1Pulse = SERWO_ScalerPulse(0); // Battery
- 8008534:	2000      	movs	r0, #0
- 8008536:	f000 f843 	bl	80085c0 <SERWO_ScalerPulse>
- 800853a:	4603      	mov	r3, r0
- 800853c:	461a      	mov	r2, r3
- 800853e:	4b1e      	ldr	r3, [pc, #120]	@ (80085b8 <SERWO_SetPulseExtern+0xb0>)
- 8008540:	701a      	strb	r2, [r3, #0]
+ 800852c:	2000      	movs	r0, #0
+ 800852e:	f000 f843 	bl	80085b8 <SERWO_ScalerPulse>
+ 8008532:	4603      	mov	r3, r0
+ 8008534:	461a      	mov	r2, r3
+ 8008536:	4b1e      	ldr	r3, [pc, #120]	@ (80085b0 <SERWO_SetPulseExtern+0xb0>)
+ 8008538:	701a      	strb	r2, [r3, #0]
 			serwo2Pulse = SERWO_ScalerPulse(0); // Cabin
- 8008542:	2000      	movs	r0, #0
- 8008544:	f000 f83c 	bl	80085c0 <SERWO_ScalerPulse>
- 8008548:	4603      	mov	r3, r0
- 800854a:	461a      	mov	r2, r3
- 800854c:	4b1b      	ldr	r3, [pc, #108]	@ (80085bc <SERWO_SetPulseExtern+0xb4>)
- 800854e:	701a      	strb	r2, [r3, #0]
+ 800853a:	2000      	movs	r0, #0
+ 800853c:	f000 f83c 	bl	80085b8 <SERWO_ScalerPulse>
+ 8008540:	4603      	mov	r3, r0
+ 8008542:	461a      	mov	r2, r3
+ 8008544:	4b1b      	ldr	r3, [pc, #108]	@ (80085b4 <SERWO_SetPulseExtern+0xb4>)
+ 8008546:	701a      	strb	r2, [r3, #0]
 			break;
- 8008550:	e02d      	b.n	80085ae <SERWO_SetPulseExtern+0xa6>
+ 8008548:	e02d      	b.n	80085a6 <SERWO_SetPulseExtern+0xa6>
 	case(2):
 			serwo1Pulse = SERWO_ScalerPulse(0); // Battery
- 8008552:	2000      	movs	r0, #0
- 8008554:	f000 f834 	bl	80085c0 <SERWO_ScalerPulse>
- 8008558:	4603      	mov	r3, r0
- 800855a:	461a      	mov	r2, r3
- 800855c:	4b16      	ldr	r3, [pc, #88]	@ (80085b8 <SERWO_SetPulseExtern+0xb0>)
- 800855e:	701a      	strb	r2, [r3, #0]
+ 800854a:	2000      	movs	r0, #0
+ 800854c:	f000 f834 	bl	80085b8 <SERWO_ScalerPulse>
+ 8008550:	4603      	mov	r3, r0
+ 8008552:	461a      	mov	r2, r3
+ 8008554:	4b16      	ldr	r3, [pc, #88]	@ (80085b0 <SERWO_SetPulseExtern+0xb0>)
+ 8008556:	701a      	strb	r2, [r3, #0]
 			serwo2Pulse = SERWO_ScalerPulse(100); // Cabin
- 8008560:	2064      	movs	r0, #100	@ 0x64
- 8008562:	f000 f82d 	bl	80085c0 <SERWO_ScalerPulse>
- 8008566:	4603      	mov	r3, r0
- 8008568:	461a      	mov	r2, r3
- 800856a:	4b14      	ldr	r3, [pc, #80]	@ (80085bc <SERWO_SetPulseExtern+0xb4>)
- 800856c:	701a      	strb	r2, [r3, #0]
+ 8008558:	2064      	movs	r0, #100	@ 0x64
+ 800855a:	f000 f82d 	bl	80085b8 <SERWO_ScalerPulse>
+ 800855e:	4603      	mov	r3, r0
+ 8008560:	461a      	mov	r2, r3
+ 8008562:	4b14      	ldr	r3, [pc, #80]	@ (80085b4 <SERWO_SetPulseExtern+0xb4>)
+ 8008564:	701a      	strb	r2, [r3, #0]
 			break;
- 800856e:	e01e      	b.n	80085ae <SERWO_SetPulseExtern+0xa6>
+ 8008566:	e01e      	b.n	80085a6 <SERWO_SetPulseExtern+0xa6>
 	case(3):
 			serwo1Pulse = SERWO_ScalerPulse(100); // Battery
- 8008570:	2064      	movs	r0, #100	@ 0x64
- 8008572:	f000 f825 	bl	80085c0 <SERWO_ScalerPulse>
- 8008576:	4603      	mov	r3, r0
- 8008578:	461a      	mov	r2, r3
- 800857a:	4b0f      	ldr	r3, [pc, #60]	@ (80085b8 <SERWO_SetPulseExtern+0xb0>)
- 800857c:	701a      	strb	r2, [r3, #0]
+ 8008568:	2064      	movs	r0, #100	@ 0x64
+ 800856a:	f000 f825 	bl	80085b8 <SERWO_ScalerPulse>
+ 800856e:	4603      	mov	r3, r0
+ 8008570:	461a      	mov	r2, r3
+ 8008572:	4b0f      	ldr	r3, [pc, #60]	@ (80085b0 <SERWO_SetPulseExtern+0xb0>)
+ 8008574:	701a      	strb	r2, [r3, #0]
 			serwo2Pulse = SERWO_ScalerPulse(0); // Cabin
- 800857e:	2000      	movs	r0, #0
- 8008580:	f000 f81e 	bl	80085c0 <SERWO_ScalerPulse>
- 8008584:	4603      	mov	r3, r0
- 8008586:	461a      	mov	r2, r3
- 8008588:	4b0c      	ldr	r3, [pc, #48]	@ (80085bc <SERWO_SetPulseExtern+0xb4>)
- 800858a:	701a      	strb	r2, [r3, #0]
+ 8008576:	2000      	movs	r0, #0
+ 8008578:	f000 f81e 	bl	80085b8 <SERWO_ScalerPulse>
+ 800857c:	4603      	mov	r3, r0
+ 800857e:	461a      	mov	r2, r3
+ 8008580:	4b0c      	ldr	r3, [pc, #48]	@ (80085b4 <SERWO_SetPulseExtern+0xb4>)
+ 8008582:	701a      	strb	r2, [r3, #0]
 			break;
- 800858c:	e00f      	b.n	80085ae <SERWO_SetPulseExtern+0xa6>
+ 8008584:	e00f      	b.n	80085a6 <SERWO_SetPulseExtern+0xa6>
 	case(4):
 			serwo1Pulse = SERWO_ScalerPulse(100); // Battery
- 800858e:	2064      	movs	r0, #100	@ 0x64
- 8008590:	f000 f816 	bl	80085c0 <SERWO_ScalerPulse>
- 8008594:	4603      	mov	r3, r0
- 8008596:	461a      	mov	r2, r3
- 8008598:	4b07      	ldr	r3, [pc, #28]	@ (80085b8 <SERWO_SetPulseExtern+0xb0>)
- 800859a:	701a      	strb	r2, [r3, #0]
+ 8008586:	2064      	movs	r0, #100	@ 0x64
+ 8008588:	f000 f816 	bl	80085b8 <SERWO_ScalerPulse>
+ 800858c:	4603      	mov	r3, r0
+ 800858e:	461a      	mov	r2, r3
+ 8008590:	4b07      	ldr	r3, [pc, #28]	@ (80085b0 <SERWO_SetPulseExtern+0xb0>)
+ 8008592:	701a      	strb	r2, [r3, #0]
 			serwo2Pulse = SERWO_ScalerPulse(100); // Cabin
- 800859c:	2064      	movs	r0, #100	@ 0x64
- 800859e:	f000 f80f 	bl	80085c0 <SERWO_ScalerPulse>
- 80085a2:	4603      	mov	r3, r0
- 80085a4:	461a      	mov	r2, r3
- 80085a6:	4b05      	ldr	r3, [pc, #20]	@ (80085bc <SERWO_SetPulseExtern+0xb4>)
- 80085a8:	701a      	strb	r2, [r3, #0]
+ 8008594:	2064      	movs	r0, #100	@ 0x64
+ 8008596:	f000 f80f 	bl	80085b8 <SERWO_ScalerPulse>
+ 800859a:	4603      	mov	r3, r0
+ 800859c:	461a      	mov	r2, r3
+ 800859e:	4b05      	ldr	r3, [pc, #20]	@ (80085b4 <SERWO_SetPulseExtern+0xb4>)
+ 80085a0:	701a      	strb	r2, [r3, #0]
 			break;
- 80085aa:	e000      	b.n	80085ae <SERWO_SetPulseExtern+0xa6>
+ 80085a2:	e000      	b.n	80085a6 <SERWO_SetPulseExtern+0xa6>
 	default:
 		break;
- 80085ac:	bf00      	nop
+ 80085a4:	bf00      	nop
 	}
 
 }
+ 80085a6:	bf00      	nop
+ 80085a8:	3708      	adds	r7, #8
+ 80085aa:	46bd      	mov	sp, r7
+ 80085ac:	bd80      	pop	{r7, pc}
  80085ae:	bf00      	nop
- 80085b0:	3708      	adds	r7, #8
- 80085b2:	46bd      	mov	sp, r7
- 80085b4:	bd80      	pop	{r7, pc}
- 80085b6:	bf00      	nop
- 80085b8:	20000dc0 	.word	0x20000dc0
- 80085bc:	20000dc1 	.word	0x20000dc1
+ 80085b0:	20000dc0 	.word	0x20000dc0
+ 80085b4:	20000dc1 	.word	0x20000dc1
 
-080085c0 <SERWO_ScalerPulse>:
+080085b8 <SERWO_ScalerPulse>:
 /**
  * @brief Scaler gain pwm 0-100 to  range 7-19
  *
  */
 uint8_t SERWO_ScalerPulse(uint8_t pwm)
 {
- 80085c0:	b580      	push	{r7, lr}
- 80085c2:	b084      	sub	sp, #16
- 80085c4:	af00      	add	r7, sp, #0
- 80085c6:	4603      	mov	r3, r0
- 80085c8:	71fb      	strb	r3, [r7, #7]
+ 80085b8:	b580      	push	{r7, lr}
+ 80085ba:	b084      	sub	sp, #16
+ 80085bc:	af00      	add	r7, sp, #0
+ 80085be:	4603      	mov	r3, r0
+ 80085c0:	71fb      	strb	r3, [r7, #7]
 	float pwmScaled = pwm/(SERWO_SCALER) + SERWO_OPEN_CANAL;
- 80085ca:	79fb      	ldrb	r3, [r7, #7]
- 80085cc:	4618      	mov	r0, r3
- 80085ce:	f7f7 ff4d 	bl	800046c <__aeabi_i2d>
- 80085d2:	a312      	add	r3, pc, #72	@ (adr r3, 800861c <SERWO_ScalerPulse+0x5c>)
- 80085d4:	e9d3 2300 	ldrd	r2, r3, [r3]
- 80085d8:	f7f8 f8dc 	bl	8000794 <__aeabi_ddiv>
- 80085dc:	4602      	mov	r2, r0
- 80085de:	460b      	mov	r3, r1
- 80085e0:	4610      	mov	r0, r2
- 80085e2:	4619      	mov	r1, r3
- 80085e4:	f04f 0200 	mov.w	r2, #0
- 80085e8:	4b0b      	ldr	r3, [pc, #44]	@ (8008618 <SERWO_ScalerPulse+0x58>)
- 80085ea:	f7f7 fdf3 	bl	80001d4 <__adddf3>
- 80085ee:	4602      	mov	r2, r0
- 80085f0:	460b      	mov	r3, r1
- 80085f2:	4610      	mov	r0, r2
- 80085f4:	4619      	mov	r1, r3
- 80085f6:	f7f8 f9d5 	bl	80009a4 <__aeabi_d2f>
- 80085fa:	4603      	mov	r3, r0
- 80085fc:	60fb      	str	r3, [r7, #12]
+ 80085c2:	79fb      	ldrb	r3, [r7, #7]
+ 80085c4:	4618      	mov	r0, r3
+ 80085c6:	f7f7 ff51 	bl	800046c <__aeabi_i2d>
+ 80085ca:	a312      	add	r3, pc, #72	@ (adr r3, 8008614 <SERWO_ScalerPulse+0x5c>)
+ 80085cc:	e9d3 2300 	ldrd	r2, r3, [r3]
+ 80085d0:	f7f8 f8e0 	bl	8000794 <__aeabi_ddiv>
+ 80085d4:	4602      	mov	r2, r0
+ 80085d6:	460b      	mov	r3, r1
+ 80085d8:	4610      	mov	r0, r2
+ 80085da:	4619      	mov	r1, r3
+ 80085dc:	f04f 0200 	mov.w	r2, #0
+ 80085e0:	4b0b      	ldr	r3, [pc, #44]	@ (8008610 <SERWO_ScalerPulse+0x58>)
+ 80085e2:	f7f7 fdf7 	bl	80001d4 <__adddf3>
+ 80085e6:	4602      	mov	r2, r0
+ 80085e8:	460b      	mov	r3, r1
+ 80085ea:	4610      	mov	r0, r2
+ 80085ec:	4619      	mov	r1, r3
+ 80085ee:	f7f8 f9d9 	bl	80009a4 <__aeabi_d2f>
+ 80085f2:	4603      	mov	r3, r0
+ 80085f4:	60fb      	str	r3, [r7, #12]
 	return (uint8_t) pwmScaled;
- 80085fe:	edd7 7a03 	vldr	s15, [r7, #12]
- 8008602:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 8008606:	edc7 7a00 	vstr	s15, [r7]
- 800860a:	783b      	ldrb	r3, [r7, #0]
- 800860c:	b2db      	uxtb	r3, r3
+ 80085f6:	edd7 7a03 	vldr	s15, [r7, #12]
+ 80085fa:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 80085fe:	edc7 7a00 	vstr	s15, [r7]
+ 8008602:	783b      	ldrb	r3, [r7, #0]
+ 8008604:	b2db      	uxtb	r3, r3
 }
- 800860e:	4618      	mov	r0, r3
- 8008610:	3710      	adds	r7, #16
- 8008612:	46bd      	mov	sp, r7
- 8008614:	bd80      	pop	{r7, pc}
- 8008616:	bf00      	nop
- 8008618:	401c0000 	.word	0x401c0000
- 800861c:	c28f5c29 	.word	0xc28f5c29
- 8008620:	4020a8f5 	.word	0x4020a8f5
+ 8008606:	4618      	mov	r0, r3
+ 8008608:	3710      	adds	r7, #16
+ 800860a:	46bd      	mov	sp, r7
+ 800860c:	bd80      	pop	{r7, pc}
+ 800860e:	bf00      	nop
+ 8008610:	40200000 	.word	0x40200000
+ 8008614:	c28f5c29 	.word	0xc28f5c29
+ 8008618:	4020a8f5 	.word	0x4020a8f5
 
-08008624 <SERWO_SetPulseInternal>:
+0800861c <SERWO_SetPulseInternal>:
  *
  * @param htim          Pointer to the timer handle controlling the servo PWM output.
  * @param CAN_Buffer_TX Pointer to the CAN scheduled message list used for TX.
  */
 void SERWO_SetPulseInternal(TIM_HandleTypeDef *htim, struct CAN_scheduledMsgList *CAN_Buffer_TX)
 {
- 8008624:	b580      	push	{r7, lr}
- 8008626:	b084      	sub	sp, #16
- 8008628:	af02      	add	r7, sp, #8
- 800862a:	6078      	str	r0, [r7, #4]
- 800862c:	6039      	str	r1, [r7, #0]
+ 800861c:	b580      	push	{r7, lr}
+ 800861e:	b084      	sub	sp, #16
+ 8008620:	af02      	add	r7, sp, #8
+ 8008622:	6078      	str	r0, [r7, #4]
+ 8008624:	6039      	str	r1, [r7, #0]
 	CAN_RemoveScheduledMsg(ID_COOLING_LEFT_SERWO, CAN_Buffer_TX);
- 800862e:	6839      	ldr	r1, [r7, #0]
- 8008630:	f240 5003 	movw	r0, #1283	@ 0x503
- 8008634:	f7ff f813 	bl	800765e <CAN_RemoveScheduledMsg>
+ 8008626:	6839      	ldr	r1, [r7, #0]
+ 8008628:	f240 5003 	movw	r0, #1283	@ 0x503
+ 800862c:	f7ff f817 	bl	800765e <CAN_RemoveScheduledMsg>
 
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_3, serwo1Pulse * SCALER_PULSE_SERWO);
- 8008638:	4b0f      	ldr	r3, [pc, #60]	@ (8008678 <SERWO_SetPulseInternal+0x54>)
- 800863a:	781b      	ldrb	r3, [r3, #0]
- 800863c:	461a      	mov	r2, r3
- 800863e:	4613      	mov	r3, r2
- 8008640:	009b      	lsls	r3, r3, #2
- 8008642:	441a      	add	r2, r3
- 8008644:	687b      	ldr	r3, [r7, #4]
- 8008646:	681b      	ldr	r3, [r3, #0]
- 8008648:	63da      	str	r2, [r3, #60]	@ 0x3c
+ 8008630:	4b0f      	ldr	r3, [pc, #60]	@ (8008670 <SERWO_SetPulseInternal+0x54>)
+ 8008632:	781b      	ldrb	r3, [r3, #0]
+ 8008634:	461a      	mov	r2, r3
+ 8008636:	4613      	mov	r3, r2
+ 8008638:	009b      	lsls	r3, r3, #2
+ 800863a:	441a      	add	r2, r3
+ 800863c:	687b      	ldr	r3, [r7, #4]
+ 800863e:	681b      	ldr	r3, [r3, #0]
+ 8008640:	63da      	str	r2, [r3, #60]	@ 0x3c
 	__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_4, serwo2Pulse * SCALER_PULSE_SERWO);
- 800864a:	4b0c      	ldr	r3, [pc, #48]	@ (800867c <SERWO_SetPulseInternal+0x58>)
- 800864c:	781b      	ldrb	r3, [r3, #0]
- 800864e:	461a      	mov	r2, r3
- 8008650:	4613      	mov	r3, r2
- 8008652:	009b      	lsls	r3, r3, #2
- 8008654:	441a      	add	r2, r3
- 8008656:	687b      	ldr	r3, [r7, #4]
- 8008658:	681b      	ldr	r3, [r3, #0]
- 800865a:	641a      	str	r2, [r3, #64]	@ 0x40
+ 8008642:	4b0c      	ldr	r3, [pc, #48]	@ (8008674 <SERWO_SetPulseInternal+0x58>)
+ 8008644:	781b      	ldrb	r3, [r3, #0]
+ 8008646:	461a      	mov	r2, r3
+ 8008648:	4613      	mov	r3, r2
+ 800864a:	009b      	lsls	r3, r3, #2
+ 800864c:	441a      	add	r2, r3
+ 800864e:	687b      	ldr	r3, [r7, #4]
+ 8008650:	681b      	ldr	r3, [r3, #0]
+ 8008652:	641a      	str	r2, [r3, #64]	@ 0x40
 
 	CAN_WriteFrame(CAN_Buffer_TX, ID_COOLING_LEFT_SERWO, BYTE_SIZE_PULSE, SERWO_FetcherPulse, PERIOD_PULSE_SEND);
- 800865c:	2364      	movs	r3, #100	@ 0x64
- 800865e:	9300      	str	r3, [sp, #0]
- 8008660:	4b07      	ldr	r3, [pc, #28]	@ (8008680 <SERWO_SetPulseInternal+0x5c>)
- 8008662:	2202      	movs	r2, #2
- 8008664:	f240 5103 	movw	r1, #1283	@ 0x503
- 8008668:	6838      	ldr	r0, [r7, #0]
- 800866a:	f7ff fa1b 	bl	8007aa4 <CAN_WriteFrame>
+ 8008654:	2364      	movs	r3, #100	@ 0x64
+ 8008656:	9300      	str	r3, [sp, #0]
+ 8008658:	4b07      	ldr	r3, [pc, #28]	@ (8008678 <SERWO_SetPulseInternal+0x5c>)
+ 800865a:	2202      	movs	r2, #2
+ 800865c:	f240 5103 	movw	r1, #1283	@ 0x503
+ 8008660:	6838      	ldr	r0, [r7, #0]
+ 8008662:	f7ff fa1f 	bl	8007aa4 <CAN_WriteFrame>
 }
+ 8008666:	bf00      	nop
+ 8008668:	3708      	adds	r7, #8
+ 800866a:	46bd      	mov	sp, r7
+ 800866c:	bd80      	pop	{r7, pc}
  800866e:	bf00      	nop
- 8008670:	3708      	adds	r7, #8
- 8008672:	46bd      	mov	sp, r7
- 8008674:	bd80      	pop	{r7, pc}
- 8008676:	bf00      	nop
- 8008678:	20000dc0 	.word	0x20000dc0
- 800867c:	20000dc1 	.word	0x20000dc1
- 8008680:	08008489 	.word	0x08008489
+ 8008670:	20000dc0 	.word	0x20000dc0
+ 8008674:	20000dc1 	.word	0x20000dc1
+ 8008678:	08008481 	.word	0x08008481
 
-08008684 <HAL_TIM_PeriodElapsedCallback>:
+0800867c <HAL_TIM_PeriodElapsedCallback>:
 static struct CAN_bufferFrame msg = {0};
 volatile uint8_t interuptCanFlag = CAN_WAIT_TO_SEND_MSG;
 /* ================= CALLBACK ================= */
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
- 8008684:	b580      	push	{r7, lr}
- 8008686:	b082      	sub	sp, #8
- 8008688:	af00      	add	r7, sp, #0
- 800868a:	6078      	str	r0, [r7, #4]
+ 800867c:	b580      	push	{r7, lr}
+ 800867e:	b082      	sub	sp, #8
+ 8008680:	af00      	add	r7, sp, #0
+ 8008682:	6078      	str	r0, [r7, #4]
 	if(htim->Instance == TIM7)
- 800868c:	687b      	ldr	r3, [r7, #4]
- 800868e:	681b      	ldr	r3, [r3, #0]
- 8008690:	4a0b      	ldr	r2, [pc, #44]	@ (80086c0 <HAL_TIM_PeriodElapsedCallback+0x3c>)
- 8008692:	4293      	cmp	r3, r2
- 8008694:	d108      	bne.n	80086a8 <HAL_TIM_PeriodElapsedCallback+0x24>
+ 8008684:	687b      	ldr	r3, [r7, #4]
+ 8008686:	681b      	ldr	r3, [r3, #0]
+ 8008688:	4a0b      	ldr	r2, [pc, #44]	@ (80086b8 <HAL_TIM_PeriodElapsedCallback+0x3c>)
+ 800868a:	4293      	cmp	r3, r2
+ 800868c:	d108      	bne.n	80086a0 <HAL_TIM_PeriodElapsedCallback+0x24>
 	{
-		HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
- 8008696:	2120      	movs	r1, #32
- 8008698:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
- 800869c:	f7fa fa8e 	bl	8002bbc <HAL_GPIO_TogglePin>
+		HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+ 800868e:	2110      	movs	r1, #16
+ 8008690:	f04f 4090 	mov.w	r0, #1207959552	@ 0x48000000
+ 8008694:	f7fa fa92 	bl	8002bbc <HAL_GPIO_TogglePin>
 		interuptCanFlag = CAN_TIME_TO_SEND_MSG;
- 80086a0:	4b08      	ldr	r3, [pc, #32]	@ (80086c4 <HAL_TIM_PeriodElapsedCallback+0x40>)
- 80086a2:	2201      	movs	r2, #1
- 80086a4:	701a      	strb	r2, [r3, #0]
+ 8008698:	4b08      	ldr	r3, [pc, #32]	@ (80086bc <HAL_TIM_PeriodElapsedCallback+0x40>)
+ 800869a:	2201      	movs	r2, #1
+ 800869c:	701a      	strb	r2, [r3, #0]
 	else if(htim->Instance == TIM6)
 	{
 		AM2320_StartMeasure();
 
 	}
 }
- 80086a6:	e006      	b.n	80086b6 <HAL_TIM_PeriodElapsedCallback+0x32>
+ 800869e:	e006      	b.n	80086ae <HAL_TIM_PeriodElapsedCallback+0x32>
 	else if(htim->Instance == TIM6)
- 80086a8:	687b      	ldr	r3, [r7, #4]
- 80086aa:	681b      	ldr	r3, [r3, #0]
- 80086ac:	4a06      	ldr	r2, [pc, #24]	@ (80086c8 <HAL_TIM_PeriodElapsedCallback+0x44>)
- 80086ae:	4293      	cmp	r3, r2
- 80086b0:	d101      	bne.n	80086b6 <HAL_TIM_PeriodElapsedCallback+0x32>
+ 80086a0:	687b      	ldr	r3, [r7, #4]
+ 80086a2:	681b      	ldr	r3, [r3, #0]
+ 80086a4:	4a06      	ldr	r2, [pc, #24]	@ (80086c0 <HAL_TIM_PeriodElapsedCallback+0x44>)
+ 80086a6:	4293      	cmp	r3, r2
+ 80086a8:	d101      	bne.n	80086ae <HAL_TIM_PeriodElapsedCallback+0x32>
 		AM2320_StartMeasure();
- 80086b2:	f7ff fd6d 	bl	8008190 <AM2320_StartMeasure>
+ 80086aa:	f7ff fd6d 	bl	8008188 <AM2320_StartMeasure>
 }
+ 80086ae:	bf00      	nop
+ 80086b0:	3708      	adds	r7, #8
+ 80086b2:	46bd      	mov	sp, r7
+ 80086b4:	bd80      	pop	{r7, pc}
  80086b6:	bf00      	nop
- 80086b8:	3708      	adds	r7, #8
- 80086ba:	46bd      	mov	sp, r7
- 80086bc:	bd80      	pop	{r7, pc}
- 80086be:	bf00      	nop
- 80086c0:	40001400 	.word	0x40001400
- 80086c4:	20000dcd 	.word	0x20000dcd
- 80086c8:	40001000 	.word	0x40001000
+ 80086b8:	40001400 	.word	0x40001400
+ 80086bc:	20000dcd 	.word	0x20000dcd
+ 80086c0:	40001000 	.word	0x40001000
 
-080086cc <COOLER_refresh_pulse>:
+080086c4 <COOLER_refresh_pulse>:
 
 /* ================= HELPER FUNCTION ================= */
 
 void COOLER_refresh_pulse()
 {
- 80086cc:	b580      	push	{r7, lr}
- 80086ce:	b082      	sub	sp, #8
- 80086d0:	af00      	add	r7, sp, #0
+ 80086c4:	b580      	push	{r7, lr}
+ 80086c6:	b082      	sub	sp, #8
+ 80086c8:	af00      	add	r7, sp, #0
 	static uint32_t lastTick = 0;
 	uint32_t ticks = HAL_GetTick();
- 80086d2:	f7f8 ff99 	bl	8001608 <HAL_GetTick>
- 80086d6:	6078      	str	r0, [r7, #4]
+ 80086ca:	f7f8 ff9d 	bl	8001608 <HAL_GetTick>
+ 80086ce:	6078      	str	r0, [r7, #4]
 	if(ticks - lastTick  > 500)
- 80086d8:	4b0b      	ldr	r3, [pc, #44]	@ (8008708 <COOLER_refresh_pulse+0x3c>)
- 80086da:	681b      	ldr	r3, [r3, #0]
- 80086dc:	687a      	ldr	r2, [r7, #4]
- 80086de:	1ad3      	subs	r3, r2, r3
- 80086e0:	f5b3 7ffa 	cmp.w	r3, #500	@ 0x1f4
- 80086e4:	d90c      	bls.n	8008700 <COOLER_refresh_pulse+0x34>
+ 80086d0:	4b0b      	ldr	r3, [pc, #44]	@ (8008700 <COOLER_refresh_pulse+0x3c>)
+ 80086d2:	681b      	ldr	r3, [r3, #0]
+ 80086d4:	687a      	ldr	r2, [r7, #4]
+ 80086d6:	1ad3      	subs	r3, r2, r3
+ 80086d8:	f5b3 7ffa 	cmp.w	r3, #500	@ 0x1f4
+ 80086dc:	d90c      	bls.n	80086f8 <COOLER_refresh_pulse+0x34>
 	{
 		lastTick = HAL_GetTick();
- 80086e6:	f7f8 ff8f 	bl	8001608 <HAL_GetTick>
- 80086ea:	4603      	mov	r3, r0
- 80086ec:	4a06      	ldr	r2, [pc, #24]	@ (8008708 <COOLER_refresh_pulse+0x3c>)
- 80086ee:	6013      	str	r3, [r2, #0]
+ 80086de:	f7f8 ff93 	bl	8001608 <HAL_GetTick>
+ 80086e2:	4603      	mov	r3, r0
+ 80086e4:	4a06      	ldr	r2, [pc, #24]	@ (8008700 <COOLER_refresh_pulse+0x3c>)
+ 80086e6:	6013      	str	r3, [r2, #0]
 		FAN_SetPulseInternal(&htim2, &canBufferTx);
- 80086f0:	4906      	ldr	r1, [pc, #24]	@ (800870c <COOLER_refresh_pulse+0x40>)
- 80086f2:	4807      	ldr	r0, [pc, #28]	@ (8008710 <COOLER_refresh_pulse+0x44>)
- 80086f4:	f7ff fc5c 	bl	8007fb0 <FAN_SetPulseInternal>
+ 80086e8:	4906      	ldr	r1, [pc, #24]	@ (8008704 <COOLER_refresh_pulse+0x40>)
+ 80086ea:	4807      	ldr	r0, [pc, #28]	@ (8008708 <COOLER_refresh_pulse+0x44>)
+ 80086ec:	f7ff fc5a 	bl	8007fa4 <FAN_SetPulseInternal>
 		SERWO_SetPulseInternal(&htim3, &canBufferTx);
- 80086f8:	4904      	ldr	r1, [pc, #16]	@ (800870c <COOLER_refresh_pulse+0x40>)
- 80086fa:	4806      	ldr	r0, [pc, #24]	@ (8008714 <COOLER_refresh_pulse+0x48>)
- 80086fc:	f7ff ff92 	bl	8008624 <SERWO_SetPulseInternal>
+ 80086f0:	4904      	ldr	r1, [pc, #16]	@ (8008704 <COOLER_refresh_pulse+0x40>)
+ 80086f2:	4806      	ldr	r0, [pc, #24]	@ (800870c <COOLER_refresh_pulse+0x48>)
+ 80086f4:	f7ff ff92 	bl	800861c <SERWO_SetPulseInternal>
 	}
 }
- 8008700:	bf00      	nop
- 8008702:	3708      	adds	r7, #8
- 8008704:	46bd      	mov	sp, r7
- 8008706:	bd80      	pop	{r7, pc}
- 8008708:	20000dd0 	.word	0x20000dd0
- 800870c:	200006e8 	.word	0x200006e8
- 8008710:	20000130 	.word	0x20000130
- 8008714:	2000017c 	.word	0x2000017c
+ 80086f8:	bf00      	nop
+ 80086fa:	3708      	adds	r7, #8
+ 80086fc:	46bd      	mov	sp, r7
+ 80086fe:	bd80      	pop	{r7, pc}
+ 8008700:	20000dd0 	.word	0x20000dd0
+ 8008704:	200006e8 	.word	0x200006e8
+ 8008708:	20000130 	.word	0x20000130
+ 800870c:	2000017c 	.word	0x2000017c
 
-08008718 <COOLER_IsTimeSendMsg>:
+08008710 <COOLER_IsTimeSendMsg>:
 
 
 void COOLER_IsTimeSendMsg(volatile uint8_t* interuptCanFlag)
 {
- 8008718:	b580      	push	{r7, lr}
- 800871a:	b082      	sub	sp, #8
- 800871c:	af00      	add	r7, sp, #0
- 800871e:	6078      	str	r0, [r7, #4]
+ 8008710:	b580      	push	{r7, lr}
+ 8008712:	b082      	sub	sp, #8
+ 8008714:	af00      	add	r7, sp, #0
+ 8008716:	6078      	str	r0, [r7, #4]
 	if(*interuptCanFlag == CAN_TIME_TO_SEND_MSG)
- 8008720:	687b      	ldr	r3, [r7, #4]
- 8008722:	781b      	ldrb	r3, [r3, #0]
- 8008724:	b2db      	uxtb	r3, r3
- 8008726:	2b01      	cmp	r3, #1
- 8008728:	d106      	bne.n	8008738 <COOLER_IsTimeSendMsg+0x20>
+ 8008718:	687b      	ldr	r3, [r7, #4]
+ 800871a:	781b      	ldrb	r3, [r3, #0]
+ 800871c:	b2db      	uxtb	r3, r3
+ 800871e:	2b01      	cmp	r3, #1
+ 8008720:	d106      	bne.n	8008730 <COOLER_IsTimeSendMsg+0x20>
 	{
 		*interuptCanFlag = CAN_WAIT_TO_SEND_MSG;
- 800872a:	687b      	ldr	r3, [r7, #4]
- 800872c:	2200      	movs	r2, #0
- 800872e:	701a      	strb	r2, [r3, #0]
+ 8008722:	687b      	ldr	r3, [r7, #4]
+ 8008724:	2200      	movs	r2, #0
+ 8008726:	701a      	strb	r2, [r3, #0]
 		CAN_HandleScheduled(&hcan, &canBufferTx);
- 8008730:	4903      	ldr	r1, [pc, #12]	@ (8008740 <COOLER_IsTimeSendMsg+0x28>)
- 8008732:	4804      	ldr	r0, [pc, #16]	@ (8008744 <COOLER_IsTimeSendMsg+0x2c>)
- 8008734:	f7ff f805 	bl	8007742 <CAN_HandleScheduled>
+ 8008728:	4903      	ldr	r1, [pc, #12]	@ (8008738 <COOLER_IsTimeSendMsg+0x28>)
+ 800872a:	4804      	ldr	r0, [pc, #16]	@ (800873c <COOLER_IsTimeSendMsg+0x2c>)
+ 800872c:	f7ff f809 	bl	8007742 <CAN_HandleScheduled>
 	}
 }
- 8008738:	bf00      	nop
- 800873a:	3708      	adds	r7, #8
- 800873c:	46bd      	mov	sp, r7
- 800873e:	bd80      	pop	{r7, pc}
- 8008740:	200006e8 	.word	0x200006e8
- 8008744:	2000002c 	.word	0x2000002c
+ 8008730:	bf00      	nop
+ 8008732:	3708      	adds	r7, #8
+ 8008734:	46bd      	mov	sp, r7
+ 8008736:	bd80      	pop	{r7, pc}
+ 8008738:	200006e8 	.word	0x200006e8
+ 800873c:	2000002c 	.word	0x2000002c
 
-08008748 <Init_Cooler>:
+08008740 <Init_Cooler>:
 
 
 void Init_Cooler()
 {
- 8008748:	b580      	push	{r7, lr}
- 800874a:	af00      	add	r7, sp, #0
+ 8008740:	b580      	push	{r7, lr}
+ 8008742:	af00      	add	r7, sp, #0
 	  // 			INIT CAN
 	  CAN_Init(&hcan);
- 800874c:	480e      	ldr	r0, [pc, #56]	@ (8008788 <Init_Cooler+0x40>)
- 800874e:	f7fe fec1 	bl	80074d4 <CAN_Init>
+ 8008744:	480e      	ldr	r0, [pc, #56]	@ (8008780 <Init_Cooler+0x40>)
+ 8008746:	f7fe fec5 	bl	80074d4 <CAN_Init>
 	  HAL_TIM_Base_Start_IT(&htim7);
- 8008752:	480e      	ldr	r0, [pc, #56]	@ (800878c <Init_Cooler+0x44>)
- 8008754:	f7fd fd96 	bl	8006284 <HAL_TIM_Base_Start_IT>
+ 800874a:	480e      	ldr	r0, [pc, #56]	@ (8008784 <Init_Cooler+0x44>)
+ 800874c:	f7fd fd9a 	bl	8006284 <HAL_TIM_Base_Start_IT>
 	  HAL_TIM_Base_Start_IT(&htim6);
- 8008758:	480d      	ldr	r0, [pc, #52]	@ (8008790 <Init_Cooler+0x48>)
- 800875a:	f7fd fd93 	bl	8006284 <HAL_TIM_Base_Start_IT>
+ 8008750:	480d      	ldr	r0, [pc, #52]	@ (8008788 <Init_Cooler+0x48>)
+ 8008752:	f7fd fd97 	bl	8006284 <HAL_TIM_Base_Start_IT>
 
 
 	  // 			INIT AM2320 - I2C
 	  AM2320_Init();
- 800875e:	f7ff fcc1 	bl	80080e4 <AM2320_Init>
+ 8008756:	f7ff fcc1 	bl	80080dc <AM2320_Init>
 
 	  // 			INIT SERWO
 	  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
- 8008762:	2108      	movs	r1, #8
- 8008764:	480b      	ldr	r0, [pc, #44]	@ (8008794 <Init_Cooler+0x4c>)
- 8008766:	f7fd fe4b 	bl	8006400 <HAL_TIM_PWM_Start>
+ 800875a:	2108      	movs	r1, #8
+ 800875c:	480b      	ldr	r0, [pc, #44]	@ (800878c <Init_Cooler+0x4c>)
+ 800875e:	f7fd fe4f 	bl	8006400 <HAL_TIM_PWM_Start>
 	  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
- 800876a:	210c      	movs	r1, #12
- 800876c:	4809      	ldr	r0, [pc, #36]	@ (8008794 <Init_Cooler+0x4c>)
- 800876e:	f7fd fe47 	bl	8006400 <HAL_TIM_PWM_Start>
+ 8008762:	210c      	movs	r1, #12
+ 8008764:	4809      	ldr	r0, [pc, #36]	@ (800878c <Init_Cooler+0x4c>)
+ 8008766:	f7fd fe4b 	bl	8006400 <HAL_TIM_PWM_Start>
 
 	  // 			INIT FAN
 	  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
- 8008772:	2100      	movs	r1, #0
- 8008774:	4808      	ldr	r0, [pc, #32]	@ (8008798 <Init_Cooler+0x50>)
- 8008776:	f7fd fe43 	bl	8006400 <HAL_TIM_PWM_Start>
+ 800876a:	2100      	movs	r1, #0
+ 800876c:	4808      	ldr	r0, [pc, #32]	@ (8008790 <Init_Cooler+0x50>)
+ 800876e:	f7fd fe47 	bl	8006400 <HAL_TIM_PWM_Start>
 	  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
- 800877a:	2104      	movs	r1, #4
- 800877c:	4806      	ldr	r0, [pc, #24]	@ (8008798 <Init_Cooler+0x50>)
- 800877e:	f7fd fe3f 	bl	8006400 <HAL_TIM_PWM_Start>
+ 8008772:	2104      	movs	r1, #4
+ 8008774:	4806      	ldr	r0, [pc, #24]	@ (8008790 <Init_Cooler+0x50>)
+ 8008776:	f7fd fe43 	bl	8006400 <HAL_TIM_PWM_Start>
 
 }
- 8008782:	bf00      	nop
- 8008784:	bd80      	pop	{r7, pc}
- 8008786:	bf00      	nop
- 8008788:	2000002c 	.word	0x2000002c
- 800878c:	20000214 	.word	0x20000214
- 8008790:	200001c8 	.word	0x200001c8
- 8008794:	2000017c 	.word	0x2000017c
- 8008798:	20000130 	.word	0x20000130
+ 800877a:	bf00      	nop
+ 800877c:	bd80      	pop	{r7, pc}
+ 800877e:	bf00      	nop
+ 8008780:	2000002c 	.word	0x2000002c
+ 8008784:	20000214 	.word	0x20000214
+ 8008788:	200001c8 	.word	0x200001c8
+ 800878c:	2000017c 	.word	0x2000017c
+ 8008790:	20000130 	.word	0x20000130
 
-0800879c <COOLER_app>:
+08008794 <COOLER_app>:
 
 
 /* ================= MAIN APP ================= */
 
 void COOLER_app()
 {
- 800879c:	b580      	push	{r7, lr}
- 800879e:	af00      	add	r7, sp, #0
+ 8008794:	b580      	push	{r7, lr}
+ 8008796:	af00      	add	r7, sp, #0
   Init_Cooler();
- 80087a0:	f7ff ffd2 	bl	8008748 <Init_Cooler>
+ 8008798:	f7ff ffd2 	bl	8008740 <Init_Cooler>
   FAN_SetOnOff(FAN_OFF_BOTH);
- 80087a4:	2005      	movs	r0, #5
- 80087a6:	f7ff fad9 	bl	8007d5c <FAN_SetOnOff>
-
+ 800879c:	2005      	movs	r0, #5
+ 800879e:	f7ff fadd 	bl	8007d5c <FAN_SetOnOff>
+  FAN_PulseReset();
+ 80087a2:	f7ff fac9 	bl	8007d38 <FAN_PulseReset>
   SERWO_OpenCanal();
- 80087aa:	f7ff fe59 	bl	8008460 <SERWO_OpenCanal>
+ 80087a6:	f7ff fe57 	bl	8008458 <SERWO_OpenCanal>
 
   while (1)
   {
 	  // STATE: DRIVING / CHARGING
 	  AM2320_StateMachine();
- 80087ae:	f7ff fd1d 	bl	80081ec <AM2320_StateMachine>
+ 80087aa:	f7ff fd1b 	bl	80081e4 <AM2320_StateMachine>
 	  COOLER_IsTimeSendMsg(&interuptCanFlag);
- 80087b2:	4813      	ldr	r0, [pc, #76]	@ (8008800 <COOLER_app+0x64>)
- 80087b4:	f7ff ffb0 	bl	8008718 <COOLER_IsTimeSendMsg>
+ 80087ae:	4813      	ldr	r0, [pc, #76]	@ (80087fc <COOLER_app+0x68>)
+ 80087b0:	f7ff ffae 	bl	8008710 <COOLER_IsTimeSendMsg>
 	  FAN_CabinController();
- 80087b8:	f7ff fbba 	bl	8007f30 <FAN_CabinController>
+ 80087b4:	f7ff fbac 	bl	8007f10 <FAN_CabinController>
 
 	  if(CAN_GetFrame(&msg) == HAL_OK)
- 80087bc:	4811      	ldr	r0, [pc, #68]	@ (8008804 <COOLER_app+0x68>)
- 80087be:	f7ff f943 	bl	8007a48 <CAN_GetFrame>
- 80087c2:	4603      	mov	r3, r0
- 80087c4:	2b00      	cmp	r3, #0
- 80087c6:	d118      	bne.n	80087fa <COOLER_app+0x5e>
+ 80087b8:	4811      	ldr	r0, [pc, #68]	@ (8008800 <COOLER_app+0x6c>)
+ 80087ba:	f7ff f945 	bl	8007a48 <CAN_GetFrame>
+ 80087be:	4603      	mov	r3, r0
+ 80087c0:	2b00      	cmp	r3, #0
+ 80087c2:	d118      	bne.n	80087f6 <COOLER_app+0x62>
 	  {
 		  if((CAN_FRAME_BMS_TEMP_1 <= msg.name) && (msg.name <= CAN_FRAME_BMS_TEMP_9))
- 80087c8:	4b0e      	ldr	r3, [pc, #56]	@ (8008804 <COOLER_app+0x68>)
- 80087ca:	781b      	ldrb	r3, [r3, #0]
- 80087cc:	2b08      	cmp	r3, #8
- 80087ce:	d805      	bhi.n	80087dc <COOLER_app+0x40>
+ 80087c4:	4b0e      	ldr	r3, [pc, #56]	@ (8008800 <COOLER_app+0x6c>)
+ 80087c6:	781b      	ldrb	r3, [r3, #0]
+ 80087c8:	2b08      	cmp	r3, #8
+ 80087ca:	d805      	bhi.n	80087d8 <COOLER_app+0x44>
 		  {
 			  FAN_SetMaxTemp(&msg);
- 80087d0:	480c      	ldr	r0, [pc, #48]	@ (8008804 <COOLER_app+0x68>)
- 80087d2:	f7ff fb23 	bl	8007e1c <FAN_SetMaxTemp>
+ 80087cc:	480c      	ldr	r0, [pc, #48]	@ (8008800 <COOLER_app+0x6c>)
+ 80087ce:	f7ff fb19 	bl	8007e04 <FAN_SetMaxTemp>
 			  FAN_BatteryController();
- 80087d6:	f7ff fb5f 	bl	8007e98 <FAN_BatteryController>
- 80087da:	e00e      	b.n	80087fa <COOLER_app+0x5e>
+ 80087d2:	f7ff fb5d 	bl	8007e90 <FAN_BatteryController>
+ 80087d6:	e00e      	b.n	80087f6 <COOLER_app+0x62>
 		  }
 		  else
 		  {
 			  switch(msg.name)
- 80087dc:	4b09      	ldr	r3, [pc, #36]	@ (8008804 <COOLER_app+0x68>)
- 80087de:	781b      	ldrb	r3, [r3, #0]
- 80087e0:	2b0a      	cmp	r3, #10
- 80087e2:	d002      	beq.n	80087ea <COOLER_app+0x4e>
- 80087e4:	2b0d      	cmp	r3, #13
- 80087e6:	d004      	beq.n	80087f2 <COOLER_app+0x56>
- 80087e8:	e007      	b.n	80087fa <COOLER_app+0x5e>
+ 80087d8:	4b09      	ldr	r3, [pc, #36]	@ (8008800 <COOLER_app+0x6c>)
+ 80087da:	781b      	ldrb	r3, [r3, #0]
+ 80087dc:	2b0a      	cmp	r3, #10
+ 80087de:	d002      	beq.n	80087e6 <COOLER_app+0x52>
+ 80087e0:	2b0d      	cmp	r3, #13
+ 80087e2:	d004      	beq.n	80087ee <COOLER_app+0x5a>
+ 80087e4:	e007      	b.n	80087f6 <COOLER_app+0x62>
 			  {
 			  case(CAN_FRAME_SET_SERVOS_FRONT):
 					SERWO_SetPulseExtern(msg.data);
- 80087ea:	4807      	ldr	r0, [pc, #28]	@ (8008808 <COOLER_app+0x6c>)
- 80087ec:	f7ff fe8c 	bl	8008508 <SERWO_SetPulseExtern>
+ 80087e6:	4807      	ldr	r0, [pc, #28]	@ (8008804 <COOLER_app+0x70>)
+ 80087e8:	f7ff fe8a 	bl	8008500 <SERWO_SetPulseExtern>
 			  	  	break;
- 80087f0:	e003      	b.n	80087fa <COOLER_app+0x5e>
+ 80087ec:	e003      	b.n	80087f6 <COOLER_app+0x62>
 
 			  case(CAN_FRAME_CABIN_SET_FAN):
 					FAN_SetPulseExternCabin(msg.data);
- 80087f2:	4805      	ldr	r0, [pc, #20]	@ (8008808 <COOLER_app+0x6c>)
- 80087f4:	f7ff fa90 	bl	8007d18 <FAN_SetPulseExternCabin>
+ 80087ee:	4805      	ldr	r0, [pc, #20]	@ (8008804 <COOLER_app+0x70>)
+ 80087f0:	f7ff fa92 	bl	8007d18 <FAN_SetPulseExternCabin>
 			  	  	break;
- 80087f8:	bf00      	nop
+ 80087f4:	bf00      	nop
 			  }
 		  }
 	  }
 	  COOLER_refresh_pulse();
- 80087fa:	f7ff ff67 	bl	80086cc <COOLER_refresh_pulse>
+ 80087f6:	f7ff ff65 	bl	80086c4 <COOLER_refresh_pulse>
 	  AM2320_StateMachine();
- 80087fe:	e7d6      	b.n	80087ae <COOLER_app+0x12>
- 8008800:	20000dcd 	.word	0x20000dcd
- 8008804:	20000dc4 	.word	0x20000dc4
- 8008808:	20000dc5 	.word	0x20000dc5
+ 80087fa:	e7d6      	b.n	80087aa <COOLER_app+0x16>
+ 80087fc:	20000dcd 	.word	0x20000dcd
+ 8008800:	20000dc4 	.word	0x20000dc4
+ 8008804:	20000dc5 	.word	0x20000dc5
 
-0800880c <memset>:
- 800880c:	4402      	add	r2, r0
- 800880e:	4603      	mov	r3, r0
- 8008810:	4293      	cmp	r3, r2
- 8008812:	d100      	bne.n	8008816 <memset+0xa>
- 8008814:	4770      	bx	lr
- 8008816:	f803 1b01 	strb.w	r1, [r3], #1
- 800881a:	e7f9      	b.n	8008810 <memset+0x4>
+08008808 <memset>:
+ 8008808:	4402      	add	r2, r0
+ 800880a:	4603      	mov	r3, r0
+ 800880c:	4293      	cmp	r3, r2
+ 800880e:	d100      	bne.n	8008812 <memset+0xa>
+ 8008810:	4770      	bx	lr
+ 8008812:	f803 1b01 	strb.w	r1, [r3], #1
+ 8008816:	e7f9      	b.n	800880c <memset+0x4>
 
-0800881c <__libc_init_array>:
- 800881c:	b570      	push	{r4, r5, r6, lr}
- 800881e:	4b0d      	ldr	r3, [pc, #52]	@ (8008854 <__libc_init_array+0x38>)
- 8008820:	4d0d      	ldr	r5, [pc, #52]	@ (8008858 <__libc_init_array+0x3c>)
- 8008822:	1b5b      	subs	r3, r3, r5
- 8008824:	109c      	asrs	r4, r3, #2
- 8008826:	2600      	movs	r6, #0
- 8008828:	42a6      	cmp	r6, r4
- 800882a:	d109      	bne.n	8008840 <__libc_init_array+0x24>
- 800882c:	f000 f828 	bl	8008880 <_init>
- 8008830:	4d0a      	ldr	r5, [pc, #40]	@ (800885c <__libc_init_array+0x40>)
- 8008832:	4b0b      	ldr	r3, [pc, #44]	@ (8008860 <__libc_init_array+0x44>)
- 8008834:	1b5b      	subs	r3, r3, r5
- 8008836:	109c      	asrs	r4, r3, #2
- 8008838:	2600      	movs	r6, #0
- 800883a:	42a6      	cmp	r6, r4
- 800883c:	d105      	bne.n	800884a <__libc_init_array+0x2e>
- 800883e:	bd70      	pop	{r4, r5, r6, pc}
- 8008840:	f855 3b04 	ldr.w	r3, [r5], #4
- 8008844:	4798      	blx	r3
- 8008846:	3601      	adds	r6, #1
- 8008848:	e7ee      	b.n	8008828 <__libc_init_array+0xc>
- 800884a:	f855 3b04 	ldr.w	r3, [r5], #4
- 800884e:	4798      	blx	r3
- 8008850:	3601      	adds	r6, #1
- 8008852:	e7f2      	b.n	800883a <__libc_init_array+0x1e>
- 8008854:	080088cc 	.word	0x080088cc
- 8008858:	080088cc 	.word	0x080088cc
+08008818 <__libc_init_array>:
+ 8008818:	b570      	push	{r4, r5, r6, lr}
+ 800881a:	4b0d      	ldr	r3, [pc, #52]	@ (8008850 <__libc_init_array+0x38>)
+ 800881c:	4d0d      	ldr	r5, [pc, #52]	@ (8008854 <__libc_init_array+0x3c>)
+ 800881e:	1b5b      	subs	r3, r3, r5
+ 8008820:	109c      	asrs	r4, r3, #2
+ 8008822:	2600      	movs	r6, #0
+ 8008824:	42a6      	cmp	r6, r4
+ 8008826:	d109      	bne.n	800883c <__libc_init_array+0x24>
+ 8008828:	f000 f828 	bl	800887c <_init>
+ 800882c:	4d0a      	ldr	r5, [pc, #40]	@ (8008858 <__libc_init_array+0x40>)
+ 800882e:	4b0b      	ldr	r3, [pc, #44]	@ (800885c <__libc_init_array+0x44>)
+ 8008830:	1b5b      	subs	r3, r3, r5
+ 8008832:	109c      	asrs	r4, r3, #2
+ 8008834:	2600      	movs	r6, #0
+ 8008836:	42a6      	cmp	r6, r4
+ 8008838:	d105      	bne.n	8008846 <__libc_init_array+0x2e>
+ 800883a:	bd70      	pop	{r4, r5, r6, pc}
+ 800883c:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8008840:	4798      	blx	r3
+ 8008842:	3601      	adds	r6, #1
+ 8008844:	e7ee      	b.n	8008824 <__libc_init_array+0xc>
+ 8008846:	f855 3b04 	ldr.w	r3, [r5], #4
+ 800884a:	4798      	blx	r3
+ 800884c:	3601      	adds	r6, #1
+ 800884e:	e7f2      	b.n	8008836 <__libc_init_array+0x1e>
+ 8008850:	080088c8 	.word	0x080088c8
+ 8008854:	080088c8 	.word	0x080088c8
+ 8008858:	080088c8 	.word	0x080088c8
  800885c:	080088cc 	.word	0x080088cc
- 8008860:	080088d0 	.word	0x080088d0
 
-08008864 <memcpy>:
- 8008864:	440a      	add	r2, r1
- 8008866:	4291      	cmp	r1, r2
- 8008868:	f100 33ff 	add.w	r3, r0, #4294967295
- 800886c:	d100      	bne.n	8008870 <memcpy+0xc>
- 800886e:	4770      	bx	lr
- 8008870:	b510      	push	{r4, lr}
- 8008872:	f811 4b01 	ldrb.w	r4, [r1], #1
- 8008876:	f803 4f01 	strb.w	r4, [r3, #1]!
- 800887a:	4291      	cmp	r1, r2
- 800887c:	d1f9      	bne.n	8008872 <memcpy+0xe>
- 800887e:	bd10      	pop	{r4, pc}
+08008860 <memcpy>:
+ 8008860:	440a      	add	r2, r1
+ 8008862:	4291      	cmp	r1, r2
+ 8008864:	f100 33ff 	add.w	r3, r0, #4294967295
+ 8008868:	d100      	bne.n	800886c <memcpy+0xc>
+ 800886a:	4770      	bx	lr
+ 800886c:	b510      	push	{r4, lr}
+ 800886e:	f811 4b01 	ldrb.w	r4, [r1], #1
+ 8008872:	f803 4f01 	strb.w	r4, [r3, #1]!
+ 8008876:	4291      	cmp	r1, r2
+ 8008878:	d1f9      	bne.n	800886e <memcpy+0xe>
+ 800887a:	bd10      	pop	{r4, pc}
 
-08008880 <_init>:
- 8008880:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8008882:	bf00      	nop
- 8008884:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8008886:	bc08      	pop	{r3}
- 8008888:	469e      	mov	lr, r3
- 800888a:	4770      	bx	lr
+0800887c <_init>:
+ 800887c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800887e:	bf00      	nop
+ 8008880:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8008882:	bc08      	pop	{r3}
+ 8008884:	469e      	mov	lr, r3
+ 8008886:	4770      	bx	lr
 
-0800888c <_fini>:
- 800888c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800888e:	bf00      	nop
- 8008890:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8008892:	bc08      	pop	{r3}
- 8008894:	469e      	mov	lr, r3
- 8008896:	4770      	bx	lr
+08008888 <_fini>:
+ 8008888:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800888a:	bf00      	nop
+ 800888c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800888e:	bc08      	pop	{r3}
+ 8008890:	469e      	mov	lr, r3
+ 8008892:	4770      	bx	lr
