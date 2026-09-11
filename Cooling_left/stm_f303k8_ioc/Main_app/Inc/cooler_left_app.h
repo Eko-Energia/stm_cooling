@@ -12,7 +12,7 @@
 #define CAN_WAIT_TO_SEND_MSG (0)
 
 
-void COOLER_IsTimeSendMsg(uint8_t* interuptCanFlag);
+void COOLER_IsTimeSendMsg(volatile uint8_t* interuptCanFlag);
 
 void Init_Cooler();
 

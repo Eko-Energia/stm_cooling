@@ -26,7 +26,6 @@ void SERWO_OpenCanal()
 }
 
 
-
 /**
  * @brief Populates the CAN data buffer with the current pulse values of both servos.
  *

@@ -11,9 +11,9 @@
 # include "main.h"
 # include "can_driver.h"
 # include "MY_driver_can.h"
-# include "MY_driver_serwo.h"
+
 # include "MY_driver_fan.h"
-# include "MY_driver_i2c.h"
+
 
 void TEST_Function();
 

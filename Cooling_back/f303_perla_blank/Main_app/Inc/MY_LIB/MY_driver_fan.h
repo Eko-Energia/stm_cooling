@@ -107,14 +107,6 @@ void FAN_SetMaxTemp(struct CAN_bufferFrame *frame);		// wybiera z ramki temperat
 void FAN_BatteryController();	// steruje wentylatorem do baterii jako pomiar temperatura uzyskana przez FAN_Set_MaxTemp()
 
 
-/**
- * @brief Regulates fan 2 PWM duty cycle based on the cabin temperature read from the AM2320 sensor.
- *
- * Runs periodically (every DT ms). Reads temperature and humidity from the AM2320 sensor,
- * then scales the duty cycle linearly with temperature above 20.0°C, forces it to 0 below
- * that threshold, and clamps it to a maximum of 100.
- */
-void FAN_CabinController();     // Będzie podawał wypełenie z ramki która przyjdzie
 
 /**
  * @brief Applies current fan pulse values to the PWM timer channels and schedules a CAN status frame.

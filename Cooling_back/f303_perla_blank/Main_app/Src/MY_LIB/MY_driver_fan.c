@@ -7,7 +7,7 @@
 
 #include "MY_driver_fan.h"
 #include "MY_driver_can.h"
-#include "MY_driver_i2c.h"
+
 /* ================= PRIVATE VARIABLE ================= */
 
 static uint8_t fan1Pulse = 0;
@@ -153,38 +153,7 @@ void FAN_BatteryController() // Fix it during tests
 	fan2Pulse = pwmDuty;
 }
 
-/**
- * @brief Regulates fan 2 PWM duty cycle based on the cabin temperature read from the AM2320 sensor.
- *
- * Runs periodically (every @ref DT ms). Reads temperature and humidity from the AM2320
- * sensor, then scales the duty cycle linearly with temperature above 20.0°C (tempX10 > 200),
- * forces it to 0 below that threshold, and clamps it to a maximum of 100.
- */
-void FAN_CabinController() // Fix it during tests
-{
-	static uint16_t lastTick = 0;
-	static uint8_t pwmDuty = 0;
-	static int16_t tempX10 = 0;
-	static uint16_t humX10 = 0;
-	tempX10 = 210;
-	if(HAL_GetTick() - lastTick >= DT)
-	{
-		lastTick = HAL_GetTick();
-		AM2320_GetTempHum(&tempX10, &humX10);
 
-		pwmDuty = 0 + (tempX10 - 200)*2;
-
-		if(tempX10 < 200)
-		{
-			pwmDuty = 0;
-		}
-		else if(pwmDuty > 100)
-		{
-			pwmDuty = 100;
-		}
-		fan2Pulse = pwmDuty;
-	}
-}
 
 
 /**

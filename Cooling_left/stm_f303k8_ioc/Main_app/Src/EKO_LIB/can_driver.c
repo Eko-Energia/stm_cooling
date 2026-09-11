@@ -136,6 +136,7 @@ void CAN_HandleScheduled(CAN_HandleTypeDef *hcanPtr, struct CAN_scheduledMsgList
 			}
 
 			msg->lastTick = HAL_GetTick();
+
 		}
 	}
 }

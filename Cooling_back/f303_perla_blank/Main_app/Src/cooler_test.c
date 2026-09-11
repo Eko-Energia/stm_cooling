@@ -8,10 +8,9 @@
 # include "main.h"
 # include "can_driver.h"
 # include "MY_driver_can.h"
-# include "MY_driver_serwo.h"
+
 # include "MY_driver_fan.h"
 
-# include "MY_driver_i2c.h"
 
 extern struct CAN_bufferFrame msg;
 
@@ -34,7 +33,7 @@ void TEST_Serwo()
 //		SERWO_CabinController(dutyTable);
 //		SERWO_BatteryController(dutyTable);
 //		SERWO_SetPulseInternal(&htim3, &canBufferTx);
-		SERWO_SetPulse(&htim3, &canBufferTx,dutyTable_[0], dutyTable_[1]);
+//		SERWO_SetPulse(&htim3, &canBufferTx,dutyTable_[0], dutyTable_[1]);
 
 	}
 	else
@@ -65,7 +64,7 @@ void TEST_FAN()
 
 void TEST_AM2320()
 {
-	AM2320_StateMachine();
+//	AM2320_StateMachine();
 }
 
 
